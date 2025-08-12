@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harish Goluguri - Finance Professional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: #34495e;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav li {
+            margin: 0;
+        }
+
+        .nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            background: #2c3e50;
+            color: #3498db;
+        }
+
+        .content {
+            padding: 0;
+        }
+
+        .section {
+            padding: 60px 40px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 2px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #3498db, #2980b9);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 0 30px;
+        }
+
+        .timeline-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px #3498db;
+            top: 25px;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            font-size: 1.1rem;
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievements li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .achievements li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 4px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .education-card, .cert-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .education-card:hover, .cert-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .degree {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .institution {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .gpa {
+            color: #27ae60;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #3498db;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .project-date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .award-box {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(241, 196, 15, 0.3);
+            margin-top: 20px;
+        }
+
+        .award-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .award-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .interactive-note {
+            background: #e8f4f8;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #0c5460;
+            text-align: center;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .section {
+                padding: 40px 20px;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                flex-direction: column;
+            }
+            
+            .timeline-content {
+                padding: 0 0 0 40px;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1>HARISH GOLUGURI</h1>
+                <p class="subtitle">Certified Finance Professional | FMVA® | SIE | Bloomberg Certified</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>872-344-7207</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <span>harishreddyice@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🔗</span>
+                        <span>LinkedIn Profile</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <ul>
+                <li><a href="#summary">Summary</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#awards">Awards</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- Professional Summary -->
+            <section id="summary" class="section">
+                <h2>Professional Summary</h2>
+                <div class="summary-box">
+                    <p>Certified finance professional with <strong>3+ years of comprehensive experience</strong> in Financial Planning & Analysis (FP&A), capital planning, and investment analysis. Triple-certified with <strong>FMVA®, SIE, and Bloomberg certifications</strong>, demonstrating expertise across financial modeling, securities analysis, and market analytics.</p>
+                    <br>
+                    <p>Proven track record in <strong>ESG integration</strong>, having enhanced ESG model accuracy by 18% through advanced data analysis. Skilled in translating complex financial data into strategic insights using <strong>Power BI, SQL, Python, and Bloomberg Terminal</strong>. Successfully managed budgets exceeding $1.5M while delivering measurable results including 25% margin improvements and 3% alpha generation over benchmarks.</p>
+                    <br>
+                    <p>Expertise spans across <strong>investment research, portfolio management, financial modeling, and regulatory compliance</strong>, with a strong foundation in both traditional finance and emerging areas like ESG and blockchain technology.</p>
+                </div>
+            </section>
+
+            <!-- Experience Timeline -->
+            <section id="experience" class="section">
+                <h2>Professional Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-card">
+                                <div class="job-title">Graduate Research Assistant</div>
+                                <div class="company">Georgia State University</div>
+                                <div class="date">Aug 2024 — Aug 2025</div>
+                                <ul class="achievements">
+                                    <li>Enhanced ESG model accuracy by <strong>18%</strong> through comprehensive emissions and stock returns analysis of 50+ firms using WRDS and Python</li>
+                                    <li>Developed 4 interactive <strong>Power BI dashboards</strong> for faculty research simulations, enabling sophisticated ESG portfolio strategy development</li>
+                                    <li>Delivered 2 impactful departmental presentations on ESG risk integration, resulting in <strong>20% increase</strong> in student participation in sustainability research</li>
+                                    <li>Translated complex carbon risk data into strategic insights supporting long-term investment scenario planning and regulatory reporting</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-card">
+                                <div class="job-title">Investment Analyst</div>
+                                <div class="company">Portfolio Management Group, Atlanta</div>
+                                <div class="date">Jan 2025 — May 2025</div>
+                                <ul class="achievements">
+                                    <li>Conducted comprehensive research on 25+ U.S. equities, guiding <strong>$200K+ weekly reallocations</strong> and delivering <strong>3% alpha over benchmark</strong></li>
+                                    <li>Built 3 custom investment screeners and 5 GAAP-compliant valuation models (DCF, comparables), improving pitch accuracy by <strong>25%</strong></li>
+                                    <li>Delivered 10+ buy/sell recommendations in investment committee meetings, directly influencing <strong>$200K+</strong> in weekly portfolio decisions</li>
+                                    <li>Executed strategic sector rotation, shifting 12% of assets into energy sector based on Fed rate forecasts, generating <strong>220 bps alpha</strong> in one quarter</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-card">
+                                <div class="job-title">Senior Finance Analyst</div>
+                                <div class="company">ANTLON, Hyderabad, India</div>
+                                <div class="date">Nov 2022 — Dec 2023</div>
+                                <ul class="achievements">
+                                    <li>Managed comprehensive <strong>$1.5M budgeting and forecasting</strong> operations, negotiating strategic cost reallocations with department heads to achieve <strong>25% margin improvement</strong></li>
+                                    <li>Automated 15+ critical financial reports using Power BI and Excel, reducing cycle time by <strong>35%</strong> and accelerating client reporting processes</li>
+                                    <li>Partnered with compliance and client audit teams to ensure budget alignment with internal controls, resulting in <strong>28% improvement</strong> in audit scores</li>
+                                    <li>Streamlined vendor reconciliation processes, reducing month-end close time by <strong>2+ days</strong> and improving operational efficiency</li>
+                                    <li>Conducted detailed variance analysis on 120+ GL/PO entries, identifying and addressing <strong>$120K in project overspending</strong></li>
+                                    <li>Led ROI reviews for 3 major capital projects, successfully negotiating <strong>$100K+ reallocation</strong> to higher-return initiatives</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-card">
+                                <div class="job-title">Finance Analyst</div>
+                                <div class="company">ANTLON, Hyderabad, India</div>
+                                <div class="date">Oct 2021 — Nov 2022</div>
+                                <ul class="achievements">
+                                    <li>Developed sophisticated IRR/NPV models for 10+ capital projects worth <strong>$800K+</strong>, improving approval accuracy by <strong>17%</strong></li>
+                                    <li>Created dynamic rolling cash flow forecasts for 6 departments, optimizing <strong>$400K in working capital</strong> management</li>
+                                    <li>Automated 4 KPI dashboards, reducing manual reporting time by <strong>40%</strong> while significantly improving data accuracy</li>
+                                    <li>Identified <strong>$120K in cost inefficiencies</strong> through comprehensive variance analysis, leading to targeted expense reduction strategies</li>
+                                    <li>Negotiated with vendors to eliminate 2 low-return projects, successfully reallocating <strong>$100K+</strong> to higher-ROI initiatives</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-card">
+                                <div class="job-title">Finance Intern</div>
+                                <div class="company">Neti Amaravathi, Rajahmundry, India</div>
+                                <div class="date">Apr 2020 — Sep 2021</div>
+                                <ul class="achievements">
+                                    <li>Audited 10+ departmental cost centers, achieving <strong>15% overhead reduction</strong> and reallocating <strong>$30K</strong> to core operations</li>
+                                    <li>Designed comprehensive Excel-based tracking system for <strong>$500K in government grants</strong>, ensuring 100% compliance and optimal fund utilization</li>
+                                    <li>Produced 3 quarterly budget variance reports, improving forecast accuracy by <strong>20%</strong> and enhancing management decision-making</li>
+                                    <li>Conducted thorough fixed asset audits for <strong>$100K+ infrastructure programs</strong>, boosting utilization efficiency and financial accountability</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="section">
+                <h2>Core Competencies</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Financial & Strategic Skills</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Financial Modeling</span>
+                            <span class="skill-tag">Budgeting & Forecasting</span>
+                            <span class="skill-tag">GAAP</span>
+                            <span class="skill-tag">KPI Dashboards</span>
+                            <span class="skill-tag">Scenario Planning</span>
+                            <span class="skill-tag">Auditing</span>
+                            <span class="skill-tag">Variance Analysis</span>
+                            <span class="skill-tag">Sensitivity Analysis</span>
+                            <span class="skill-tag">ESG Integration</span>
+                            <span class="skill-tag">IRR/NPV/ROI Modeling</span>
+                            <span class="skill-tag">CapEx/OpEx Analysis</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Data Tools & Analytics</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Excel (Advanced)</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">MS Office</span>
+                            <span class="skill-tag">WRDS</span>
+                            <span class="skill-tag">Bloomberg Terminal</span>
+                            <span class="skill-tag">BQL</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Professional Skills</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Financial Storytelling</span>
+                            <span class="skill-tag">Stakeholder Management</span>
+                            <span class="skill-tag">Financial Negotiation</span>
+                            <span class="skill-tag">Problem-Solving</span>
+                            <span class="skill-tag">Strategic Thinking</span>
+                            <span class="skill-tag">Attention to Detail</span>
+                            <span class="skill-tag">Cross-Functional Collaboration</span>
+                            <span class="skill-tag">Time Management</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education & Certifications -->
+            <section id="education" class="section">
+                <h2>Education & Certifications</h2>
+                <div class="education-grid">
+                    <div class="education-card">
+                        <div class="degree">Master of Science in Finance</div>
+                        <div class="institution">Georgia State University, Atlanta</div>
+                        <div class="date">Aug 2024 — Aug 2025</div>
+                        <div class="gpa">GPA: 3.64 / 4.00</div>
+                    </div>
+
+                    <div class="education-card">
+                        <div class="degree">Bachelor of Business Administration</div>
+                        <div class="institution">Bharath University, Chennai, India</div>
+                        <div class="date">Jul 2018 — May 2021</div>
+                        <div class="gpa">GPA: 8.04 / 10.00</div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="degree">Securities Industry Essentials (SIE)</div>
+                        <div class="institution">FINRA</div>
+                        <div class="date">Professional Certification</div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="degree">Financial Modeling & Valuation Analyst (FMVA®)</div>
+                        <div class="institution">Corporate Finance Institute (CFI)</div>
+                        <div class="date">Professional Certification</div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="degree">Bloomberg Certifications</div>
+                        <div class="institution">Bloomberg</div>
+                        <div class="date">Spreadsheet Analysis, Market Concepts, Financial Fundamentals & ESG</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Showcase -->
+            <section id="projects" class="section">
+                <h2>Key Projects & Research</h2>
+                <div class="interactive-note">
+                    💡 Click on any project for detailed case study (Interactive feature for web version)
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Evolving Patterns in Corporate Derivatives Usage</div>
+                            <div class="project-date">May 2025 — Jun 2025</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                Comprehensive analysis of corporate derivatives utilization patterns across different market conditions. Examined risk management strategies and their effectiveness in hedging operational and financial risks. Utilized advanced statistical methods to identify emerging trends in derivatives usage.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Behavioral Analytics & Random Forest Personality Classifier</div>
+                            <div class="project-date">Mar 2025 — May 2025</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                Developed machine learning model using Random Forest algorithm to classify investor personality types based on trading behavior. Applied behavioral finance principles to predict investment preferences and risk tolerance levels. Achieved high accuracy in personality prediction through feature engineering.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Blockchain-Based Voting System: Securing Elections</div>
+                            <div class="project-date">Jan 2025 — Mar 2025</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                Designed secure blockchain voting infrastructure focusing on transparency and immutability. Analyzed economic implications of blockchain adoption in electoral systems. Developed cost-benefit analysis framework for government implementation of blockchain voting technology.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Central Bank Digital Currency (CBDC) Capstone Research</div>
+                            <div class="project-date">Oct 2024 — Dec 2024</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                In-depth research on CBDC implementation strategies and their impact on monetary policy. Analyzed potential effects on traditional banking systems and financial stability. Developed policy recommendations for central bank digital currency adoption frameworks.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Customer Churn Analysis for QNBT</div>
+                            <div class="project-date">Aug 2024 — Oct 2024</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-description">
+                                Implemented predictive analytics to identify customer churn patterns and developed retention strategies. Utilized machine learning algorithms to predict high-risk customers. Created actionable insights that improved customer retention rates and optimized marketing spend.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
