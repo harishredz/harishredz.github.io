@@ -1,359 +1,265 @@
-import { useEffect, useRef } from "react";
-import { Github, Linkedin, Mail, FileText, ArrowRight, Briefcase, School, Trophy, Code2 } from "lucide-react";
-import { motion } from "framer-motion";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harish Goluguri — Finance | FP&A & Investments</title>
+  <meta name="description" content="Harish Goluguri — Financial Analyst | FP&A & Investments. Turning data into decisions — faster, clearer, and with measurable ROI." />
+  <!-- Tailwind (CDN build) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#e2e8f0; --muted:#94a3b8; --panel:rgba(255,255,255,.05);
+      --stroke:rgba(255,255,255,.1); --brand:#8b5cf6;
+    }
+    html{ scroll-behavior:smooth; }
+    body{ font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:#0b1220; color:var(--ink) }
+    .glass{ background:var(--panel); border:1px solid var(--stroke); backdrop-filter: blur(10px); }
+    .chip{ border:1px solid var(--stroke); background:var(--panel); }
+    .card{ transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease }
+    .card:hover{ transform:translateY(-2px); border-color:rgba(139,92,246,.35); box-shadow:0 10px 30px rgba(2,6,23,.45) }
+    .title{ letter-spacing:.2px }
+    .link-ghost{ color:var(--muted) }
+    .link-ghost:hover{ color:white }
+    .brand{ color:var(--brand) }
+    /* section reveal */
+    .reveal{ opacity:0; transform:translateY(14px); transition:all .6s ease }
+    .reveal.show{ opacity:1; transform:none }
+    /* canvas sits behind */
+    #bg-wrap{ position:fixed; inset:0; z-index:-1 }
+    #constellation{ width:100%; height:100% }
+  </style>
+</head>
+<body>
+  <!-- Animated background -->
+  <div id="bg-wrap">
+    <canvas id="constellation"></canvas>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(139,92,246,0.10),transparent_40%),radial-gradient(circle_at_90%_20%,rgba(56,189,248,0.10),transparent_40%)]"></div>
+  </div>
 
-// ====== Quick theme knobs ======
-const NAME = "Harish Goluguri";
-const ROLE = "Financial Analyst | FP&A & Investments";
-const TAGLINE = "Turning data into decisions — faster, clearer, and with measurable ROI.";
-const EMAIL = "harishreddyice@gmail.com";
-const LINKEDIN = "https://www.linkedin.com/in/harishredz";
-const GITHUB = "https://github.com/"; // add if you want
-const RESUME_URL = "#"; // replace with your resume link
-
-export default function App() {
-  return (
-    <div className="min-h-screen w-full bg-slate-950 text-slate-100 selection:bg-violet-500/30 selection:text-white">
-      <AuroraGrid />
-      <Navbar />
-      <main className="mx-auto max-w-6xl px-6">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Education />
-        <Awards />
-        <Contact />
-      </main>
-      <footer className="mt-20 border-t border-white/10 py-10 text-center text-sm text-slate-400">
-        © {new Date().getFullYear()} {NAME}. Built with ❤️ using React + Tailwind + Framer Motion.
-      </footer>
+  <!-- NAV -->
+  <nav class="sticky top-0 z-20 backdrop-blur supports-[backdrop-filter]:bg-[#0b1220]/50 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="font-semibold tracking-wide link-ghost">&lt;Harish/&gt;</a>
+      <div class="hidden md:flex gap-6 text-sm">
+        <a class="link-ghost" href="#about">About</a>
+        <a class="link-ghost" href="#skills">Skills</a>
+        <a class="link-ghost" href="#experience">Experience</a>
+        <a class="link-ghost" href="#projects">Projects</a>
+        <a class="link-ghost" href="#education">Education</a>
+        <a class="link-ghost" href="#awards">Awards</a>
+        <a class="link-ghost" href="#contact">Contact</a>
+      </div>
     </div>
-  );
-}
+  </nav>
 
-// ====== Background (animated constellations style, lightweight) ======
-function AuroraGrid() {
-  const canvasRef = useRef(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let w, h, animationId;
-    const DPR = Math.min(2, window.devicePixelRatio || 1);
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto px-6">
+    <!-- HERO -->
+    <section id="home" class="min-h-[78vh] flex flex-col justify-center gap-5 pt-10">
+      <h1 class="text-4xl sm:text-6xl font-extrabold title">Harish Goluguri</h1>
+      <p class="text-xl text-slate-300">Financial Analyst • FP&amp;A &amp; Investments</p>
+      <p class="max-w-2xl text-slate-300">
+        Turning data into decisions — faster, clearer, and with measurable ROI.
+        Advanced in Excel, Power BI, Tableau, SAP S/4HANA/TRM, Bloomberg, SQL, and Python.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="mailto:harishreddyice@gmail.com">Email</a>
+        <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand)] hover:bg-violet-500 text-white" href="#" target="_blank" rel="noreferrer">Resume</a>
+      </div>
+    </section>
 
-    const particles = Array.from({ length: 90 }, () => ({
-      x: Math.random(),
-      y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.0006,
-      vy: (Math.random() - 0.5) * 0.0006,
-      r: Math.random() * 1.6 + 0.3,
+    <!-- ABOUT -->
+    <section id="about" class="py-14 reveal">
+      <h2 class="text-2xl font-bold mb-4">About</h2>
+      <div class="glass rounded-2xl p-6">
+        <p class="text-slate-300">
+          Finance professional (FMVA®, SIE) with strengths in investment analysis, financial modeling, FP&amp;A, and analytics.
+          Proven track record improving forecast accuracy, liquidity, and decision speed via automation and executive-ready reporting.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-14 reveal">
+      <h2 class="text-2xl font-bold mb-6">Skills</h2>
+      <ul class="grid sm:grid-cols-2 gap-3">
+        <li class="glass rounded-xl p-3">Financial Modeling (DCF/IRR/NPV)</li>
+        <li class="glass rounded-xl p-3">Budgeting &amp; Forecasting</li>
+        <li class="glass rounded-xl p-3">Revenue Recognition (GAAP) • SOX</li>
+        <li class="glass rounded-xl p-3">Treasury &amp; Liquidity</li>
+        <li class="glass rounded-xl p-3">Power BI • Tableau • Excel (Power Query)</li>
+        <li class="glass rounded-xl p-3">SAP S/4HANA &amp; TRM • SQL • Python</li>
+        <li class="glass rounded-xl p-3">Bloomberg (BQL) • WRDS</li>
+      </ul>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="py-14 reveal">
+      <h2 class="text-2xl font-bold mb-6">Experience</h2>
+      <div class="grid gap-6">
+        <article class="glass rounded-2xl p-5 card">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-semibold text-lg">Investment Analyst</h3>
+            <span class="text-xs text-slate-400">Jan 2025 – May 2025</span>
+          </div>
+          <p class="text-sm text-slate-300 mt-1">Portfolio Management Group, Atlanta, United States</p>
+          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
+            <li>Researched 30+ U.S. equities via Bloomberg/WSJ, driving $500K+ weekly reallocations and 3% alpha vs. benchmark.</li>
+            <li>Built 8 GAAP-compliant DCF/comps models and 5 custom screeners; boosted pitch accuracy by 30%.</li>
+            <li>Presented 15+ buy/sell calls with risk-return memos; influenced $500K+ weekly portfolio shifts.</li>
+          </ul>
+        </article>
+
+        <article class="glass rounded-2xl p-5 card">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-semibold text-lg">Senior Finance Analyst</h3>
+            <span class="text-xs text-slate-400">Nov 2022 – Dec 2023</span>
+          </div>
+          <p class="text-sm text-slate-300 mt-1">ANTLON, Hyderabad, India</p>
+          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
+            <li>Directed $70M+ budgets/forecasts in SAP S/4HANA; raised forecast accuracy to 96% and investor confidence.</li>
+            <li>Automated 25+ Power BI/Excel workflows; cut close cycles 40% and freed 100+ hours/month.</li>
+            <li>Led ROI analysis on 16 capex projects ($34M+); reallocated $6M to higher-return initiatives.</li>
+            <li>Negotiated vendor terms; reduced costs 15% (~$9M/yr) and accelerated collections.</li>
+          </ul>
+        </article>
+
+        <article class="glass rounded-2xl p-5 card">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-semibold text-lg">Finance Analyst</h3>
+            <span class="text-xs text-slate-400">Oct 2021 – Nov 2022</span>
+          </div>
+          <p class="text-sm text-slate-300 mt-1">ANTLON, Hyderabad, India</p>
+          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
+            <li>Flagged $2M+ inefficiencies via treasury variance analysis; enabled targeted cost cuts.</li>
+            <li>Built IRR/NPV models for 25+ projects ($20M+); improved investment approvals by 22%.</li>
+            <li>Optimized $10M working capital with rolling cash forecasts across 6 departments.</li>
+          </ul>
+        </article>
+
+        <article class="glass rounded-2xl p-5 card">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-semibold text-lg">Finance Intern</h3>
+            <span class="text-xs text-slate-400">Apr 2020 – Sep 2021</span>
+          </div>
+          <p class="text-sm text-slate-300 mt-1">Neti Amravathi, Rajahmundry, India</p>
+          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
+            <li>Audited 25+ cost centers (Tally ERP); trimmed overheads 18% and reallocated $1.2M to core ops.</li>
+            <li>Built Excel tracking/models for $5M+ grants; ensured 100% compliance and timely disbursement.</li>
+            <li>Produced 6 budget variance analyses; improved forecast accuracy by 25%.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-14 reveal">
+      <h2 class="text-2xl font-bold mb-6">Projects</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <a class="glass rounded-2xl p-5 card block" href="#" target="_blank" rel="noreferrer">
+          <h4 class="font-semibold">ESG Alpha Lab (GSU)</h4>
+          <p class="text-sm text-slate-300 mt-2">Analyzed ESG-linked performance for 50+ firms using WRDS, Bloomberg, Python; improved model accuracy 18%.</p>
+          <span class="mt-3 inline-flex items-center gap-2 text-violet-300">View →</span>
+        </a>
+        <a class="glass rounded-2xl p-5 card block" href="#" target="_blank" rel="noreferrer">
+          <h4 class="font-semibold">Forecast Automation</h4>
+          <p class="text-sm text-slate-300 mt-2">9 Tableau/Power BI dashboards reduced manual reporting 45% and accelerated exec insights.</p>
+          <span class="mt-3 inline-flex items-center gap-2 text-violet-300">View →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="py-14 reveal">
+      <h2 class="text-2xl font-bold mb-6">Education</h2>
+      <ol class="relative ml-3 border-l border-white/10">
+        <li class="mb-6 ml-4">
+          <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-violet-400"></div>
+          <h3 class="font-semibold">Georgia State University — MS in Finance</h3>
+          <p class="text-xs text-slate-400">Aug 2024 – Aug 2025</p>
+          <p class="mt-1 text-slate-300">Graduate Certificate in FinTech Innovation; All-Rounder Award 2025.</p>
+        </li>
+        <li class="mb-6 ml-4">
+          <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-violet-400"></div>
+          <h3 class="font-semibold">Bharath University — BBA</h3>
+          <p class="text-xs text-slate-400">2018 – 2021</p>
+          <p class="mt-1 text-slate-300">Graduated with distinction.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- AWARDS -->
+    <section id="awards" class="py-14 reveal">
+      <h2 class="text-2xl font-bold mb-6">Awards</h2>
+      <ul class="grid sm:grid-cols-2 gap-3">
+        <li class="glass rounded-xl p-3">All-Rounder Award 2025 — Georgia State University</li>
+        <li class="glass rounded-xl p-3">FMVA® (CFI) — Financial Modeling &amp; Valuation Analyst</li>
+        <li class="glass rounded-xl p-3">SIE (FINRA) — Securities Industry Essentials</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-14 reveal">
+      <h2 class="text-2xl font-bold mb-4">Contact</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand)] hover:bg-violet-500 text-white" href="mailto:harishreddyice@gmail.com">harishreddyice@gmail.com</a>
+        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-16 border-t border-white/10 py-10 text-center text-sm text-slate-400">
+    © <span id="yy"></span> Harish Goluguri. Built with ❤️ using Tailwind.
+  </footer>
+
+  <!-- BG constellations + section reveal -->
+  <script>
+    // year
+    document.getElementById('yy').textContent = new Date().getFullYear();
+
+    // intersection reveal
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show') })
+    },{ threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // minimal constellation bg
+    const canvas = document.getElementById('constellation');
+    const ctx = canvas.getContext('2d');
+    let W,H,DPR = Math.min(2, window.devicePixelRatio||1);
+    const P = Array.from({length:90}, ()=>({
+      x: Math.random(), y: Math.random(),
+      vx:(Math.random()-.5)*.0006, vy:(Math.random()-.5)*.0006,
+      r: Math.random()*1.6+.3
     }));
-
-    const resize = () => {
-      w = canvas.clientWidth; h = canvas.clientHeight;
-      canvas.width = w * DPR; canvas.height = h * DPR; ctx.scale(DPR, DPR);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const tick = () => {
-      ctx.clearRect(0, 0, w, h);
-      // aurora gradient
-      const g = ctx.createRadialGradient(w*0.7, h*0.2, 80, w*0.8, h*0.1, Math.max(w,h));
-      g.addColorStop(0, "rgba(139,92,246,0.12)");
-      g.addColorStop(1, "rgba(15,23,42,0)");
-      ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > 1) p.vx *= -1;
-        if (p.y < 0 || p.y > 1) p.vy *= -1;
-      });
-
-      // draw links
-      for (let i=0;i<particles.length;i++){
-        for (let j=i+1;j<particles.length;j++){
-          const a = particles[i], b = particles[j];
-          const dx = (a.x-b.x)*w, dy = (a.y-b.y)*h; const d = Math.hypot(dx,dy);
-          if (d < 110){
-            ctx.strokeStyle = `rgba(148,163,184,${0.08 * (1-d/110)})`;
-            ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.x*w, a.y*h); ctx.lineTo(b.x*w, b.y*h); ctx.stroke();
-          }
+    function size(){ W = canvas.clientWidth = innerWidth; H = canvas.clientHeight = innerHeight;
+      canvas.width = W*DPR; canvas.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    size(); addEventListener('resize', size);
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      // links
+      for(let i=0;i<P.length;i++){
+        for(let j=i+1;j<P.length;j++){
+          const a=P[i], b=P[j], dx=(a.x-b.x)*W, dy=(a.y-b.y)*H, d=Math.hypot(dx,dy);
+          if(d<110){ ctx.strokeStyle=`rgba(148,163,184,${0.08*(1-d/110)})`; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(a.x*W, a.y*H); ctx.lineTo(b.x*W, b.y*H); ctx.stroke(); }
         }
       }
-
-      // dots
-      particles.forEach(p=>{
-        ctx.fillStyle = "rgba(203,213,225,0.8)";
-        ctx.beginPath(); ctx.arc(p.x*w, p.y*h, p.r, 0, Math.PI*2); ctx.fill();
+      // dots & move
+      P.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>1) p.vx*=-1; if(p.y<0||p.y>1) p.vy*=-1;
+        ctx.fillStyle="rgba(203,213,225,.85)"; ctx.beginPath(); ctx.arc(p.x*W, p.y*H, p.r, 0, Math.PI*2); ctx.fill();
       });
-
-      animationId = requestAnimationFrame(tick);
-    };
+      requestAnimationFrame(tick);
+    }
     tick();
-    return () => { cancelAnimationFrame(animationId); window.removeEventListener("resize", resize); };
-  }, []);
-
-  return (
-    <div className="pointer-events-none fixed inset-0 -z-10">
-      <canvas ref={canvasRef} className="h-full w-full" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(139,92,246,0.1),transparent_40%),radial-gradient(circle_at_90%_20%,rgba(56,189,248,0.08),transparent_40%)]"/>
-    </div>
-  );
-}
-
-// ====== Navbar ======
-function Navbar(){
-  const items = ["About","Skills","Experience","Projects","Education","Awards","Contact"];
-  return (
-    <nav className="sticky top-0 z-20 backdrop-blur supports-[backdrop-filter]:bg-slate-950/40">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#home" className="font-semibold tracking-wide text-slate-200">{`<Harish/>`}</a>
-        <div className="hidden gap-6 text-sm text-slate-300 md:flex">
-          {items.map(i=> (
-            <a key={i} href={`#${i.toLowerCase()}`} className="hover:text-white transition">{i}</a>
-          ))}
-        </div>
-      </div>
-    </nav>
-  );
-}
-
-// ====== Sections ======
-function Hero(){
-  return (
-    <section id="home" className="relative flex min-h-[78vh] flex-col items-start justify-center gap-6 pt-12">
-      <motion.h1 initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.6}} className="text-4xl font-extrabold tracking-tight sm:text-6xl">
-        {NAME}
-      </motion.h1>
-      <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.7, delay:0.05}} className="text-xl text-slate-300">
-        {ROLE}
-      </motion.p>
-      <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.8, delay:0.1}} className="max-w-2xl text-slate-300">
-        {TAGLINE}
-      </motion.p>
-      <div className="mt-2 flex flex-wrap gap-3">
-        <Social href={GITHUB} icon={<Github size={18}/>} label="GitHub" />
-        <Social href={LINKEDIN} icon={<Linkedin size={18}/>} label="LinkedIn" />
-        <Social href={`mailto:${EMAIL}`} icon={<Mail size={18}/>} label="Email" />
-        <Social href={RESUME_URL} icon={<FileText size={18}/>} label="Resume" primary />
-      </div>
-    </section>
-  );
-}
-
-function About(){
-  return (
-    <Section id="about" title="About">
-      <p className="text-slate-300">
-        Finance professional (FMVA®, SIE) with strengths in investment analysis, financial modeling, FP&A, and
-        analytics. Proven track record improving forecast accuracy, liquidity, and decision speed via automation and
-        executive‑ready reporting. Advanced in Excel, Power BI, Tableau, SAP S/4HANA/TRM, Bloomberg, SQL, and Python.
-      </p>
-    </Section>
-  );
-}
-
-function Skills(){
-  const items = [
-    "Financial Modeling (DCF/IRR/NPV)",
-    "Budgeting & Forecasting",
-    "Revenue Recognition (GAAP) / SOX",
-    "Treasury & Liquidity",
-    "Power BI / Tableau / Excel (Power Query)",
-    "SAP S/4HANA & TRM | SQL | Python",
-    "Bloomberg (BQL) | WRDS",
-  ];
-  return (
-    <Section id="skills" title="Skills">
-      <ul className="grid gap-2 sm:grid-cols-2">
-        {items.map(s=> (
-          <li key={s} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
-            <Code2 className="mt-0.5 h-4 w-4 text-violet-400"/>
-            <span className="text-slate-200">{s}</span>
-          </li>
-        ))}
-      </ul>
-    </Section>
-  );
-}
-
-function Experience(){
-  const roles = [
-    {
-      company:"Portfolio Management Group, Atlanta, United States",
-      title:"Investment Analyst",
-      period:"Jan 2025 – May 2025",
-      bullets:[
-        "Researched 30+ U.S. equities via Bloomberg/WSJ, driving $500K+ weekly reallocations and 3% alpha vs. benchmark.",
-        "Built 8 GAAP‑compliant DCF/comps models and 5 custom screeners; boosted pitch accuracy by 30%.",
-        "Presented 15+ buy/sell calls with risk‑return memos; influenced $500K+ portfolio shifts weekly.",
-      ]
-    },
-    {
-      company:"ANTLON, Hyderabad, India",
-      title:"Senior Finance Analyst",
-      period:"Nov 2022 – Dec 2023",
-      bullets:[
-        "Directed $70M+ budgets/forecasts in SAP S/4HANA; raised forecast accuracy to 96% and investor confidence.",
-        "Automated 25+ Power BI/Excel workflows; cut close cycles 40% and freed 100+ hours/month.",
-        "Led ROI analysis on 16 capex projects ($34M+); reallocated $6M to higher‑return initiatives.",
-        "Negotiated vendor terms; reduced costs 15% (~$9M/yr) and accelerated collections.",
-      ]
-    },
-    {
-      company:"ANTLON, Hyderabad, India",
-      title:"Finance Analyst",
-      period:"Oct 2021 – Nov 2022",
-      bullets:[
-        "Flagged $2M+ inefficiencies via treasury variance analysis (Excel/Tableau); enabled targeted cost cuts.",
-        "Built IRR/NPV models for 25+ projects ($20M+); improved investment approvals by 22%.",
-        "Optimized $10M working capital with rolling cash forecasts across 6 departments.",
-      ]
-    },
-    {
-      company:"Neti Amravathi, Rajahmundry, India",
-      title:"Finance Intern",
-      period:"Apr 2020 – Sep 2021",
-      bullets:[
-        "Audited 25+ cost centers (Tally ERP); trimmed overheads 18% and reallocated $1.2M to core ops.",
-        "Built Excel tracking/models for $5M+ grants; ensured 100% compliance and timely disbursement.",
-        "Produced 6 budget variance analyses; improved forecast accuracy by 25%.",
-      ]
-    },
-  ];
-  return (
-    <Section id="experience" title="Experience" icon={<Briefcase className="h-5 w-5"/>}>
-      <div className="grid gap-6">
-        {roles.map((r, idx)=> (
-          <motion.article key={idx} initial={{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.45}} className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="text-lg font-semibold text-white">{r.title}</h3>
-              <span className="text-xs text-slate-400">{r.period}</span>
-            </div>
-            <p className="mt-1 text-sm text-slate-300">{r.company}</p>
-            <ul className="mt-3 ml-4 list-disc space-y-1.5 text-slate-200">
-              {r.bullets.map((b,i)=>(<li key={i}>{b}</li>))}
-            </ul>
-          </motion.article>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-function Projects(){
-  const items = [
-    {
-      title: "ESG Alpha Lab (GSU)",
-      desc: "Analyzed ESG‑linked performance for 50+ firms using WRDS, Bloomberg, Python; improved model accuracy 18%.",
-      link: "#"
-    },
-    {
-      title: "Forecast Automation",
-      desc: "9 Tableau/Power BI dashboards reduced manual reporting 45% and accelerated exec insights.",
-      link: "#"
-    },
-  ];
-  return (
-    <Section id="projects" title="Projects">
-      <div className="grid gap-6 sm:grid-cols-2">
-        {items.map((p,i)=> (
-          <a key={i} href={p.link} className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-violet-400/40">
-            <h4 className="text-white">{p.title}</h4>
-            <p className="mt-2 text-sm text-slate-300">{p.desc}</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-violet-300">View <ArrowRight size={14}/></span>
-          </a>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-function Education(){
-  return (
-    <Section id="education" title="Education" icon={<School className="h-5 w-5"/>}>
-      <Timeline
-        items={[
-          {
-            title:"Georgia State University — MS in Finance",
-            period:"Aug 2024 – Aug 2025",
-            detail:"Graduate Certificate in FinTech Innovation; All‑Rounder Award 2025.",
-          },
-          {
-            title:"Bharath University — BBA",
-            period:"2018 – 2021",
-            detail:"Graduated with distinction.",
-          },
-        ]}
-      />
-    </Section>
-  );
-}
-
-function Awards(){
-  return (
-    <Section id="awards" title="Awards" icon={<Trophy className="h-5 w-5"/>}>
-      <ul className="grid gap-2 sm:grid-cols-2">
-        <li className="rounded-xl border border-white/10 bg-white/5 p-3">All‑Rounder Award 2025 — Georgia State University</li>
-        <li className="rounded-xl border border-white/10 bg-white/5 p-3">FMVA® (CFI) — Financial Modeling & Valuation Analyst</li>
-        <li className="rounded-xl border border-white/10 bg-white/5 p-3">SIE (FINRA) — Securities Industry Essentials</li>
-      </ul>
-    </Section>
-  );
-}
-
-function Contact(){
-  return (
-    <Section id="contact" title="Contact">
-      <div className="flex flex-wrap items-center gap-3 text-slate-300">
-        <Social href={`mailto:${EMAIL}`} icon={<Mail size={18}/>} label={EMAIL} primary />
-        <Social href={LINKEDIN} icon={<Linkedin size={18}/>} label="Connect on LinkedIn" />
-      </div>
-    </Section>
-  );
-}
-
-// ====== Reusable bits ======
-function Section({ id, title, icon, children }){
-  return (
-    <section id={id} className="scroll-mt-24 py-14">
-      <div className="mb-6 flex items-center gap-2">
-        {icon}
-        <h2 className="text-2xl font-bold tracking-tight text-white">{title}</h2>
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function Social({ href, icon, label, primary }){
-  if (!href || href === "#") return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200 opacity-60">
-      {icon}{label}
-    </span>
-  );
-  return (
-    <a href={href} target="_blank" rel="noreferrer" className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm transition ${primary ? "bg-violet-500 text-white hover:bg-violet-400" : "border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10"}`}>
-      {icon}
-      {label}
-    </a>
-  );
-}
-
-function Timeline({ items }){
-  return (
-    <ol className="relative ml-3 border-l border-white/10">
-      {items.map((it, idx)=> (
-        <li key={idx} className="mb-6 ml-4">
-          <div className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-violet-400" />
-          <h3 className="font-semibold text-white">{it.title}</h3>
-          <p className="text-xs text-slate-400">{it.period}</p>
-          <p className="mt-1 text-slate-300">{it.detail}</p>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
+  </script>
+</body>
+</html>
