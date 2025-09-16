@@ -1,265 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Harish Goluguri — Finance | FP&A & Investments</title>
-  <meta name="description" content="Harish Goluguri — Financial Analyst | FP&A & Investments. Turning data into decisions — faster, clearer, and with measurable ROI." />
-  <!-- Tailwind (CDN build) -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Harish Goluguri — Financial Analyst</title>
+  <meta name="description" content="Harish Goluguri · Financial Analyst (FP&A & Investments). Turning data into decisions with modeling, dashboards, and automation." />
+
+  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#0f172a",          /* slate-900-ish for headings */
+            copy: "#334155",         /* slate-600-ish for body */
+            brand: "#0ea5e9",        /* sky-500 */
+            brandAlt: "#7c3aed",     /* violet-600 */
+            panel: "#ffffff",
+            edge: "rgba(15,23,42,.08)"
+          },
+          fontFamily: { inter: ['Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --ink:#e2e8f0; --muted:#94a3b8; --panel:rgba(255,255,255,.05);
-      --stroke:rgba(255,255,255,.1); --brand:#8b5cf6;
-    }
-    html{ scroll-behavior:smooth; }
-    body{ font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:#0b1220; color:var(--ink) }
-    .glass{ background:var(--panel); border:1px solid var(--stroke); backdrop-filter: blur(10px); }
-    .chip{ border:1px solid var(--stroke); background:var(--panel); }
-    .card{ transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease }
-    .card:hover{ transform:translateY(-2px); border-color:rgba(139,92,246,.35); box-shadow:0 10px 30px rgba(2,6,23,.45) }
-    .title{ letter-spacing:.2px }
-    .link-ghost{ color:var(--muted) }
-    .link-ghost:hover{ color:white }
-    .brand{ color:var(--brand) }
-    /* section reveal */
+    html{ scroll-behavior:smooth }
+    body{ background:#f8fafc }
+    .card{ background:var(--panel, #fff); border:1px solid var(--edge, rgba(15,23,42,.08)); box-shadow:0 6px 20px rgba(2,6,23,.06); transition:transform .2s ease, box-shadow .2s ease }
+    .card:hover{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(2,6,23,.08) }
     .reveal{ opacity:0; transform:translateY(14px); transition:all .6s ease }
     .reveal.show{ opacity:1; transform:none }
-    /* canvas sits behind */
-    #bg-wrap{ position:fixed; inset:0; z-index:-1 }
-    #constellation{ width:100%; height:100% }
+    .chip{ border:1px solid rgba(15,23,42,.08); background:#fff }
   </style>
 </head>
-<body>
-  <!-- Animated background -->
-  <div id="bg-wrap">
-    <canvas id="constellation"></canvas>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(139,92,246,0.10),transparent_40%),radial-gradient(circle_at_90%_20%,rgba(56,189,248,0.10),transparent_40%)]"></div>
-  </div>
+<body class="font-inter text-copy">
 
   <!-- NAV -->
-  <nav class="sticky top-0 z-20 backdrop-blur supports-[backdrop-filter]:bg-[#0b1220]/50 border-b border-white/10">
+  <nav class="sticky top-0 z-20 bg-white/70 backdrop-blur border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#home" class="font-semibold tracking-wide link-ghost">&lt;Harish/&gt;</a>
-      <div class="hidden md:flex gap-6 text-sm">
-        <a class="link-ghost" href="#about">About</a>
-        <a class="link-ghost" href="#skills">Skills</a>
-        <a class="link-ghost" href="#experience">Experience</a>
-        <a class="link-ghost" href="#projects">Projects</a>
-        <a class="link-ghost" href="#education">Education</a>
-        <a class="link-ghost" href="#awards">Awards</a>
-        <a class="link-ghost" href="#contact">Contact</a>
+      <a href="#home" class="font-semibold tracking-wide text-ink">&lt;Harish/&gt;</a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a class="hover:text-ink" href="#about">About</a>
+        <a class="hover:text-ink" href="#skills">Skills</a>
+        <a class="hover:text-ink" href="#experience">Experience</a>
+        <a class="hover:text-ink" href="#projects">Projects</a>
+        <a class="hover:text-ink" href="#education">Education</a>
+        <a class="hover:text-ink" href="#awards">Awards</a>
+        <a class="hover:text-ink" href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- MAIN -->
-  <main class="max-w-6xl mx-auto px-6">
-    <!-- HERO -->
-    <section id="home" class="min-h-[78vh] flex flex-col justify-center gap-5 pt-10">
-      <h1 class="text-4xl sm:text-6xl font-extrabold title">Harish Goluguri</h1>
-      <p class="text-xl text-slate-300">Financial Analyst • FP&amp;A &amp; Investments</p>
-      <p class="max-w-2xl text-slate-300">
-        Turning data into decisions — faster, clearer, and with measurable ROI.
-        Advanced in Excel, Power BI, Tableau, SAP S/4HANA/TRM, Bloomberg, SQL, and Python.
-      </p>
-      <div class="flex flex-wrap gap-3">
-        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="mailto:harishreddyice@gmail.com">Email</a>
-        <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand)] hover:bg-violet-500 text-white" href="#" target="_blank" rel="noreferrer">Resume</a>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="py-14 reveal">
-      <h2 class="text-2xl font-bold mb-4">About</h2>
-      <div class="glass rounded-2xl p-6">
-        <p class="text-slate-300">
-          Finance professional (FMVA®, SIE) with strengths in investment analysis, financial modeling, FP&amp;A, and analytics.
-          Proven track record improving forecast accuracy, liquidity, and decision speed via automation and executive-ready reporting.
+  <!-- HERO -->
+  <header id="home" class="max-w-6xl mx-auto px-6 pt-12 pb-8 md:pt-20 md:pb-14">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div class="space-y-6">
+        <p class="text-brand font-semibold">Financial Analyst • FP&amp;A &amp; Investments</p>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-ink leading-tight">Harish Goluguri</h1>
+        <p class="text-lg text-slate-600">
+          Turning data into decisions — faster, clearer, and with measurable ROI.
+          Advanced in Excel, Power BI, Tableau, SAP S/4HANA/TRM, Bloomberg, SQL, and Python.
         </p>
+
+        <div class="flex flex-wrap gap-3">
+          <!-- TODO: add your GitHub if desired -->
+          <a href="https://github.com/" target="_blank" rel="noreferrer" class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50">
+            <!-- github icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-ink"><path d="M12 .5A12 12 0 0 0 0 12.7c0 5.4 3.4 9.9 8.2 11.5.6.1.8-.3.8-.6v-2c-3.3.8-4-1.4-4-1.4-.6-1.5-1.4-1.9-1.4-1.9-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.4-1.4-5.4-6.1 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.2 4 18.2 4.3 18.2 4.3c.6 1.7.2 3 .1 3.3.7.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.8-5.4 6.1.4.3.7.9.7 1.9v2.8c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.5A12 12 0 0 0 12 .5Z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer" class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50">
+            <!-- linkedin -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-ink"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5Zm.02 5.9H2v11.6h3V9.4Zm6.8 0H8.9v11.6h3V15c0-2.4 3.1-2.6 3.1 0v6h3v-6.9c0-4.6-5.2-4.4-6.2-2.1V9.4Z"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:harishreddyice@gmail.com" class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50">
+            <!-- mail -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-ink"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.4l8 5.1 8-5.1V7H4Zm16 10V9.2l-7.4 4.8a1 1 0 0 1-1.2 0L4 9.2V17h16Z"/></svg>
+            Email
+          </a>
+          <a href="#" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white bg-brand hover:bg-sky-600">
+            <!-- TODO: replace # with your resume link -->
+            Resume
+          </a>
+        </div>
       </div>
-    </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="py-14 reveal">
-      <h2 class="text-2xl font-bold mb-6">Skills</h2>
-      <ul class="grid sm:grid-cols-2 gap-3">
-        <li class="glass rounded-xl p-3">Financial Modeling (DCF/IRR/NPV)</li>
-        <li class="glass rounded-xl p-3">Budgeting &amp; Forecasting</li>
-        <li class="glass rounded-xl p-3">Revenue Recognition (GAAP) • SOX</li>
-        <li class="glass rounded-xl p-3">Treasury &amp; Liquidity</li>
-        <li class="glass rounded-xl p-3">Power BI • Tableau • Excel (Power Query)</li>
-        <li class="glass rounded-xl p-3">SAP S/4HANA &amp; TRM • SQL • Python</li>
-        <li class="glass rounded-xl p-3">Bloomberg (BQL) • WRDS</li>
-      </ul>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="py-14 reveal">
-      <h2 class="text-2xl font-bold mb-6">Experience</h2>
-      <div class="grid gap-6">
-        <article class="glass rounded-2xl p-5 card">
-          <div class="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 class="font-semibold text-lg">Investment Analyst</h3>
-            <span class="text-xs text-slate-400">Jan 2025 – May 2025</span>
-          </div>
-          <p class="text-sm text-slate-300 mt-1">Portfolio Management Group, Atlanta, United States</p>
-          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
-            <li>Researched 30+ U.S. equities via Bloomberg/WSJ, driving $500K+ weekly reallocations and 3% alpha vs. benchmark.</li>
-            <li>Built 8 GAAP-compliant DCF/comps models and 5 custom screeners; boosted pitch accuracy by 30%.</li>
-            <li>Presented 15+ buy/sell calls with risk-return memos; influenced $500K+ weekly portfolio shifts.</li>
-          </ul>
-        </article>
-
-        <article class="glass rounded-2xl p-5 card">
-          <div class="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 class="font-semibold text-lg">Senior Finance Analyst</h3>
-            <span class="text-xs text-slate-400">Nov 2022 – Dec 2023</span>
-          </div>
-          <p class="text-sm text-slate-300 mt-1">ANTLON, Hyderabad, India</p>
-          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
-            <li>Directed $70M+ budgets/forecasts in SAP S/4HANA; raised forecast accuracy to 96% and investor confidence.</li>
-            <li>Automated 25+ Power BI/Excel workflows; cut close cycles 40% and freed 100+ hours/month.</li>
-            <li>Led ROI analysis on 16 capex projects ($34M+); reallocated $6M to higher-return initiatives.</li>
-            <li>Negotiated vendor terms; reduced costs 15% (~$9M/yr) and accelerated collections.</li>
-          </ul>
-        </article>
-
-        <article class="glass rounded-2xl p-5 card">
-          <div class="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 class="font-semibold text-lg">Finance Analyst</h3>
-            <span class="text-xs text-slate-400">Oct 2021 – Nov 2022</span>
-          </div>
-          <p class="text-sm text-slate-300 mt-1">ANTLON, Hyderabad, India</p>
-          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
-            <li>Flagged $2M+ inefficiencies via treasury variance analysis; enabled targeted cost cuts.</li>
-            <li>Built IRR/NPV models for 25+ projects ($20M+); improved investment approvals by 22%.</li>
-            <li>Optimized $10M working capital with rolling cash forecasts across 6 departments.</li>
-          </ul>
-        </article>
-
-        <article class="glass rounded-2xl p-5 card">
-          <div class="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 class="font-semibold text-lg">Finance Intern</h3>
-            <span class="text-xs text-slate-400">Apr 2020 – Sep 2021</span>
-          </div>
-          <p class="text-sm text-slate-300 mt-1">Neti Amravathi, Rajahmundry, India</p>
-          <ul class="list-disc ml-5 mt-3 space-y-1.5 text-slate-200">
-            <li>Audited 25+ cost centers (Tally ERP); trimmed overheads 18% and reallocated $1.2M to core ops.</li>
-            <li>Built Excel tracking/models for $5M+ grants; ensured 100% compliance and timely disbursement.</li>
-            <li>Produced 6 budget variance analyses; improved forecast accuracy by 25%.</li>
-          </ul>
-        </article>
+      <!-- Right simple illustration -->
+      <div class="hidden md:block">
+        <svg viewBox="0 0 520 420" class="w-full max-w-[520px] mx-auto" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0ea5e9" stop-opacity=".25"/><stop offset="1" stop-color="#7c3aed" stop-opacity=".25"/></linearGradient>
+          </defs>
+          <rect x="0" y="0" width="520" height="420" rx="24" fill="url(#g)"/>
+          <g fill="none" stroke="#0f172a" opacity=".12">
+            <circle cx="120" cy="120" r="70"/><circle cx="400" cy="120" r="60"/><circle cx="260" cy="300" r="90"/>
+            <path d="M40 60h440M40 110h440M40 160h440M40 210h440M40 260h440M40 310h440M40 360h440"/>
+          </g>
+          <g transform="translate(70,70)">
+            <rect width="380" height="260" rx="16" fill="#fff" stroke="rgba(15,23,42,.08)"/>
+            <rect x="24" y="30" width="140" height="14" rx="7" fill="#e2e8f0"/>
+            <rect x="24" y="55" width="220" height="10" rx="5" fill="#e2e8f0"/>
+            <rect x="24" y="90" width="330" height="120" rx="10" fill="#f1f5f9" stroke="rgba(15,23,42,.06)"/>
+            <rect x="24" y="230" width="180" height="10" rx="5" fill="#e2e8f0"/>
+            <rect x="214" y="230" width="120" height="10" rx="5" fill="#e2e8f0"/>
+          </g>
+        </svg>
       </div>
-    </section>
+    </div>
+  </header>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="py-14 reveal">
-      <h2 class="text-2xl font-bold mb-6">Projects</h2>
-      <div class="grid sm:grid-cols-2 gap-6">
-        <a class="glass rounded-2xl p-5 card block" href="#" target="_blank" rel="noreferrer">
-          <h4 class="font-semibold">ESG Alpha Lab (GSU)</h4>
-          <p class="text-sm text-slate-300 mt-2">Analyzed ESG-linked performance for 50+ firms using WRDS, Bloomberg, Python; improved model accuracy 18%.</p>
-          <span class="mt-3 inline-flex items-center gap-2 text-violet-300">View →</span>
-        </a>
-        <a class="glass rounded-2xl p-5 card block" href="#" target="_blank" rel="noreferrer">
-          <h4 class="font-semibold">Forecast Automation</h4>
-          <p class="text-sm text-slate-300 mt-2">9 Tableau/Power BI dashboards reduced manual reporting 45% and accelerated exec insights.</p>
-          <span class="mt-3 inline-flex items-center gap-2 text-violet-300">View →</span>
-        </a>
+  <!-- ABOUT -->
+  <section id="about" class="max-w-6xl mx-auto px-6 py-12 reveal">
+    <div class="card rounded-2xl p-6">
+      <h2 class="text-2xl font-bold text-ink mb-2">About</h2>
+      <p>
+        Finance professional (FMVA®, SIE) with strengths in investment analysis, financial modeling, FP&amp;A, and analytics.
+        Proven track record improving forecast accuracy, liquidity, and decision speed via automation and executive-ready reporting.
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="max-w-6xl mx-auto px-6 py-12 reveal">
+    <h2 class="text-2xl font-bold text-ink mb-6">Skills</h2>
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <li class="card rounded-xl p-3">Financial Modeling (DCF/IRR/NPV)</li>
+      <li class="card rounded-xl p-3">Budgeting &amp; Forecasting</li>
+      <li class="card rounded-xl p-3">Revenue Recognition (GAAP) • SOX</li>
+      <li class="card rounded-xl p-3">Treasury &amp; Liquidity</li>
+      <li class="card rounded-xl p-3">Power BI • Tableau • Excel (Power Query)</li>
+      <li class="card rounded-xl p-3">SAP S/4HANA &amp; TRM • SQL • Python</li>
+      <li class="card rounded-xl p-3">Bloomberg (BQL) • WRDS</li>
+    </ul>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="max-w-6xl mx-auto px-6 py-12 reveal">
+    <h2 class="text-2xl font-bold text-ink mb-6">Experience</h2>
+    <div class="grid gap-6">
+      <article class="card rounded-2xl p-5">
+        <div class="flex items-baseline justify-between gap-2">
+          <h3 class="font-semibold text-lg text-ink">Investment Analyst</h3>
+          <span class="text-xs text-slate-500">Jan 2025 – May 2025</span>
+        </div>
+        <p class="text-sm text-slate-600 mt-1">Portfolio Management Group, Atlanta, United States</p>
+        <ul class="list-disc ml-6 mt-3 space-y-1.5">
+          <li>Researched 30+ U.S. equities via Bloomberg/WSJ, driving $500K+ weekly reallocations and 3% alpha vs. benchmark.</li>
+          <li>Built 8 GAAP-compliant DCF/comps models and 5 custom screeners; boosted pitch accuracy by 30%.</li>
+          <li>Presented 15+ buy/sell calls with risk-return memos; influenced $500K+ weekly portfolio shifts.</li>
+        </ul>
+      </article>
+
+      <article class="card rounded-2xl p-5">
+        <div class="flex items-baseline justify-between gap-2">
+          <h3 class="font-semibold text-lg text-ink">Senior Finance Analyst</h3>
+          <span class="text-xs text-slate-500">Nov 2022 – Dec 2023</span>
+        </div>
+        <p class="text-sm text-slate-600 mt-1">ANTLON, Hyderabad, India</p>
+        <ul class="list-disc ml-6 mt-3 space-y-1.5">
+          <li>Directed $70M+ budgets/forecasts in SAP S/4HANA; raised forecast accuracy to 96%.</li>
+          <li>Automated 25+ Power BI/Excel workflows; cut close cycles 40% and freed 100+ hours/month.</li>
+          <li>Led ROI on 16 capex projects ($34M+); reallocated $6M to higher-return initiatives.</li>
+          <li>Negotiated vendor terms; reduced costs 15% (~$9M/yr) and accelerated collections.</li>
+        </ul>
+      </article>
+
+      <article class="card rounded-2xl p-5">
+        <div class="flex items-baseline justify-between gap-2">
+          <h3 class="font-semibold text-lg text-ink">Finance Analyst</h3>
+          <span class="text-xs text-slate-500">Oct 2021 – Nov 2022</span>
+        </div>
+        <p class="text-sm text-slate-600 mt-1">ANTLON, Hyderabad, India</p>
+        <ul class="list-disc ml-6 mt-3 space-y-1.5">
+          <li>Flagged $2M+ inefficiencies via treasury variance analysis; enabled targeted cost cuts.</li>
+          <li>Built IRR/NPV models for 25+ projects ($20M+); improved investment approvals by 22%.</li>
+          <li>Optimized $10M working capital with rolling cash forecasts across 6 departments.</li>
+        </ul>
+      </article>
+
+      <article class="card rounded-2xl p-5">
+        <div class="flex items-baseline justify-between gap-2">
+          <h3 class="font-semibold text-lg text-ink">Finance Intern</h3>
+          <span class="text-xs text-slate-500">Apr 2020 – Sep 2021</span>
+        </div>
+        <p class="text-sm text-slate-600 mt-1">Neti Amravathi, Rajahmundry, India</p>
+        <ul class="list-disc ml-6 mt-3 space-y-1.5">
+          <li>Audited 25+ cost centers (Tally ERP); trimmed overheads 18% and reallocated $1.2M to core ops.</li>
+          <li>Built Excel tracking/models for $5M+ grants; ensured 100% compliance and timely disbursement.</li>
+          <li>Produced 6 budget variance analyses; improved forecast accuracy by 25%.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-12 reveal">
+    <h2 class="text-2xl font-bold text-ink mb-6">Projects</h2>
+    <div class="grid sm:grid-cols-2 gap-6">
+      <a class="card rounded-2xl p-5 block" href="#" target="_blank" rel="noreferrer">
+        <h4 class="font-semibold text-ink">ESG Alpha Lab (GSU)</h4>
+        <p class="text-sm mt-2">Analyzed ESG-linked performance for 50+ firms using WRDS, Bloomberg, Python; improved model accuracy 18%.</p>
+        <span class="mt-3 inline-flex items-center gap-2 text-brand">View →</span>
+      </a>
+      <a class="card rounded-2xl p-5 block" href="#" target="_blank" rel="noreferrer">
+        <h4 class="font-semibold text-ink">Forecast Automation</h4>
+        <p class="text-sm mt-2">9 Tableau/Power BI dashboards reduced manual reporting 45% and accelerated exec insights.</p>
+        <span class="mt-3 inline-flex items-center gap-2 text-brand">View →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="max-w-6xl mx-auto px-6 py-12 reveal">
+    <h2 class="text-2xl font-bold text-ink mb-6">Education</h2>
+    <ol class="relative ml-3 border-l border-slate-200">
+      <li class="mb-6 ml-4">
+        <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-brand"></div>
+        <h3 class="font-semibold text-ink">Georgia State University — MS in Finance</h3>
+        <p class="text-xs text-slate-500">Aug 2024 – Aug 2025</p>
+        <p class="mt-1">Graduate Certificate in FinTech Innovation; All-Rounder Award 2025.</p>
+      </li>
+      <li class="mb-6 ml-4">
+        <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-brand"></div>
+        <h3 class="font-semibold text-ink">Bharath University — BBA</h3>
+        <p class="text-xs text-slate-500">2018 – 2021</p>
+        <p class="mt-1">Graduated with distinction.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards" class="max-w-6xl mx-auto px-6 py-12 reveal">
+    <h2 class="text-2xl font-bold text-ink mb-6">Awards</h2>
+    <ul class="grid sm:grid-cols-2 gap-3">
+      <li class="card rounded-xl p-3">All-Rounder Award 2025 — Georgia State University</li>
+      <li class="card rounded-xl p-3">FMVA® (CFI) — Financial Modeling &amp; Valuation Analyst</li>
+      <li class="card rounded-xl p-3">SIE (FINRA) — Securities Industry Essentials</li>
+    </ul>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="max-w-6xl mx-auto px-6 py-12 reveal">
+    <div class="card rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-ink">Let’s connect</h2>
+        <p>Open to Financial Analyst / FP&amp;A / Investments roles. Based in Chicago; flexible on location.</p>
       </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="py-14 reveal">
-      <h2 class="text-2xl font-bold mb-6">Education</h2>
-      <ol class="relative ml-3 border-l border-white/10">
-        <li class="mb-6 ml-4">
-          <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-violet-400"></div>
-          <h3 class="font-semibold">Georgia State University — MS in Finance</h3>
-          <p class="text-xs text-slate-400">Aug 2024 – Aug 2025</p>
-          <p class="mt-1 text-slate-300">Graduate Certificate in FinTech Innovation; All-Rounder Award 2025.</p>
-        </li>
-        <li class="mb-6 ml-4">
-          <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-violet-400"></div>
-          <h3 class="font-semibold">Bharath University — BBA</h3>
-          <p class="text-xs text-slate-400">2018 – 2021</p>
-          <p class="mt-1 text-slate-300">Graduated with distinction.</p>
-        </li>
-      </ol>
-    </section>
-
-    <!-- AWARDS -->
-    <section id="awards" class="py-14 reveal">
-      <h2 class="text-2xl font-bold mb-6">Awards</h2>
-      <ul class="grid sm:grid-cols-2 gap-3">
-        <li class="glass rounded-xl p-3">All-Rounder Award 2025 — Georgia State University</li>
-        <li class="glass rounded-xl p-3">FMVA® (CFI) — Financial Modeling &amp; Valuation Analyst</li>
-        <li class="glass rounded-xl p-3">SIE (FINRA) — Securities Industry Essentials</li>
-      </ul>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="py-14 reveal">
-      <h2 class="text-2xl font-bold mb-4">Contact</h2>
-      <div class="flex flex-wrap items-center gap-3">
-        <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--brand)] hover:bg-violet-500 text-white" href="mailto:harishreddyice@gmail.com">harishreddyice@gmail.com</a>
-        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10" href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+      <div class="flex flex-wrap gap-3">
+        <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white bg-brand hover:bg-sky-600" href="mailto:harishreddyice@gmail.com">harishreddyice@gmail.com</a>
+        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50" href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- FOOTER -->
-  <footer class="mt-16 border-t border-white/10 py-10 text-center text-sm text-slate-400">
-    © <span id="yy"></span> Harish Goluguri. Built with ❤️ using Tailwind.
+  <footer class="mt-16 border-t border-slate-200 py-8 text-center text-sm text-slate-500">
+    © <span id="yy"></span> Harish Goluguri
   </footer>
 
-  <!-- BG constellations + section reveal -->
   <script>
     // year
     document.getElementById('yy').textContent = new Date().getFullYear();
-
-    // intersection reveal
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show') })
-    },{ threshold:.12 });
+    // section reveal on scroll
+    const io = new IntersectionObserver((entries)=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show') }),{threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    // minimal constellation bg
-    const canvas = document.getElementById('constellation');
-    const ctx = canvas.getContext('2d');
-    let W,H,DPR = Math.min(2, window.devicePixelRatio||1);
-    const P = Array.from({length:90}, ()=>({
-      x: Math.random(), y: Math.random(),
-      vx:(Math.random()-.5)*.0006, vy:(Math.random()-.5)*.0006,
-      r: Math.random()*1.6+.3
-    }));
-    function size(){ W = canvas.clientWidth = innerWidth; H = canvas.clientHeight = innerHeight;
-      canvas.width = W*DPR; canvas.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-    }
-    size(); addEventListener('resize', size);
-    function tick(){
-      ctx.clearRect(0,0,W,H);
-      // links
-      for(let i=0;i<P.length;i++){
-        for(let j=i+1;j<P.length;j++){
-          const a=P[i], b=P[j], dx=(a.x-b.x)*W, dy=(a.y-b.y)*H, d=Math.hypot(dx,dy);
-          if(d<110){ ctx.strokeStyle=`rgba(148,163,184,${0.08*(1-d/110)})`; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(a.x*W, a.y*H); ctx.lineTo(b.x*W, b.y*H); ctx.stroke(); }
-        }
-      }
-      // dots & move
-      P.forEach(p=>{
-        p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>1) p.vx*=-1; if(p.y<0||p.y>1) p.vy*=-1;
-        ctx.fillStyle="rgba(203,213,225,.85)"; ctx.beginPath(); ctx.arc(p.x*W, p.y*H, p.r, 0, Math.PI*2); ctx.fill();
-      });
-      requestAnimationFrame(tick);
-    }
-    tick();
   </script>
 </body>
 </html>
