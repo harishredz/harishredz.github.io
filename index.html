@@ -1,763 +1,359 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harish Goluguri - Finance Professional</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+import { useEffect, useRef } from "react";
+import { Github, Linkedin, Mail, FileText, ArrowRight, Briefcase, School, Trophy, Code2 } from "lucide-react";
+import { motion } from "framer-motion";
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+// ====== Quick theme knobs ======
+const NAME = "Harish Goluguri";
+const ROLE = "Financial Analyst | FP&A & Investments";
+const TAGLINE = "Turning data into decisions — faster, clearer, and with measurable ROI.";
+const EMAIL = "harishreddyice@gmail.com";
+const LINKEDIN = "https://www.linkedin.com/in/harishredz";
+const GITHUB = "https://github.com/"; // add if you want
+const RESUME_URL = "#"; // replace with your resume link
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
+export default function App() {
+  return (
+    <div className="min-h-screen w-full bg-slate-950 text-slate-100 selection:bg-violet-500/30 selection:text-white">
+      <AuroraGrid />
+      <Navbar />
+      <main className="mx-auto max-w-6xl px-6">
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Education />
+        <Awards />
+        <Contact />
+      </main>
+      <footer className="mt-20 border-t border-white/10 py-10 text-center text-sm text-slate-400">
+        © {new Date().getFullYear()} {NAME}. Built with ❤️ using React + Tailwind + Framer Motion.
+      </footer>
+    </div>
+  );
+}
 
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 60px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+// ====== Background (animated constellations style, lightweight) ======
+function AuroraGrid() {
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    let w, h, animationId;
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
+    const particles = Array.from({ length: 90 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      vx: (Math.random() - 0.5) * 0.0006,
+      vy: (Math.random() - 0.5) * 0.0006,
+      r: Math.random() * 1.6 + 0.3,
+    }));
 
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
+    const resize = () => {
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = w * DPR; canvas.height = h * DPR; ctx.scale(DPR, DPR);
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+    const tick = () => {
+      ctx.clearRect(0, 0, w, h);
+      // aurora gradient
+      const g = ctx.createRadialGradient(w*0.7, h*0.2, 80, w*0.8, h*0.1, Math.max(w,h));
+      g.addColorStop(0, "rgba(139,92,246,0.12)");
+      g.addColorStop(1, "rgba(15,23,42,0)");
+      ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
 
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > 1) p.vx *= -1;
+        if (p.y < 0 || p.y > 1) p.vy *= -1;
+      });
 
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+      // draw links
+      for (let i=0;i<particles.length;i++){
+        for (let j=i+1;j<particles.length;j++){
+          const a = particles[i], b = particles[j];
+          const dx = (a.x-b.x)*w, dy = (a.y-b.y)*h; const d = Math.hypot(dx,dy);
+          if (d < 110){
+            ctx.strokeStyle = `rgba(148,163,184,${0.08 * (1-d/110)})`;
+            ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.x*w, a.y*h); ctx.lineTo(b.x*w, b.y*h); ctx.stroke();
+          }
         }
+      }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            opacity: 0.9;
-        }
+      // dots
+      particles.forEach(p=>{
+        ctx.fillStyle = "rgba(203,213,225,0.8)";
+        ctx.beginPath(); ctx.arc(p.x*w, p.y*h, p.r, 0, Math.PI*2); ctx.fill();
+      });
 
-        .nav {
-            background: #34495e;
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      animationId = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => { cancelAnimationFrame(animationId); window.removeEventListener("resize", resize); };
+  }, []);
 
-        .nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-10">
+      <canvas ref={canvasRef} className="h-full w-full" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(139,92,246,0.1),transparent_40%),radial-gradient(circle_at_90%_20%,rgba(56,189,248,0.08),transparent_40%)]"/>
+    </div>
+  );
+}
 
-        .nav li {
-            margin: 0;
-        }
+// ====== Navbar ======
+function Navbar(){
+  const items = ["About","Skills","Experience","Projects","Education","Awards","Contact"];
+  return (
+    <nav className="sticky top-0 z-20 backdrop-blur supports-[backdrop-filter]:bg-slate-950/40">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="#home" className="font-semibold tracking-wide text-slate-200">{`<Harish/>`}</a>
+        <div className="hidden gap-6 text-sm text-slate-300 md:flex">
+          {items.map(i=> (
+            <a key={i} href={`#${i.toLowerCase()}`} className="hover:text-white transition">{i}</a>
+          ))}
+        </div>
+      </div>
+    </nav>
+  );
+}
 
-        .nav a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 15px 25px;
-            transition: background 0.3s ease;
-            font-weight: 500;
-        }
+// ====== Sections ======
+function Hero(){
+  return (
+    <section id="home" className="relative flex min-h-[78vh] flex-col items-start justify-center gap-6 pt-12">
+      <motion.h1 initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.6}} className="text-4xl font-extrabold tracking-tight sm:text-6xl">
+        {NAME}
+      </motion.h1>
+      <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.7, delay:0.05}} className="text-xl text-slate-300">
+        {ROLE}
+      </motion.p>
+      <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.8, delay:0.1}} className="max-w-2xl text-slate-300">
+        {TAGLINE}
+      </motion.p>
+      <div className="mt-2 flex flex-wrap gap-3">
+        <Social href={GITHUB} icon={<Github size={18}/>} label="GitHub" />
+        <Social href={LINKEDIN} icon={<Linkedin size={18}/>} label="LinkedIn" />
+        <Social href={`mailto:${EMAIL}`} icon={<Mail size={18}/>} label="Email" />
+        <Social href={RESUME_URL} icon={<FileText size={18}/>} label="Resume" primary />
+      </div>
+    </section>
+  );
+}
 
-        .nav a:hover {
-            background: #2c3e50;
-            color: #3498db;
-        }
+function About(){
+  return (
+    <Section id="about" title="About">
+      <p className="text-slate-300">
+        Finance professional (FMVA®, SIE) with strengths in investment analysis, financial modeling, FP&A, and
+        analytics. Proven track record improving forecast accuracy, liquidity, and decision speed via automation and
+        executive‑ready reporting. Advanced in Excel, Power BI, Tableau, SAP S/4HANA/TRM, Bloomberg, SQL, and Python.
+      </p>
+    </Section>
+  );
+}
 
-        .content {
-            padding: 0;
-        }
+function Skills(){
+  const items = [
+    "Financial Modeling (DCF/IRR/NPV)",
+    "Budgeting & Forecasting",
+    "Revenue Recognition (GAAP) / SOX",
+    "Treasury & Liquidity",
+    "Power BI / Tableau / Excel (Power Query)",
+    "SAP S/4HANA & TRM | SQL | Python",
+    "Bloomberg (BQL) | WRDS",
+  ];
+  return (
+    <Section id="skills" title="Skills">
+      <ul className="grid gap-2 sm:grid-cols-2">
+        {items.map(s=> (
+          <li key={s} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
+            <Code2 className="mt-0.5 h-4 w-4 text-violet-400"/>
+            <span className="text-slate-200">{s}</span>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  );
+}
 
-        .section {
-            padding: 60px 40px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        .section:last-child {
-            border-bottom: none;
-        }
-
-        .section h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, #3498db, #2980b9);
-            border-radius: 2px;
-        }
-
-        .summary-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 5px solid #3498db;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, #3498db, #2980b9);
-        }
-
-        .timeline-item {
-            display: flex;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-content {
-            flex: 1;
-            padding: 0 30px;
-        }
-
-        .timeline-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-left: 4px solid #3498db;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .timeline-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: #3498db;
-            border: 4px solid white;
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px #3498db;
-            top: 25px;
-        }
-
-        .job-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-
-        .company {
-            font-size: 1.1rem;
-            color: #3498db;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .date {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .achievements {
-            list-style: none;
-        }
-
-        .achievements li {
-            padding: 8px 0;
-            padding-left: 20px;
-            position: relative;
-            line-height: 1.6;
-        }
-
-        .achievements li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .skill-category {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 30px;
-            border-radius: 10px;
-            border-top: 4px solid #3498db;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .skill-category h3 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            text-align: center;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: transform 0.2s ease;
-        }
-
-        .skill-tag:hover {
-            transform: scale(1.05);
-        }
-
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .education-card, .cert-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-left: 4px solid #3498db;
-            transition: transform 0.3s ease;
-        }
-
-        .education-card:hover, .cert-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .degree {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .institution {
-            color: #3498db;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .gpa {
-            color: #27ae60;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-top: 4px solid #3498db;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .project-header {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 20px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-
-        .project-date {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-
-        .project-content {
-            padding: 20px;
-        }
-
-        .project-description {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .award-box {
-            background: linear-gradient(135deg, #f1c40f, #f39c12);
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(241, 196, 15, 0.3);
-            margin-top: 20px;
-        }
-
-        .award-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .award-description {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .interactive-note {
-            background: #e8f4f8;
-            border: 1px solid #bee5eb;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 20px 0;
-            color: #0c5460;
-            text-align: center;
-            font-style: italic;
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 40px 20px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .section {
-                padding: 40px 20px;
-            }
-            
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                flex-direction: column;
-            }
-            
-            .timeline-item:nth-child(odd) {
-                flex-direction: column;
-            }
-            
-            .timeline-content {
-                padding: 0 0 0 40px;
-            }
-            
-            .timeline-dot {
-                left: 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="header-content">
-                <h1>HARISH GOLUGURI</h1>
-                <p class="subtitle">Certified Finance Professional | FMVA® | SIE | Bloomberg Certified</p>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span>📞</span>
-                        <span>872-344-7207</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>✉️</span>
-                        <span>harishreddyice@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>🔗</span>
-                        <span>LinkedIn Profile</span>
-                    </div>
-                </div>
+function Experience(){
+  const roles = [
+    {
+      company:"Portfolio Management Group, Atlanta, United States",
+      title:"Investment Analyst",
+      period:"Jan 2025 – May 2025",
+      bullets:[
+        "Researched 30+ U.S. equities via Bloomberg/WSJ, driving $500K+ weekly reallocations and 3% alpha vs. benchmark.",
+        "Built 8 GAAP‑compliant DCF/comps models and 5 custom screeners; boosted pitch accuracy by 30%.",
+        "Presented 15+ buy/sell calls with risk‑return memos; influenced $500K+ portfolio shifts weekly.",
+      ]
+    },
+    {
+      company:"ANTLON, Hyderabad, India",
+      title:"Senior Finance Analyst",
+      period:"Nov 2022 – Dec 2023",
+      bullets:[
+        "Directed $70M+ budgets/forecasts in SAP S/4HANA; raised forecast accuracy to 96% and investor confidence.",
+        "Automated 25+ Power BI/Excel workflows; cut close cycles 40% and freed 100+ hours/month.",
+        "Led ROI analysis on 16 capex projects ($34M+); reallocated $6M to higher‑return initiatives.",
+        "Negotiated vendor terms; reduced costs 15% (~$9M/yr) and accelerated collections.",
+      ]
+    },
+    {
+      company:"ANTLON, Hyderabad, India",
+      title:"Finance Analyst",
+      period:"Oct 2021 – Nov 2022",
+      bullets:[
+        "Flagged $2M+ inefficiencies via treasury variance analysis (Excel/Tableau); enabled targeted cost cuts.",
+        "Built IRR/NPV models for 25+ projects ($20M+); improved investment approvals by 22%.",
+        "Optimized $10M working capital with rolling cash forecasts across 6 departments.",
+      ]
+    },
+    {
+      company:"Neti Amravathi, Rajahmundry, India",
+      title:"Finance Intern",
+      period:"Apr 2020 – Sep 2021",
+      bullets:[
+        "Audited 25+ cost centers (Tally ERP); trimmed overheads 18% and reallocated $1.2M to core ops.",
+        "Built Excel tracking/models for $5M+ grants; ensured 100% compliance and timely disbursement.",
+        "Produced 6 budget variance analyses; improved forecast accuracy by 25%.",
+      ]
+    },
+  ];
+  return (
+    <Section id="experience" title="Experience" icon={<Briefcase className="h-5 w-5"/>}>
+      <div className="grid gap-6">
+        {roles.map((r, idx)=> (
+          <motion.article key={idx} initial={{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.45}} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-lg font-semibold text-white">{r.title}</h3>
+              <span className="text-xs text-slate-400">{r.period}</span>
             </div>
-        </header>
-
-        <!-- Navigation -->
-        <nav class="nav">
-            <ul>
-                <li><a href="#summary">Summary</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#awards">Awards</a></li>
+            <p className="mt-1 text-sm text-slate-300">{r.company}</p>
+            <ul className="mt-3 ml-4 list-disc space-y-1.5 text-slate-200">
+              {r.bullets.map((b,i)=>(<li key={i}>{b}</li>))}
             </ul>
-        </nav>
+          </motion.article>
+        ))}
+      </div>
+    </Section>
+  );
+}
 
-        <div class="content">
-            <!-- Professional Summary -->
-            <section id="summary" class="section">
-                <h2>Professional Summary</h2>
-                <div class="summary-box">
-                    <p>Certified finance professional with <strong>3+ years of comprehensive experience</strong> in Financial Planning & Analysis (FP&A), capital planning, and investment analysis. Triple-certified with <strong>FMVA®, SIE, and Bloomberg certifications</strong>, demonstrating expertise across financial modeling, securities analysis, and market analytics.</p>
-                    <br>
-                    <p>Proven track record in <strong>ESG integration</strong>, having enhanced ESG model accuracy by 18% through advanced data analysis. Skilled in translating complex financial data into strategic insights using <strong>Power BI, SQL, Python, and Bloomberg Terminal</strong>. Successfully managed budgets exceeding $1.5M while delivering measurable results including 25% margin improvements and 3% alpha generation over benchmarks.</p>
-                    <br>
-                    <p>Expertise spans across <strong>investment research, portfolio management, financial modeling, and regulatory compliance</strong>, with a strong foundation in both traditional finance and emerging areas like ESG and blockchain technology.</p>
-                </div>
-            </section>
+function Projects(){
+  const items = [
+    {
+      title: "ESG Alpha Lab (GSU)",
+      desc: "Analyzed ESG‑linked performance for 50+ firms using WRDS, Bloomberg, Python; improved model accuracy 18%.",
+      link: "#"
+    },
+    {
+      title: "Forecast Automation",
+      desc: "9 Tableau/Power BI dashboards reduced manual reporting 45% and accelerated exec insights.",
+      link: "#"
+    },
+  ];
+  return (
+    <Section id="projects" title="Projects">
+      <div className="grid gap-6 sm:grid-cols-2">
+        {items.map((p,i)=> (
+          <a key={i} href={p.link} className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-violet-400/40">
+            <h4 className="text-white">{p.title}</h4>
+            <p className="mt-2 text-sm text-slate-300">{p.desc}</p>
+            <span className="mt-3 inline-flex items-center gap-1 text-violet-300">View <ArrowRight size={14}/></span>
+          </a>
+        ))}
+      </div>
+    </Section>
+  );
+}
 
-            <!-- Experience Timeline -->
-            <section id="experience" class="section">
-                <h2>Professional Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-card">
-                                <div class="job-title">Graduate Research Assistant</div>
-                                <div class="company">Georgia State University</div>
-                                <div class="date">Aug 2024 — Aug 2025</div>
-                                <ul class="achievements">
-                                    <li>Enhanced ESG model accuracy by <strong>18%</strong> through comprehensive emissions and stock returns analysis of 50+ firms using WRDS and Python</li>
-                                    <li>Developed 4 interactive <strong>Power BI dashboards</strong> for faculty research simulations, enabling sophisticated ESG portfolio strategy development</li>
-                                    <li>Delivered 2 impactful departmental presentations on ESG risk integration, resulting in <strong>20% increase</strong> in student participation in sustainability research</li>
-                                    <li>Translated complex carbon risk data into strategic insights supporting long-term investment scenario planning and regulatory reporting</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+function Education(){
+  return (
+    <Section id="education" title="Education" icon={<School className="h-5 w-5"/>}>
+      <Timeline
+        items={[
+          {
+            title:"Georgia State University — MS in Finance",
+            period:"Aug 2024 – Aug 2025",
+            detail:"Graduate Certificate in FinTech Innovation; All‑Rounder Award 2025.",
+          },
+          {
+            title:"Bharath University — BBA",
+            period:"2018 – 2021",
+            detail:"Graduated with distinction.",
+          },
+        ]}
+      />
+    </Section>
+  );
+}
 
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-card">
-                                <div class="job-title">Investment Analyst</div>
-                                <div class="company">Portfolio Management Group, Atlanta</div>
-                                <div class="date">Jan 2025 — May 2025</div>
-                                <ul class="achievements">
-                                    <li>Conducted comprehensive research on 25+ U.S. equities, guiding <strong>$200K+ weekly reallocations</strong> and delivering <strong>3% alpha over benchmark</strong></li>
-                                    <li>Built 3 custom investment screeners and 5 GAAP-compliant valuation models (DCF, comparables), improving pitch accuracy by <strong>25%</strong></li>
-                                    <li>Delivered 10+ buy/sell recommendations in investment committee meetings, directly influencing <strong>$200K+</strong> in weekly portfolio decisions</li>
-                                    <li>Executed strategic sector rotation, shifting 12% of assets into energy sector based on Fed rate forecasts, generating <strong>220 bps alpha</strong> in one quarter</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+function Awards(){
+  return (
+    <Section id="awards" title="Awards" icon={<Trophy className="h-5 w-5"/>}>
+      <ul className="grid gap-2 sm:grid-cols-2">
+        <li className="rounded-xl border border-white/10 bg-white/5 p-3">All‑Rounder Award 2025 — Georgia State University</li>
+        <li className="rounded-xl border border-white/10 bg-white/5 p-3">FMVA® (CFI) — Financial Modeling & Valuation Analyst</li>
+        <li className="rounded-xl border border-white/10 bg-white/5 p-3">SIE (FINRA) — Securities Industry Essentials</li>
+      </ul>
+    </Section>
+  );
+}
 
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-card">
-                                <div class="job-title">Senior Finance Analyst</div>
-                                <div class="company">ANTLON, Hyderabad, India</div>
-                                <div class="date">Nov 2022 — Dec 2023</div>
-                                <ul class="achievements">
-                                    <li>Managed comprehensive <strong>$1.5M budgeting and forecasting</strong> operations, negotiating strategic cost reallocations with department heads to achieve <strong>25% margin improvement</strong></li>
-                                    <li>Automated 15+ critical financial reports using Power BI and Excel, reducing cycle time by <strong>35%</strong> and accelerating client reporting processes</li>
-                                    <li>Partnered with compliance and client audit teams to ensure budget alignment with internal controls, resulting in <strong>28% improvement</strong> in audit scores</li>
-                                    <li>Streamlined vendor reconciliation processes, reducing month-end close time by <strong>2+ days</strong> and improving operational efficiency</li>
-                                    <li>Conducted detailed variance analysis on 120+ GL/PO entries, identifying and addressing <strong>$120K in project overspending</strong></li>
-                                    <li>Led ROI reviews for 3 major capital projects, successfully negotiating <strong>$100K+ reallocation</strong> to higher-return initiatives</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+function Contact(){
+  return (
+    <Section id="contact" title="Contact">
+      <div className="flex flex-wrap items-center gap-3 text-slate-300">
+        <Social href={`mailto:${EMAIL}`} icon={<Mail size={18}/>} label={EMAIL} primary />
+        <Social href={LINKEDIN} icon={<Linkedin size={18}/>} label="Connect on LinkedIn" />
+      </div>
+    </Section>
+  );
+}
 
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-card">
-                                <div class="job-title">Finance Analyst</div>
-                                <div class="company">ANTLON, Hyderabad, India</div>
-                                <div class="date">Oct 2021 — Nov 2022</div>
-                                <ul class="achievements">
-                                    <li>Developed sophisticated IRR/NPV models for 10+ capital projects worth <strong>$800K+</strong>, improving approval accuracy by <strong>17%</strong></li>
-                                    <li>Created dynamic rolling cash flow forecasts for 6 departments, optimizing <strong>$400K in working capital</strong> management</li>
-                                    <li>Automated 4 KPI dashboards, reducing manual reporting time by <strong>40%</strong> while significantly improving data accuracy</li>
-                                    <li>Identified <strong>$120K in cost inefficiencies</strong> through comprehensive variance analysis, leading to targeted expense reduction strategies</li>
-                                    <li>Negotiated with vendors to eliminate 2 low-return projects, successfully reallocating <strong>$100K+</strong> to higher-ROI initiatives</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+// ====== Reusable bits ======
+function Section({ id, title, icon, children }){
+  return (
+    <section id={id} className="scroll-mt-24 py-14">
+      <div className="mb-6 flex items-center gap-2">
+        {icon}
+        <h2 className="text-2xl font-bold tracking-tight text-white">{title}</h2>
+      </div>
+      {children}
+    </section>
+  );
+}
 
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-card">
-                                <div class="job-title">Finance Intern</div>
-                                <div class="company">Neti Amaravathi, Rajahmundry, India</div>
-                                <div class="date">Apr 2020 — Sep 2021</div>
-                                <ul class="achievements">
-                                    <li>Audited 10+ departmental cost centers, achieving <strong>15% overhead reduction</strong> and reallocating <strong>$30K</strong> to core operations</li>
-                                    <li>Designed comprehensive Excel-based tracking system for <strong>$500K in government grants</strong>, ensuring 100% compliance and optimal fund utilization</li>
-                                    <li>Produced 3 quarterly budget variance reports, improving forecast accuracy by <strong>20%</strong> and enhancing management decision-making</li>
-                                    <li>Conducted thorough fixed asset audits for <strong>$100K+ infrastructure programs</strong>, boosting utilization efficiency and financial accountability</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+function Social({ href, icon, label, primary }){
+  if (!href || href === "#") return (
+    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-200 opacity-60">
+      {icon}{label}
+    </span>
+  );
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm transition ${primary ? "bg-violet-500 text-white hover:bg-violet-400" : "border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10"}`}>
+      {icon}
+      {label}
+    </a>
+  );
+}
 
-            <!-- Skills Section -->
-            <section id="skills" class="section">
-                <h2>Core Competencies</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Financial & Strategic Skills</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">Financial Modeling</span>
-                            <span class="skill-tag">Budgeting & Forecasting</span>
-                            <span class="skill-tag">GAAP</span>
-                            <span class="skill-tag">KPI Dashboards</span>
-                            <span class="skill-tag">Scenario Planning</span>
-                            <span class="skill-tag">Auditing</span>
-                            <span class="skill-tag">Variance Analysis</span>
-                            <span class="skill-tag">Sensitivity Analysis</span>
-                            <span class="skill-tag">ESG Integration</span>
-                            <span class="skill-tag">IRR/NPV/ROI Modeling</span>
-                            <span class="skill-tag">CapEx/OpEx Analysis</span>
-                        </div>
-                    </div>
+function Timeline({ items }){
+  return (
+    <ol className="relative ml-3 border-l border-white/10">
+      {items.map((it, idx)=> (
+        <li key={idx} className="mb-6 ml-4">
+          <div className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-violet-400" />
+          <h3 className="font-semibold text-white">{it.title}</h3>
+          <p className="text-xs text-slate-400">{it.period}</p>
+          <p className="mt-1 text-slate-300">{it.detail}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
 
-                    <div class="skill-category">
-                        <h3>Data Tools & Analytics</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">Excel (Advanced)</span>
-                            <span class="skill-tag">Power BI</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Tableau</span>
-                            <span class="skill-tag">MS Office</span>
-                            <span class="skill-tag">WRDS</span>
-                            <span class="skill-tag">Bloomberg Terminal</span>
-                            <span class="skill-tag">BQL</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3>Professional Skills</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">Financial Storytelling</span>
-                            <span class="skill-tag">Stakeholder Management</span>
-                            <span class="skill-tag">Financial Negotiation</span>
-                            <span class="skill-tag">Problem-Solving</span>
-                            <span class="skill-tag">Strategic Thinking</span>
-                            <span class="skill-tag">Attention to Detail</span>
-                            <span class="skill-tag">Cross-Functional Collaboration</span>
-                            <span class="skill-tag">Time Management</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Education & Certifications -->
-            <section id="education" class="section">
-                <h2>Education & Certifications</h2>
-                <div class="education-grid">
-                    <div class="education-card">
-                        <div class="degree">Master of Science in Finance</div>
-                        <div class="institution">Georgia State University, Atlanta</div>
-                        <div class="date">Aug 2024 — Aug 2025</div>
-                        <div class="gpa">GPA: 3.64 / 4.00</div>
-                    </div>
-
-                    <div class="education-card">
-                        <div class="degree">Bachelor of Business Administration</div>
-                        <div class="institution">Bharath University, Chennai, India</div>
-                        <div class="date">Jul 2018 — May 2021</div>
-                        <div class="gpa">GPA: 8.04 / 10.00</div>
-                    </div>
-
-                    <div class="cert-card">
-                        <div class="degree">Securities Industry Essentials (SIE)</div>
-                        <div class="institution">FINRA</div>
-                        <div class="date">Professional Certification</div>
-                    </div>
-
-                    <div class="cert-card">
-                        <div class="degree">Financial Modeling & Valuation Analyst (FMVA®)</div>
-                        <div class="institution">Corporate Finance Institute (CFI)</div>
-                        <div class="date">Professional Certification</div>
-                    </div>
-
-                    <div class="cert-card">
-                        <div class="degree">Bloomberg Certifications</div>
-                        <div class="institution">Bloomberg</div>
-                        <div class="date">Spreadsheet Analysis, Market Concepts, Financial Fundamentals & ESG</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects Showcase -->
-            <section id="projects" class="section">
-                <h2>Key Projects & Research</h2>
-                <div class="interactive-note">
-                    💡 Click on any project for detailed case study (Interactive feature for web version)
-                </div>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">Evolving Patterns in Corporate Derivatives Usage</div>
-                            <div class="project-date">May 2025 — Jun 2025</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-description">
-                                Comprehensive analysis of corporate derivatives utilization patterns across different market conditions. Examined risk management strategies and their effectiveness in hedging operational and financial risks. Utilized advanced statistical methods to identify emerging trends in derivatives usage.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">Behavioral Analytics & Random Forest Personality Classifier</div>
-                            <div class="project-date">Mar 2025 — May 2025</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-description">
-                                Developed machine learning model using Random Forest algorithm to classify investor personality types based on trading behavior. Applied behavioral finance principles to predict investment preferences and risk tolerance levels. Achieved high accuracy in personality prediction through feature engineering.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">Blockchain-Based Voting System: Securing Elections</div>
-                            <div class="project-date">Jan 2025 — Mar 2025</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-description">
-                                Designed secure blockchain voting infrastructure focusing on transparency and immutability. Analyzed economic implications of blockchain adoption in electoral systems. Developed cost-benefit analysis framework for government implementation of blockchain voting technology.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">Central Bank Digital Currency (CBDC) Capstone Research</div>
-                            <div class="project-date">Oct 2024 — Dec 2024</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-description">
-                                In-depth research on CBDC implementation strategies and their impact on monetary policy. Analyzed potential effects on traditional banking systems and financial stability. Developed policy recommendations for central bank digital currency adoption frameworks.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
-                            <div class="project-title">Customer Churn Analysis for QNBT</div>
-                            <div class="project-date">Aug 2024 — Oct 2024</div>
-                        </div>
-                        <div class="project-content">
-                            <div class="project-description">
-                                Implemented predictive analytics to identify customer churn patterns and developed retention strategies. Utilized machine learning algorithms to predict high-risk customers. Created actionable insights that improved customer retention rates and optimized marketing spend.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
