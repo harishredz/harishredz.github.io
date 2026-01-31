@@ -1,274 +1,947 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Harish Goluguri — Financial Analyst</title>
-  <meta name="description" content="Harish Goluguri · Financial Analyst (FP&A & Investments). Turning data into decisions with modeling, dashboards, and automation." />
-
-  <!-- Tailwind via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: "#0f172a",          /* slate-900-ish for headings */
-            copy: "#334155",         /* slate-600-ish for body */
-            brand: "#0ea5e9",        /* sky-500 */
-            brandAlt: "#7c3aed",     /* violet-600 */
-            panel: "#ffffff",
-            edge: "rgba(15,23,42,.08)"
-          },
-          fontFamily: { inter: ['Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harish Reddy Goluguri — High-Performance Hybrid Portfolio</title>
+  <meta name="description" content="High-Performance Hybrid Portfolio — Operations Strategist + Capital Markets Analyst." />
   <style>
-    html{ scroll-behavior:smooth }
-    body{ background:#f8fafc }
-    .card{ background:var(--panel, #fff); border:1px solid var(--edge, rgba(15,23,42,.08)); box-shadow:0 6px 20px rgba(2,6,23,.06); transition:transform .2s ease, box-shadow .2s ease }
-    .card:hover{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(2,6,23,.08) }
-    .reveal{ opacity:0; transform:translateY(14px); transition:all .6s ease }
-    .reveal.show{ opacity:1; transform:none }
-    .chip{ border:1px solid rgba(15,23,42,.08); background:#fff }
-  </style>
-</head>
-<body class="font-inter text-copy">
+    :root{
+      --bg:#0a0f1c;
+      --fg:#e8eefc;
+      --muted: rgba(232,238,252,.72);
+      --green:#00ff41;
+      --red:#f40009;
+      --line: rgba(232,238,252,.12);
+      --card: rgba(255,255,255,.03);
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --max: 1180px;
 
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      overflow-x:hidden;
+      cursor:none;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button, input, textarea{ font:inherit; color:inherit; }
+
+    /* smooth sections */
+    .snap{
+      height:100vh;
+      overflow:auto;
+      scroll-snap-type:y mandatory;
+      scroll-behavior:smooth;
+    }
+    section{
+      min-height:100vh;
+      scroll-snap-align:start;
+      display:flex;
+      align-items:center;
+      padding: 88px 0;
+      position:relative;
+    }
+    .container{
+      width:min(var(--max), calc(100% - 56px));
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    /* top nav */
+    .nav{
+      position:fixed;
+      top:18px;
+      left:0;
+      right:0;
+      z-index:50;
+      pointer-events:none;
+    }
+    .nav .bar{
+      pointer-events:auto;
+      width:min(var(--max), calc(100% - 56px));
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(10,15,28,.62);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-weight:900;
+      letter-spacing:-0.02em;
+    }
+    .brandDot{
+      width:10px;height:10px;border-radius:99px;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(0,255,65,.5);
+    }
+    .navLinks{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .navLinks a{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+    }
+    .navLinks a:hover{
+      transform: translateY(-1px);
+      color: var(--fg);
+      border-color: rgba(0,255,65,.25);
+      background: rgba(0,255,65,.07);
+    }
+
+    /* typography */
+    .kicker{
+      text-transform:uppercase;
+      letter-spacing:.24em;
+      font-weight:800;
+      font-size:12px;
+      color: var(--muted);
+    }
+    .huge{
+      font-weight:950;
+      line-height:.92;
+      letter-spacing:-0.045em;
+      font-size: clamp(46px, 6.2vw, 98px);
+      margin: 14px 0 10px;
+    }
+    .sub{
+      font-size: clamp(16px, 1.35vw, 20px);
+      color: var(--muted);
+      max-width: 74ch;
+      line-height:1.55;
+    }
+    .mono{
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-weight:900;
+      font-size: 12px;
+    }
+
+    /* buttons */
+    .btnRow{ display:flex; gap:14px; flex-wrap:wrap; margin-top:22px; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      backdrop-filter: blur(10px);
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
+      will-change: transform;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(0,255,65,.35);
+      background: rgba(0,255,65,.07);
+      box-shadow: 0 14px 45px rgba(0,255,65,.08);
+    }
+    .btn.red:hover{
+      border-color: rgba(244,0,9,.55);
+      background: rgba(244,0,9,.07);
+      box-shadow: 0 14px 45px rgba(244,0,9,.08);
+    }
+    .btn small{ opacity:.75; font-weight:800; letter-spacing:.14em; }
+
+    /* layout helpers */
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items:start;
+      margin-top: 26px;
+    }
+    @media (max-width: 980px){
+      .grid2{ grid-template-columns: 1fr; }
+      .navLinks{ display:none; }
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .bigStat{
+      font-size: clamp(30px, 3.4vw, 56px);
+      font-weight: 950;
+      letter-spacing:-0.04em;
+      line-height:1;
+      margin: 0 0 10px;
+    }
+    .bigStat .g{ color: var(--green); }
+    .bigStat .r{ color: var(--red); }
+
+    .pillRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
+    .pill{
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing:.05em;
+      font-size:12px;
+      text-transform:uppercase;
+    }
+
+    /* HERO split */
+    .heroBg{
+      position:absolute; inset:0;
+      display:grid; grid-template-columns:1fr 1fr;
+      z-index:1;
+    }
+    .heroLeft{
+      border-right: 1px solid rgba(232,238,252,.08);
+      background:
+        radial-gradient(1100px 650px at 25% 40%, rgba(255,255,255,.07), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+    }
+    .heroRight{
+      background:
+        radial-gradient(1050px 650px at 75% 40%, rgba(0,255,65,.12), transparent 55%),
+        linear-gradient(180deg, rgba(0,255,65,.06), transparent);
+    }
+    .hoverLabel{
+      height: 22px;
+      margin-top: 16px;
+      color: var(--green);
+      letter-spacing:.18em;
+      font-weight:950;
+    }
+
+    /* timeline */
+    .timeline{
+      margin-top: 26px;
+      position:relative;
+      padding-left: 22px;
+    }
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width:2px;
+      background: rgba(232,238,252,.12);
+    }
+    .tItem{
+      position:relative;
+      padding: 16px 16px 16px 18px;
+      margin-bottom: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .tItem:before{
+      content:"";
+      position:absolute;
+      left: -1px;
+      top: 22px;
+      width: 14px;
+      height: 14px;
+      border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 16px rgba(0,255,65,.55);
+      transform: translateX(-22px);
+    }
+    .tHead{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:baseline;
+      margin-bottom: 10px;
+    }
+    .role{
+      font-weight: 950;
+      letter-spacing:-0.02em;
+      font-size: 18px;
+    }
+    .meta{
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size: 12px;
+    }
+    .bullets{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.55; }
+    .bullets li{ margin: 6px 0; }
+
+    /* HUD grid (Skills) */
+    .hud{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (max-width: 980px){
+      .hud{ grid-template-columns: 1fr; }
+    }
+    .hud .card h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing:.18em;
+      text-transform: uppercase;
+    }
+    .hud ul{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.55; }
+    .hud li{ margin:6px 0; }
+
+    /* badges */
+    .badgeGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (max-width: 980px){
+      .badgeGrid{ grid-template-columns: 1fr; }
+    }
+    .badge{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 14px;
+      background: rgba(255,255,255,.02);
+    }
+    .badge strong{
+      font-weight: 950;
+      letter-spacing:-0.02em;
+    }
+    .badge span{
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+
+    /* projects */
+    .projGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    @media (max-width: 980px){
+      .projGrid{ grid-template-columns: 1fr; }
+    }
+    .projTitle{
+      font-weight: 950;
+      letter-spacing:-0.02em;
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    /* interests collage (lightweight gradients, no heavy images) */
+    .collage{
+      position:absolute; inset:0;
+      z-index:1;
+      background:
+        radial-gradient(900px 520px at 20% 30%, rgba(244,0,9,.10), transparent 55%),
+        radial-gradient(900px 520px at 75% 40%, rgba(0,255,65,.10), transparent 55%),
+        radial-gradient(700px 420px at 50% 85%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.02), transparent 70%);
+      filter: saturate(1.1);
+    }
+
+    /* contact */
+    form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    form .full{ grid-column: 1 / -1; }
+    input, textarea{
+      width:100%;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(10,15,28,.62);
+      outline:none;
+      color: var(--fg);
+      transition: border-color .12s ease, background .12s ease;
+    }
+    input:focus, textarea:focus{
+      border-color: rgba(0,255,65,.45);
+      background: rgba(0,255,65,.05);
+    }
+    textarea{ min-height: 140px; resize: vertical; }
+
+    .contactMeta{
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* cursor */
+    .cursor{
+      position:fixed;
+      top:0; left:0;
+      width: 28px;
+      height: 42px;
+      z-index:9999;
+      pointer-events:none;
+      transform: translate3d(-999px, -999px, 0);
+      filter: drop-shadow(0 0 12px rgba(0,255,65,.55));
+      will-change: transform;
+    }
+    .cursor.crosshair{
+      width: 34px;
+      height: 34px;
+      filter: drop-shadow(0 0 12px rgba(0,255,65,.45));
+    }
+
+    /* reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+      body{ cursor:auto; }
+      .cursor{ display:none; }
+    }
+  </style>
+
+  <!-- GSAP + Lenis via CDN (fast) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+</head>
+
+<body data-cursor="candle">
   <!-- NAV -->
-  <nav class="sticky top-0 z-20 bg-white/70 backdrop-blur border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#home" class="font-semibold tracking-wide text-ink">&lt;Harish/&gt;</a>
-      <div class="hidden md:flex items-center gap-6 text-sm">
-        <a class="hover:text-ink" href="#about">About</a>
-        <a class="hover:text-ink" href="#skills">Skills</a>
-        <a class="hover:text-ink" href="#experience">Experience</a>
-        <a class="hover:text-ink" href="#projects">Projects</a>
-        <a class="hover:text-ink" href="#education">Education</a>
-        <a class="hover:text-ink" href="#awards">Awards</a>
-        <a class="hover:text-ink" href="#contact">Contact</a>
+  <div class="nav">
+    <div class="bar">
+      <div class="brand" data-crosshair="true">
+        <span class="brandDot"></span>
+        HARISH GOLUGURI
+      </div>
+      <div class="navLinks">
+        <a href="#hybrid" data-crosshair="true">Hybrid</a>
+        <a href="#experience" data-crosshair="true">Experience</a>
+        <a href="#skills" data-crosshair="true">Skills</a>
+        <a href="#projects" data-crosshair="true">Projects</a>
+        <a href="#contact" data-crosshair="true">Contact</a>
       </div>
     </div>
-  </nav>
+  </div>
 
-  <!-- HERO -->
-  <header id="home" class="max-w-6xl mx-auto px-6 pt-12 pb-8 md:pt-20 md:pb-14">
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-      <div class="space-y-6">
-        <p class="text-brand font-semibold">Financial Analyst • FP&amp;A &amp; Investments</p>
-        <h1 class="text-4xl sm:text-6xl font-extrabold text-ink leading-tight">Harish Goluguri</h1>
-        <p class="text-lg text-slate-600">
-          Turning data into decisions — faster, clearer, and with measurable ROI.
-          Advanced in Excel, Power BI, Tableau, SAP S/4HANA/TRM, Bloomberg, SQL, and Python.
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <!-- candlestick -->
+    <svg id="cursorSvg" width="28" height="42" viewBox="0 0 28 42" fill="none">
+      <rect x="12.5" y="2.2" width="3" height="37.6" rx="1.5" fill="rgba(0,255,65,.95)"/>
+      <rect x="7" y="11" width="14" height="20" rx="3.2" fill="rgba(0,255,65,.20)" stroke="rgba(0,255,65,.95)"/>
+    </svg>
+  </div>
+
+  <div class="snap" id="scrollRoot">
+
+    <!-- PAGE 1: HERO -->
+    <section id="hero">
+      <div class="heroBg" aria-hidden="true">
+        <div class="heroLeft" id="heroLeft"></div>
+        <div class="heroRight" id="heroRight"></div>
+      </div>
+
+      <div class="container">
+        <div class="kicker" data-anim="in">The "High-Performance Hybrid" Portfolio</div>
+        <h1 class="huge" data-anim="in">
+          HELLO FINANCE PEOPLE, WELCOME.<br/>
+          I AM HARISH REDDY GOLUGURI.
+        </h1>
+
+        <div class="sub" data-anim="in">
+          <span id="typeTarget"></span><span style="color:var(--green)">▍</span>
+        </div>
+
+        <div class="hoverLabel mono" id="hoverLabel" data-anim="in"></div>
+
+        <div class="btnRow" data-anim="in">
+          <a class="btn" href="./Harish_Goluguri_Resume.pdf" download data-crosshair="true">
+            DOWNLOAD RESUME <small>PDF</small>
+          </a>
+          <a class="btn red" href="#contact" data-crosshair="true">
+            CONTACT ME
+          </a>
+        </div>
+
+        <div class="pillRow" data-anim="in">
+          <span class="pill">Zero Lag</span>
+          <span class="pill">Kinetic Typography</span>
+          <span class="pill">Dark Mode Financial</span>
+          <span class="pill">60fps+ mindset</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2: HYBRID -->
+    <section id="hybrid">
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 2</div>
+        <h2 class="huge" data-anim="in">THE HYBRID ENGINE.</h2>
+        <p class="sub" data-anim="in">
+          Why choose between the ledger and the ticker? I thrive in both.
         </p>
 
-        <div class="flex flex-wrap gap-3">
-          <!-- TODO: add your GitHub if desired -->
-          <a href="https://github.com/" target="_blank" rel="noreferrer" class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50">
-            <!-- github icon -->
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-ink"><path d="M12 .5A12 12 0 0 0 0 12.7c0 5.4 3.4 9.9 8.2 11.5.6.1.8-.3.8-.6v-2c-3.3.8-4-1.4-4-1.4-.6-1.5-1.4-1.9-1.4-1.9-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.4-1.4-5.4-6.1 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.2 4 18.2 4.3 18.2 4.3c.6 1.7.2 3 .1 3.3.7.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.8-5.4 6.1.4.3.7.9.7 1.9v2.8c0 .3.2.7.8.6 4.8-1.6 8.2-6.1 8.2-11.5A12 12 0 0 0 12 .5Z"/></svg>
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer" class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50">
-            <!-- linkedin -->
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-ink"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5Zm.02 5.9H2v11.6h3V9.4Zm6.8 0H8.9v11.6h3V15c0-2.4 3.1-2.6 3.1 0v6h3v-6.9c0-4.6-5.2-4.4-6.2-2.1V9.4Z"/></svg>
-            LinkedIn
-          </a>
-          <a href="mailto:harishreddyice@gmail.com" class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50">
-            <!-- mail -->
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-ink"><path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.4l8 5.1 8-5.1V7H4Zm16 10V9.2l-7.4 4.8a1 1 0 0 1-1.2 0L4 9.2V17h16Z"/></svg>
-            Email
-          </a>
-          <a href="#" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white bg-brand hover:bg-sky-600">
-            <!-- TODO: replace # with your resume link -->
-            Resume
-          </a>
+        <div class="grid2">
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--green);">OPERATIONAL RIGOR</div>
+            <div class="bigStat"><span class="g">$70M+</span> budgets. <span class="g">97%</span> accuracy.</div>
+            <p class="sub">
+              I bring 5+ years of operational finance experience. I’ve managed $70M+ budgets and unlocked $6M in liquidity on the ground.
+              I don't just track costs; I crush inefficiencies to drive margin growth.
+            </p>
+            <div class="pillRow">
+              <span class="pill">Budgeting</span>
+              <span class="pill">Forecasting</span>
+              <span class="pill">Liquidity</span>
+              <span class="pill">Automation</span>
+            </div>
+          </div>
+
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--red);">MARKET INTELLIGENCE</div>
+            <div class="bigStat"><span class="g">Series 65</span> + <span class="g">Bloomberg</span> + <span class="g">CFI</span></div>
+            <p class="sub">
+              I am obsessed with the markets. My weekends are spent analyzing charts, testing volatility models, and tracking macro trends.
+              I bring a trader's instinct backed by institutional-grade modeling.
+            </p>
+            <div class="pillRow">
+              <span class="pill">Equities</span>
+              <span class="pill">Derivatives</span>
+              <span class="pill">Macro</span>
+              <span class="pill">Valuation</span>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Right simple illustration -->
-      <div class="hidden md:block">
-        <svg viewBox="0 0 520 420" class="w-full max-w-[520px] mx-auto" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0ea5e9" stop-opacity=".25"/><stop offset="1" stop-color="#7c3aed" stop-opacity=".25"/></linearGradient>
-          </defs>
-          <rect x="0" y="0" width="520" height="420" rx="24" fill="url(#g)"/>
-          <g fill="none" stroke="#0f172a" opacity=".12">
-            <circle cx="120" cy="120" r="70"/><circle cx="400" cy="120" r="60"/><circle cx="260" cy="300" r="90"/>
-            <path d="M40 60h440M40 110h440M40 160h440M40 210h440M40 260h440M40 310h440M40 360h440"/>
-          </g>
-          <g transform="translate(70,70)">
-            <rect width="380" height="260" rx="16" fill="#fff" stroke="rgba(15,23,42,.08)"/>
-            <rect x="24" y="30" width="140" height="14" rx="7" fill="#e2e8f0"/>
-            <rect x="24" y="55" width="220" height="10" rx="5" fill="#e2e8f0"/>
-            <rect x="24" y="90" width="330" height="120" rx="10" fill="#f1f5f9" stroke="rgba(15,23,42,.06)"/>
-            <rect x="24" y="230" width="180" height="10" rx="5" fill="#e2e8f0"/>
-            <rect x="214" y="230" width="120" height="10" rx="5" fill="#e2e8f0"/>
-          </g>
-        </svg>
+    <!-- PAGE 3: EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 3</div>
+        <h2 class="huge" data-anim="in">EXPERIENCE. THE TRACK RECORD.</h2>
+        <p class="sub" data-anim="in">Vertical timeline. Massive numbers. No fluff. All signal.</p>
+
+        <div class="timeline">
+          <div class="tItem" data-anim="in">
+            <div class="tHead">
+              <div class="role">Fact Finders Pro — Investor Relations & Strategy Analyst</div>
+              <div class="meta">Seattle, WA</div>
+            </div>
+            <ul class="bullets">
+              <li><b style="color:var(--green)">$1.5M</b> capital roadmap structured.</li>
+              <li>Engineered VC & Berkus valuation models to stress-test pricing tiers.</li>
+              <li>Targeted <b style="color:var(--green)">$10M–$12M</b> valuation via sensitivity analysis.</li>
+            </ul>
+          </div>
+
+          <div class="tItem" data-anim="in">
+            <div class="tHead">
+              <div class="role">Georgia State University — Graduate Research Assistant</div>
+              <div class="meta">Atlanta, GA</div>
+            </div>
+            <ul class="bullets">
+              <li>Investigated ESG metrics across <b style="color:var(--green)">50+</b> U.S. firms using Bloomberg BQL.</li>
+              <li>Enhanced predictive model accuracy by <b style="color:var(--green)">18%</b>.</li>
+              <li>Curated <b style="color:var(--green)">7</b> interactive Power BI dashboards.</li>
+            </ul>
+          </div>
+
+          <div class="tItem" data-anim="in">
+            <div class="tHead">
+              <div class="role">Portfolio Management Group — Investment Analyst</div>
+              <div class="meta">Atlanta, GA</div>
+            </div>
+            <ul class="bullets">
+              <li><b style="color:var(--green)">3%</b> alpha generated over benchmark.</li>
+              <li>Researched <b style="color:var(--green)">30+</b> U.S. equities weekly using Bloomberg & WSJ.</li>
+              <li>Drove <b style="color:var(--green)">$500K+</b> in weekly reallocations.</li>
+            </ul>
+          </div>
+
+          <div class="tItem" data-anim="in">
+            <div class="tHead">
+              <div class="role">ANTLON — Senior Financial Analyst</div>
+              <div class="meta">Hyderabad, India</div>
+            </div>
+            <ul class="bullets">
+              <li>Managed <b style="color:var(--green)">$70M+</b> budgets with <b style="color:var(--green)">97%</b> forecast accuracy.</li>
+              <li>Unlocked <b style="color:var(--green)">$6M</b> liquidity via Monte Carlo cash flow simulations.</li>
+              <li>Cut reporting cycle time by <b style="color:var(--green)">65%</b> using Python automation.</li>
+            </ul>
+          </div>
+
+          <div class="tItem" data-anim="in">
+            <div class="tHead">
+              <div class="role">ANTLON — Financial Analyst</div>
+              <div class="meta">Hyderabad, India</div>
+            </div>
+            <ul class="bullets">
+              <li>Designed IRR/NPV models for a <b style="color:var(--green)">$48M+</b> portfolio of <b style="color:var(--green)">27</b> builds.</li>
+              <li>Detected <b style="color:var(--green)">$2.1M</b> procurement leakage using Tableau.</li>
+              <li>Saved <b style="color:var(--green)">$1.7M</b> in interest expense via liquidity modeling.</li>
+            </ul>
+          </div>
+
+          <div class="tItem" data-anim="in">
+            <div class="tHead">
+              <div class="role">Neti Amaravathi — Finance Intern</div>
+              <div class="meta">Rajahmundry, India</div>
+            </div>
+            <ul class="bullets">
+              <li>Saved <b style="color:var(--green)">$1.2M</b> by uncovering inefficiencies across <b style="color:var(--green)">25+</b> distribution centers.</li>
+              <li>Managed <b style="color:var(--green)">$3M+</b> in media production budgets.</li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="max-w-6xl mx-auto px-6 py-12 reveal">
-    <div class="card rounded-2xl p-6">
-      <h2 class="text-2xl font-bold text-ink mb-2">About</h2>
-      <p>
-        Finance professional (FMVA®, SIE) with strengths in investment analysis, financial modeling, FP&amp;A, and analytics.
-        Proven track record improving forecast accuracy, liquidity, and decision speed via automation and executive-ready reporting.
-      </p>
-    </div>
-  </section>
+    <!-- PAGE 4: SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 4</div>
+        <h2 class="huge" data-anim="in">ARSENAL.</h2>
+        <p class="sub" data-anim="in">Heads-Up Display grid. Market weapons + operational engines + technical core.</p>
 
-  <!-- SKILLS -->
-  <section id="skills" class="max-w-6xl mx-auto px-6 py-12 reveal">
-    <h2 class="text-2xl font-bold text-ink mb-6">Skills</h2>
-    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      <li class="card rounded-xl p-3">Financial Modeling (DCF/IRR/NPV)</li>
-      <li class="card rounded-xl p-3">Budgeting &amp; Forecasting</li>
-      <li class="card rounded-xl p-3">Revenue Recognition (GAAP) • SOX</li>
-      <li class="card rounded-xl p-3">Treasury &amp; Liquidity</li>
-      <li class="card rounded-xl p-3">Power BI • Tableau • Excel (Power Query)</li>
-      <li class="card rounded-xl p-3">SAP S/4HANA &amp; TRM • SQL • Python</li>
-      <li class="card rounded-xl p-3">Bloomberg (BQL) • WRDS</li>
-    </ul>
-  </section>
+        <div class="hud">
+          <div class="card" data-anim="in">
+            <h3 style="color:var(--green);">MARKET WEAPONS</h3>
+            <ul>
+              <li>Bloomberg Terminal (4x Certified)</li>
+              <li>Derivatives & Equities</li>
+              <li>DCF / LBO Modeling</li>
+              <li>WRDS & FactSet</li>
+            </ul>
+          </div>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" class="max-w-6xl mx-auto px-6 py-12 reveal">
-    <h2 class="text-2xl font-bold text-ink mb-6">Experience</h2>
-    <div class="grid gap-6">
-      <article class="card rounded-2xl p-5">
-        <div class="flex items-baseline justify-between gap-2">
-          <h3 class="font-semibold text-lg text-ink">Investment Analyst</h3>
-          <span class="text-xs text-slate-500">Jan 2025 – May 2025</span>
+          <div class="card" data-anim="in">
+            <h3 style="color:var(--red);">OPERATIONAL ENGINES</h3>
+            <ul>
+              <li>SAP S/4HANA (Budgeting)</li>
+              <li>Cost Accounting & Variance Analysis</li>
+              <li>GAAP / SOX Compliance</li>
+              <li>Close & Reporting Acceleration</li>
+            </ul>
+          </div>
+
+          <div class="card" data-anim="in">
+            <h3>TECHNICAL CORE</h3>
+            <ul>
+              <li>Python (Automation/Modeling)</li>
+              <li>SQL & Power BI</li>
+              <li>Advanced Excel (VBA/Macros)</li>
+              <li>Monte Carlo / Scenario Modeling</li>
+            </ul>
+          </div>
         </div>
-        <p class="text-sm text-slate-600 mt-1">Portfolio Management Group, Atlanta, United States</p>
-        <ul class="list-disc ml-6 mt-3 space-y-1.5">
-          <li>Researched 30+ U.S. equities via Bloomberg/WSJ, driving $500K+ weekly reallocations and 3% alpha vs. benchmark.</li>
-          <li>Built 8 GAAP-compliant DCF/comps models and 5 custom screeners; boosted pitch accuracy by 30%.</li>
-          <li>Presented 15+ buy/sell calls with risk-return memos; influenced $500K+ weekly portfolio shifts.</li>
-        </ul>
-      </article>
-
-      <article class="card rounded-2xl p-5">
-        <div class="flex items-baseline justify-between gap-2">
-          <h3 class="font-semibold text-lg text-ink">Senior Finance Analyst</h3>
-          <span class="text-xs text-slate-500">Nov 2022 – Dec 2023</span>
-        </div>
-        <p class="text-sm text-slate-600 mt-1">ANTLON, Hyderabad, India</p>
-        <ul class="list-disc ml-6 mt-3 space-y-1.5">
-          <li>Directed $70M+ budgets/forecasts in SAP S/4HANA; raised forecast accuracy to 96%.</li>
-          <li>Automated 25+ Power BI/Excel workflows; cut close cycles 40% and freed 100+ hours/month.</li>
-          <li>Led ROI on 16 capex projects ($34M+); reallocated $6M to higher-return initiatives.</li>
-          <li>Negotiated vendor terms; reduced costs 15% (~$9M/yr) and accelerated collections.</li>
-        </ul>
-      </article>
-
-      <article class="card rounded-2xl p-5">
-        <div class="flex items-baseline justify-between gap-2">
-          <h3 class="font-semibold text-lg text-ink">Finance Analyst</h3>
-          <span class="text-xs text-slate-500">Oct 2021 – Nov 2022</span>
-        </div>
-        <p class="text-sm text-slate-600 mt-1">ANTLON, Hyderabad, India</p>
-        <ul class="list-disc ml-6 mt-3 space-y-1.5">
-          <li>Flagged $2M+ inefficiencies via treasury variance analysis; enabled targeted cost cuts.</li>
-          <li>Built IRR/NPV models for 25+ projects ($20M+); improved investment approvals by 22%.</li>
-          <li>Optimized $10M working capital with rolling cash forecasts across 6 departments.</li>
-        </ul>
-      </article>
-
-      <article class="card rounded-2xl p-5">
-        <div class="flex items-baseline justify-between gap-2">
-          <h3 class="font-semibold text-lg text-ink">Finance Intern</h3>
-          <span class="text-xs text-slate-500">Apr 2020 – Sep 2021</span>
-        </div>
-        <p class="text-sm text-slate-600 mt-1">Neti Amravathi, Rajahmundry, India</p>
-        <ul class="list-disc ml-6 mt-3 space-y-1.5">
-          <li>Audited 25+ cost centers (Tally ERP); trimmed overheads 18% and reallocated $1.2M to core ops.</li>
-          <li>Built Excel tracking/models for $5M+ grants; ensured 100% compliance and timely disbursement.</li>
-          <li>Produced 6 budget variance analyses; improved forecast accuracy by 25%.</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="max-w-6xl mx-auto px-6 py-12 reveal">
-    <h2 class="text-2xl font-bold text-ink mb-6">Projects</h2>
-    <div class="grid sm:grid-cols-2 gap-6">
-      <a class="card rounded-2xl p-5 block" href="#" target="_blank" rel="noreferrer">
-        <h4 class="font-semibold text-ink">ESG Alpha Lab (GSU)</h4>
-        <p class="text-sm mt-2">Analyzed ESG-linked performance for 50+ firms using WRDS, Bloomberg, Python; improved model accuracy 18%.</p>
-        <span class="mt-3 inline-flex items-center gap-2 text-brand">View →</span>
-      </a>
-      <a class="card rounded-2xl p-5 block" href="#" target="_blank" rel="noreferrer">
-        <h4 class="font-semibold text-ink">Forecast Automation</h4>
-        <p class="text-sm mt-2">9 Tableau/Power BI dashboards reduced manual reporting 45% and accelerated exec insights.</p>
-        <span class="mt-3 inline-flex items-center gap-2 text-brand">View →</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education" class="max-w-6xl mx-auto px-6 py-12 reveal">
-    <h2 class="text-2xl font-bold text-ink mb-6">Education</h2>
-    <ol class="relative ml-3 border-l border-slate-200">
-      <li class="mb-6 ml-4">
-        <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-brand"></div>
-        <h3 class="font-semibold text-ink">Georgia State University — MS in Finance</h3>
-        <p class="text-xs text-slate-500">Aug 2024 – Aug 2025</p>
-        <p class="mt-1">Graduate Certificate in FinTech Innovation; All-Rounder Award 2025.</p>
-      </li>
-      <li class="mb-6 ml-4">
-        <div class="absolute -left-1.5 mt-1 h-3 w-3 rounded-full bg-brand"></div>
-        <h3 class="font-semibold text-ink">Bharath University — BBA</h3>
-        <p class="text-xs text-slate-500">2018 – 2021</p>
-        <p class="mt-1">Graduated with distinction.</p>
-      </li>
-    </ol>
-  </section>
-
-  <!-- AWARDS -->
-  <section id="awards" class="max-w-6xl mx-auto px-6 py-12 reveal">
-    <h2 class="text-2xl font-bold text-ink mb-6">Awards</h2>
-    <ul class="grid sm:grid-cols-2 gap-3">
-      <li class="card rounded-xl p-3">All-Rounder Award 2025 — Georgia State University</li>
-      <li class="card rounded-xl p-3">FMVA® (CFI) — Financial Modeling &amp; Valuation Analyst</li>
-      <li class="card rounded-xl p-3">SIE (FINRA) — Securities Industry Essentials</li>
-    </ul>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="max-w-6xl mx-auto px-6 py-12 reveal">
-    <div class="card rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div>
-        <h2 class="text-2xl font-bold text-ink">Let’s connect</h2>
-        <p>Open to Financial Analyst / FP&amp;A / Investments roles. Based in Chicago; flexible on location.</p>
       </div>
-      <div class="flex flex-wrap gap-3">
-        <a class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white bg-brand hover:bg-sky-600" href="mailto:harishreddyice@gmail.com">harishreddyice@gmail.com</a>
-        <a class="chip inline-flex items-center gap-2 px-4 py-2 rounded-full hover:bg-slate-50" href="https://www.linkedin.com/in/harishredz" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
-  <footer class="mt-16 border-t border-slate-200 py-8 text-center text-sm text-slate-500">
-    © <span id="yy"></span> Harish Goluguri
-  </footer>
+    <!-- PAGE 5: EDUCATION -->
+    <section id="education">
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 5</div>
+        <h2 class="huge" data-anim="in">FOUNDATION.</h2>
+
+        <div class="grid2">
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--green)">Georgia State University</div>
+            <div class="bigStat">Master of Science in Finance</div>
+            <p class="sub">GPA: <b style="color:var(--green)">3.64</b></p>
+          </div>
+
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--red)">Bharath University</div>
+            <div class="bigStat">Bachelor of Business Administration</div>
+            <p class="sub">GPA: <b style="color:var(--green)">8.04</b></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 6: CREDENTIALS & AWARDS -->
+    <section id="credentials">
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 6</div>
+        <h2 class="huge" data-anim="in">VERIFIED.</h2>
+        <p class="sub" data-anim="in">Grid of badges. Clean. Prestigious. No clutter.</p>
+
+        <div class="badgeGrid">
+          <div class="badge" data-anim="in"><strong>Series 65</strong><span>Scheduled Feb 2026</span></div>
+          <div class="badge" data-anim="in"><strong>SIE (FINRA)</strong><span>Completed</span></div>
+          <div class="badge" data-anim="in"><strong>CMSA (CFI)</strong><span>Capital Markets</span></div>
+          <div class="badge" data-anim="in"><strong>FPWMP (CFI)</strong><span>Wealth Mgmt</span></div>
+          <div class="badge" data-anim="in"><strong>Bloomberg Certified</strong><span>BMC/ESG/FF/SA</span></div>
+        </div>
+
+        <div class="grid2" style="margin-top:18px;">
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--green)">AWARDS</div>
+            <ul class="bullets">
+              <li>🏆 All Rounder 2025 — Georgia State University</li>
+              <li>🏆 Employee of the Year 2023 — ANTLON</li>
+            </ul>
+          </div>
+
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--red)">NOTE</div>
+            <p class="sub">
+              Want certificate images & logos? Add them later in <b>assets/</b>. This build stays fast and lightweight.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 7: PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 7</div>
+        <h2 class="huge" data-anim="in">ANALYSIS. THE LAB.</h2>
+
+        <div class="projGrid">
+          <div class="card" data-anim="in">
+            <div class="projTitle">Valuation Engine (Coty Inc.)</div>
+            <p class="sub">Full-scale DCF + Buy/Hold recommendation based on 5-year fundamentals and trend drivers.</p>
+          </div>
+
+          <div class="card" data-anim="in">
+            <div class="projTitle">Decoding Volatility (Accenture)</div>
+            <p class="sub">Time-series analysis on 20+ years of equity data to predict price limits and regime shifts.</p>
+          </div>
+
+          <div class="card" data-anim="in">
+            <div class="projTitle">Future of Money (CBDC)</div>
+            <p class="sub">Award-winning blockchain research on U.S. Central Bank feasibility and system design tradeoffs.</p>
+          </div>
+
+          <div class="card" data-anim="in">
+            <div class="projTitle">Churn Prediction (QNBT)</div>
+            <p class="sub">Predictive model with Python/Power BI to improve retention by 15% via segmentation + intervention triggers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 8: INTERESTS -->
+    <section id="interests">
+      <div class="collage" aria-hidden="true"></div>
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 8</div>
+        <h2 class="huge" data-anim="in">FUEL & FOCUS.</h2>
+        <p class="sub" data-anim="in">
+          The Obsessions: The Stock Market, The Economy, Finance, Tennis, Formula 1.
+        </p>
+
+        <div class="grid2">
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--green)">THE FUEL</div>
+            <div class="bigStat">BIRYANI.</div>
+            <p class="sub">Always hunting for the best.</p>
+          </div>
+
+          <div class="card" data-anim="in">
+            <div class="mono" style="color:var(--red)">FUN FACT</div>
+            <div class="bigStat">COCA-COLA.</div>
+            <p class="sub" id="colaLine">I can finish a whole bottle of Coca-Cola without putting it down once. Hire me, and I'll prove it!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 9: CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="kicker" data-anim="in">PAGE 9</div>
+        <h2 class="huge" data-anim="in">DEPLOY ME.</h2>
+        <p class="sub" data-anim="in">
+          Fast contact. Fast response. (GitHub Pages is static — this form will open your email client by default.)
+        </p>
+
+        <!-- Static mailto form (works without backend) -->
+        <form id="contactForm" class="card" data-anim="in">
+          <input name="name" placeholder="Name" required data-crosshair="true"/>
+          <input name="email" type="email" placeholder="Email" required data-crosshair="true"/>
+          <input class="full" name="subject" placeholder="Subject" required data-crosshair="true"/>
+          <textarea class="full" name="message" placeholder="Message" required data-crosshair="true"></textarea>
+          <button class="btn red full" type="submit" data-crosshair="true">SEND</button>
+        </form>
+
+        <div class="contactMeta" data-anim="in">
+          <div><b>Harish Reddy Goluguri</b> — Atlanta, Georgia, USA</div>
+          <div>+1 (872) 344-7207</div>
+          <div><a href="mailto:harishreddyice@gmail.com" data-crosshair="true" style="color:var(--green)">harishreddyice@gmail.com</a></div>
+          <div style="margin-top:10px;">
+            <a href="https://www.linkedin.com/in/harishredz/" data-crosshair="true" class="btn">LinkedIn</a>
+          </div>
+          <div style="margin-top:10px; color:rgba(232,238,252,.45); font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:12px;">
+            No GitHub link (as requested)
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 
   <script>
-    // year
-    document.getElementById('yy').textContent = new Date().getFullYear();
-    // section reveal on scroll
-    const io = new IntersectionObserver((entries)=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show') }),{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    // ---------- Lenis ----------
+    window.addEventListener("load", () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (!window.Lenis) return;
+
+      const root = document.getElementById("scrollRoot");
+      const lenis = new Lenis({
+        wrapper: root,
+        content: root,
+        smoothWheel: true,
+        lerp: 0.08,
+        wheelMultiplier: 1.0,
+        syncTouch: true,
+      });
+
+      function raf(time){
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    });
+
+    // ---------- Cursor (candlestick -> crosshair) ----------
+    (function cursor(){
+      const c = document.getElementById("cursor");
+      if (!c) return;
+
+      let x=0,y=0, tx=0,ty=0;
+      const speed = 0.18;
+
+      function tick(){
+        x += (tx - x)*speed;
+        y += (ty - y)*speed;
+        c.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      window.addEventListener("mousemove", (e) => { tx=e.clientX; ty=e.clientY; }, {passive:true});
+
+      window.addEventListener("mouseover", (e) => {
+        const target = e.target.closest("[data-crosshair='true'], a, button, input, textarea");
+        if (target) {
+          c.classList.add("crosshair");
+          c.innerHTML = `
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+              <circle cx="17" cy="17" r="7.5" stroke="rgba(0,255,65,.95)" />
+              <path d="M17 2v8M17 24v8M2 17h8M24 17h8" stroke="rgba(0,255,65,.95)"/>
+            </svg>
+          `;
+        } else {
+          c.classList.remove("crosshair");
+          c.innerHTML = `
+            <svg width="28" height="42" viewBox="0 0 28 42" fill="none">
+              <rect x="12.5" y="2.2" width="3" height="37.6" rx="1.5" fill="rgba(0,255,65,.95)"/>
+              <rect x="7" y="11" width="14" height="20" rx="3.2" fill="rgba(0,255,65,.20)" stroke="rgba(0,255,65,.95)"/>
+            </svg>
+          `;
+        }
+      }, {passive:true});
+    })();
+
+    // ---------- HERO hover label ----------
+    (function heroHover(){
+      const left = document.getElementById("heroLeft");
+      const right = document.getElementById("heroRight");
+      const label = document.getElementById("hoverLabel");
+      if (!left || !right || !label) return;
+
+      left.addEventListener("mouseenter", ()=> label.textContent = "OPERATIONS STRATEGIST");
+      left.addEventListener("mouseleave", ()=> label.textContent = "");
+      right.addEventListener("mouseenter", ()=> label.textContent = "CAPITAL MARKETS ANALYST");
+      right.addEventListener("mouseleave", ()=> label.textContent = "");
+    })();
+
+    // ---------- Typewriter ----------
+    (function typewriter(){
+      const target = document.getElementById("typeTarget");
+      if (!target) return;
+      const full = "I'M A FINANCE NERD WITH MARKETS AND FINANCE IN MIND, BIRYANI AND COCA COLA IN BELLY, WHEELS IN FEET.";
+      let i = 0;
+      const t = setInterval(() => {
+        i++;
+        target.textContent = full.slice(0, i);
+        if (i >= full.length) clearInterval(t);
+      }, 18);
+    })();
+
+    // ---------- GSAP entrance animations ----------
+    window.addEventListener("load", () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (!window.gsap) return;
+
+      gsap.from("[data-anim='in']", {
+        y: 18,
+        opacity: 0,
+        duration: 0.75,
+        stagger: 0.06,
+        ease: "power3.out"
+      });
+    });
+
+    // ---------- Contact form (mailto fallback) ----------
+    (function contact(){
+      const form = document.getElementById("contactForm");
+      if (!form) return;
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const subject = form.subject.value.trim();
+        const message = form.message.value.trim();
+
+        if (!name || !email || !subject || !message) return;
+
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\n${message}`
+        );
+
+        const mailto = `mailto:harishreddyice@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        window.location.href = mailto;
+      });
+    })();
   </script>
 </body>
 </html>
