@@ -12,7 +12,7 @@
   --radius: 22px;
   --max: 1180px;
 
-  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
 }
 
 *{ box-sizing:border-box; }
@@ -65,7 +65,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   display:flex;
   align-items:center;
   gap:10px;
-  min-width: 260px;
+  min-width: 240px;
 }
 .dot{
   width:9px;height:9px;border-radius:999px;background:var(--green);
@@ -76,7 +76,6 @@ button,input,textarea{ font:inherit; color:inherit; }
   letter-spacing:.02em;
   font-size:13px;
   text-transform:uppercase;
-  white-space:nowrap;
 }
 
 .navLinks{
@@ -182,11 +181,10 @@ button,input,textarea{ font:inherit; color:inherit; }
   padding:6px 14px;
   white-space:nowrap;
   width:200%;
-  animation: ticker 18s linear infinite;
+  animation: ticker 16s linear infinite;
 }
-.tickerInner.slow{ animation-duration: 24s; }
+.tickerInner.slow{ animation-duration: 22s; }
 .tickerInner span{ color:rgba(232,236,255,.7); }
-
 @keyframes ticker{
   from{ transform:translateX(0); }
   to{ transform:translateX(-50%); }
@@ -221,7 +219,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   line-height:.92;
 }
 .lead{
-  max-width: 820px;
+  max-width: 900px;
   margin:0 0 24px;
   font-size:18px;
   color:rgba(232,236,255,.74);
@@ -285,7 +283,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   filter: drop-shadow(0 0 18px rgba(244,0,9,.25));
 }
 
-/* Floating background tape text across sections (includes USD/INR/CAD/GBP + $) */
+/* floating market/currency text */
 .hero::before,
 .about::before,
 .experience::before,
@@ -294,7 +292,8 @@ button,input,textarea{ font:inherit; color:inherit; }
 .projects::before,
 .interests::before,
 .contact::before{
-  content:"USD INR CAD GBP EUR JPY AUD $ $ $   SPX 5,0XX   VIX 1X.XX   YLD 4.XX   BETA 1.0X   TSLA   AAPL   NVDA   MSFT   AMZN   META   DXY   OIL   GOLD   USD INR CAD GBP EUR JPY AUD $";
+  content:
+    "SPX 5,0XX   VIX 1X.XX   USD   INR   CAD   GBP   EUR   JPY   AUD   DXY   OIL   GOLD   TSLA   AAPL   NVDA   MSFT   AMZN   META   $   ₹   £   €   ¥   CAD   USD   ₹   €   $   FCF +18%   GM +220bp   EPS +12%   BETA 1.0X";
   position:absolute;
   inset:-10%;
   pointer-events:none;
@@ -309,17 +308,17 @@ button,input,textarea{ font:inherit; color:inherit; }
   opacity:.9;
 }
 
-/* ---------- HERO CONTENT ---------- */
+/* ---------- HERO ---------- */
 .hero{ display:flex; align-items:center; }
 .heroInner{ padding-top:24px; }
-.heroCopy{ max-width: 980px; }
+.heroCopy{ max-width: 920px; }
 
 .kicker{
   font-family:var(--mono);
-  letter-spacing:.26em;
+  letter-spacing:.28em;
   text-transform:uppercase;
-  font-size:14px;   /* increased */
-  color:rgba(232,236,255,.80);
+  font-size:15px; /* bigger */
+  color:rgba(232,236,255,.86);
   margin-bottom:14px;
 }
 
@@ -327,23 +326,25 @@ button,input,textarea{ font:inherit; color:inherit; }
   margin:0 0 12px;
   font-weight:900;
   letter-spacing:-.04em;
-  font-size:clamp(52px, 6.2vw, 92px);
-  line-height:1.02;
-  white-space:nowrap;        /* keeps in one line on desktop */
+  font-size:clamp(50px, 6.2vw, 88px);
+  line-height:.92;
+  white-space:nowrap;         /* keeps in one line on desktop */
 }
-@media (max-width: 900px){
+@media (max-width: 980px){
   .heroTitle{ white-space:normal; } /* allow wrap on mobile */
 }
 
 .glow{
   color:var(--fg);
-  text-shadow: 0 0 22px rgba(0,255,65,.18), 0 0 16px rgba(232,236,255,.12);
+  text-shadow:
+    0 0 22px rgba(0,255,65,.18),
+    0 0 16px rgba(232,236,255,.12);
 }
 .dotEnd{ color: rgba(0,255,65,.9); }
 
 .typeLine{
-  margin:14px 0 22px;
-  max-width: 760px;
+  margin:14px 0 18px;
+  max-width: 860px;
   color:rgba(232,236,255,.74);
   font-size:16px;
   line-height:1.7;
@@ -364,6 +365,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   flex-wrap:wrap;
   margin-top:8px;
 }
+
 .btn{
   display:inline-flex;
   align-items:center;
@@ -395,7 +397,7 @@ button,input,textarea{ font:inherit; color:inherit; }
 }
 .btnGhost:hover{ border-color: rgba(244,0,9,.45); }
 
-/* ---------- CARDS / GRID ---------- */
+/* ---------- GRID / CARDS ---------- */
 .grid2{
   display:grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
@@ -432,8 +434,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   letter-spacing:.22em;
   font-size:11px;
   margin-bottom:10px;
-  opacity:.75;
-  color: rgba(232,236,255,.78);
+  opacity:.9;
 }
 .cardLabel.green{ color: rgba(0,255,65,.9); }
 .cardLabel.red{ color: rgba(244,0,9,.9); }
@@ -441,8 +442,8 @@ button,input,textarea{ font:inherit; color:inherit; }
 .bigStat{
   font-weight:900;
   letter-spacing:-.02em;
-  font-size: clamp(26px, 2.6vw, 40px);
-  line-height:1.05;
+  font-size: clamp(24px, 2.2vw, 38px);
+  line-height:1.06;
   margin-bottom:10px;
 }
 .g{ color: rgba(0,255,65,.95); }
@@ -471,30 +472,56 @@ button,input,textarea{ font:inherit; color:inherit; }
   color: rgba(232,236,255,.72);
 }
 
-.powered{
-  margin-top:18px;
-  padding:14px 16px;
+/* ---------- AWARDS (Education) ---------- */
+.awards{
+  margin-top: 16px;
   border-radius: 18px;
   border: 1px solid rgba(232,236,255,.10);
   background: rgba(12,18,34,.52);
-  box-shadow: 0 12px 32px rgba(0,0,0,.35);
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:flex-start;
-  flex-wrap:wrap;
+  box-shadow: 0 12px 32px rgba(0,0,0,.32);
+  padding: 16px 16px 14px;
 }
-.poweredLabel{
+.awardsTitle{
   font-family:var(--mono);
-  letter-spacing:.22em;
   text-transform:uppercase;
+  letter-spacing:.22em;
   font-size:11px;
   color: rgba(232,236,255,.62);
+  margin: 0 0 10px;
 }
-.poweredLine{
-  font-weight:800;
+.awardItem{
+  display:grid;
+  gap:6px;
+  padding:10px 10px;
+  border-radius:14px;
+  border:1px solid rgba(232,236,255,.10);
+  background: rgba(0,0,0,.16);
+  margin-bottom:10px;
+}
+.awardItem:last-child{ margin-bottom:0; }
+.awardHead{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:baseline;
+}
+.awardName{
+  font-weight:900;
   letter-spacing:-.01em;
-  color: rgba(232,236,255,.88);
+  font-size:14px;
+}
+.awardOrg{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color: rgba(232,236,255,.62);
+}
+.awardDesc{
+  margin:0;
+  color: rgba(232,236,255,.74);
+  line-height:1.6;
+  font-size:13px;
 }
 
 /* ---------- TIMELINE ---------- */
@@ -513,10 +540,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   background: linear-gradient(180deg, rgba(0,255,65,.65), rgba(232,236,255,.10), rgba(244,0,9,.45));
   opacity:.8;
 }
-.tItem{
-  position:relative;
-  margin: 0 0 16px;
-}
+.tItem{ position:relative; margin: 0 0 16px; }
 .tDot{
   position:absolute;
   left: -22px;
@@ -541,11 +565,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   gap:12px;
   margin-bottom:10px;
 }
-.tRole{
-  font-weight:900;
-  letter-spacing:-.02em;
-  font-size:16px;
-}
+.tRole{ font-weight:900; letter-spacing:-.02em; font-size:16px; }
 .tLoc{
   font-family:var(--mono);
   text-transform:uppercase;
@@ -610,11 +630,76 @@ button,input,textarea{ font:inherit; color:inherit; }
 }
 .hudItem:last-child{ margin-bottom:0; }
 
-/* ---------- FORM ---------- */
-.form{
-  max-width: 760px;
-  margin-top: 18px;
+/* ---------- PROJECTS accents + slightly smaller title ---------- */
+.projects .bigStat{
+  font-size: clamp(22px, 1.9vw, 32px);
 }
+.pCard{
+  position:relative;
+}
+.pCard::before{
+  content:"";
+  position:absolute;
+  left:0; top:0; right:0;
+  height:3px;
+  background: linear-gradient(90deg, rgba(0,255,65,.85), rgba(244,0,9,.70));
+  opacity:.65;
+}
+.pMeta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.pTag{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(232,236,255,.10);
+  background:rgba(0,0,0,.16);
+  color: rgba(232,236,255,.72);
+}
+.pTag.g{ border-color: rgba(0,255,65,.20); }
+.pTag.r{ border-color: rgba(244,0,9,.22); }
+
+/* ---------- INTERESTS equal importance cards ---------- */
+.interestsGrid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:16px;
+  margin-top: 14px;
+}
+@media (max-width: 980px){
+  .interestsGrid{ grid-template-columns:1fr; }
+}
+.iCardTitle{
+  font-weight:900;
+  letter-spacing:-.01em;
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+.iCardBody{
+  margin:0;
+  color: rgba(232,236,255,.74);
+  line-height:1.65;
+  font-size:14px;
+}
+.iAccent{
+  font-family:var(--mono);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:11px;
+  color: rgba(232,236,255,.62);
+  margin-bottom:10px;
+}
+.iAccent .g{ color: rgba(0,255,65,.92); }
+.iAccent .r{ color: rgba(244,0,9,.88); }
+
+/* ---------- FORM ---------- */
+.form{ max-width: 760px; margin-top: 18px; }
 .row2{
   display:grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
@@ -632,18 +717,13 @@ button,input,textarea{ font:inherit; color:inherit; }
   outline:none;
   box-shadow: 0 10px 28px rgba(0,0,0,.25);
 }
-.field:focus{
-  border-color: rgba(0,255,65,.35);
-}
+.field:focus{ border-color: rgba(0,255,65,.35); }
 .area{ min-height: 140px; resize: vertical; }
 
 .btnFull{ width:100%; margin-top: 12px; }
 .btnSmall{ margin-top: 12px; padding:10px 14px; }
 
-.contactMeta{
-  margin-top: 18px;
-  color: rgba(232,236,255,.72);
-}
+.contactMeta{ margin-top: 18px; color: rgba(232,236,255,.72); }
 .metaLine{ margin: 6px 0; }
 .link{ text-decoration: underline; text-underline-offset: 3px; }
 
@@ -701,72 +781,6 @@ button,input,textarea{ font:inherit; color:inherit; }
 
 .cursor.crosshair .candle{ opacity:0; }
 .cursor.crosshair .crosshair{ opacity:1; }
-/* =========================
-   EDUCATION: AWARDS SECTION
-   (paste at bottom of style.css)
-========================= */
 
-.awards{
-  margin-top: 18px;
-  padding: 16px 16px;
-  border-radius: 18px;
-  border: 1px solid rgba(232,236,255,.10);
-  background: rgba(12,18,34,.48);
-  box-shadow: 0 12px 32px rgba(0,0,0,.35);
-  position: relative;
-  overflow: hidden;
-}
-
-.awards::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  background:
-    radial-gradient(520px 220px at 18% 20%, rgba(0,255,65,.10), transparent 60%),
-    radial-gradient(520px 220px at 82% 20%, rgba(244,0,9,.10), transparent 60%);
-  opacity:.65;
-  pointer-events:none;
-}
-
-.awards > *{ position:relative; z-index:1; }
-
-.awardsTag{
-  font-family: var(--mono);
-  text-transform: uppercase;
-  letter-spacing: .22em;
-  font-size: 11px;
-  color: rgba(232,236,255,.70);
-  margin-bottom: 12px;
-}
-
-.awardsGrid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 12px;
-}
-
-@media (max-width: 920px){
-  .awardsGrid{ grid-template-columns: 1fr; }
-}
-
-.awardCard{
-  border-radius: 18px;
-  border: 1px solid rgba(232,236,255,.10);
-  background: rgba(0,0,0,.16);
-  padding: 14px 14px;
-}
-
-.awardTitle{
-  font-weight: 900;
-  letter-spacing: -.01em;
-  font-size: 14px;
-  line-height: 1.25;
-  text-transform: uppercase;
-}
-
-.awardDesc{
-  margin-top: 8px;
-  color: rgba(232,236,255,.74);
-  line-height: 1.65;
-  font-size: 13px;
-}
+/* ---------- Small helpers ---------- */
+.mutedSmall{ color: rgba(232,236,255,.55); font-size:12px; }
