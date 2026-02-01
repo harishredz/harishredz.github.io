@@ -235,3 +235,342 @@
 .btn.red{
   border-color: rgba(244,0,9,.35);
 }
+<section id="about" class="about">
+  <div class="wrap">
+    <p class="sectionKicker">ABOUT ME</p>
+    <h2 class="sectionTitle">THE HYBRID ADVANTAGE.</h2>
+    <p class="sectionLead">
+      I operate where operational finance meets capital markets — execution-first thinking, backed by modeling discipline and market awareness.
+    </p>
+
+    <div class="aboutGrid">
+      <div class="aboutCard">
+        <div class="aboutTag green">OPERATIONAL RIGOR</div>
+        <div class="aboutStat"><span class="g">$70M+</span> budgets. <span class="g">97%</span> accuracy.</div>
+        <p class="aboutText">
+          I build planning systems that hold up in the real world — budgeting, forecasting, variance control, and liquidity decisions that protect margin and cash.
+        </p>
+        <div class="pillRow">
+          <span class="pill">Budgeting</span>
+          <span class="pill">Forecasting</span>
+          <span class="pill">Liquidity</span>
+        </div>
+      </div>
+
+      <div class="aboutCard">
+        <div class="aboutTag red">MARKET INTELLIGENCE</div>
+        <div class="aboutStat"><span class="g">Series 65</span> + <span class="g">Bloomberg</span> + <span class="g">CFI</span></div>
+        <p class="aboutText">
+          I track markets, macro signals, and price action — translating volatility and fundamentals into decisions, not opinions.
+        </p>
+        <div class="pillRow">
+          <span class="pill">Equities</span>
+          <span class="pill">Derivatives</span>
+          <span class="pill">Valuation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+/* =========================
+   ABOUT (PAGE 2)
+   ========================= */
+
+.wrap{
+  width:min(1180px, calc(100% - 24px));
+  margin:0 auto;
+  position:relative;
+  z-index:2;
+}
+
+.about{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:110px 16px 70px;
+  position:relative;
+}
+
+.sectionKicker{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-size:13px;
+  color: rgba(232,236,255,.60);
+  margin:0 0 14px;
+}
+
+.sectionTitle{
+  margin:0;
+  line-height:.95;
+  font-size: clamp(44px, 5.6vw, 84px);
+  font-weight:900;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+}
+
+.sectionLead{
+  margin:14px 0 0;
+  max-width: 860px;
+  color: rgba(232,236,255,.70);
+  font-size: 16px;
+  line-height:1.7;
+}
+
+.aboutGrid{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:16px;
+}
+
+.aboutCard{
+  border-radius: 22px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(12,18,34,.55);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 55px rgba(0,0,0,.35);
+  padding: 20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.aboutCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(520px 260px at 18% 25%, rgba(0,255,65,.14), transparent 60%),
+    radial-gradient(520px 260px at 82% 70%, rgba(244,0,9,.12), transparent 62%);
+  opacity:.6;
+  pointer-events:none;
+}
+
+.aboutTag{
+  position:relative;
+  z-index:1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  font-size:12px;
+  margin-bottom:12px;
+  font-weight:800;
+}
+
+.aboutTag.green{ color: rgba(0,255,65,.95); }
+.aboutTag.red{ color: rgba(244,0,9,.90); }
+
+.aboutStat{
+  position:relative;
+  z-index:1;
+  font-weight:900;
+  font-size: clamp(28px, 3.2vw, 48px);
+  line-height:1.06;
+  letter-spacing:-.01em;
+  margin: 0 0 10px;
+}
+
+.aboutText{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color: rgba(232,236,255,.72);
+  line-height:1.7;
+  font-size: 15px;
+}
+
+.pillRow{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+
+.pill{
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(12,18,34,.40);
+  color: rgba(232,236,255,.78);
+}
+
+.g{ color: rgba(0,255,65,.95); }
+
+@media (max-width: 980px){
+  .aboutGrid{ grid-template-columns: 1fr; }
+}
+<section id="experience" class="experience">
+  <div class="wrap">
+    <p class="sectionKicker">EXPERIENCE</p>
+    <h2 class="sectionTitle">WHAT DID I DO?</h2>
+    <p class="sectionLead">
+      High-impact work across investor strategy, research, portfolio decisions, and operational finance.
+    </p>
+
+    <div class="expList">
+
+      <div class="expCard">
+        <div class="expTop">
+          <div class="expRole">Fact Finders Pro — Investor Relations & Strategy Analyst</div>
+          <div class="expLoc">Seattle, WA</div>
+        </div>
+        <ul class="expBullets">
+          <li><b>$1.5M</b> capital roadmap structured.</li>
+          <li>Engineered VC & Berkus valuation models to stress-test pricing tiers.</li>
+          <li>Targeted <b>$10M–$12M</b> valuation via sensitivity analysis.</li>
+        </ul>
+      </div>
+
+      <div class="expCard">
+        <div class="expTop">
+          <div class="expRole">Georgia State University — Graduate Research Assistant</div>
+          <div class="expLoc">Atlanta, GA</div>
+        </div>
+        <ul class="expBullets">
+          <li>Investigated ESG metrics across <b>50+</b> U.S. firms using Bloomberg BQL.</li>
+          <li>Enhanced predictive model accuracy by <b>18%</b>.</li>
+          <li>Curated <b>7</b> interactive Power BI dashboards.</li>
+        </ul>
+      </div>
+
+      <div class="expCard">
+        <div class="expTop">
+          <div class="expRole">Portfolio Management Group — Investment Analyst</div>
+          <div class="expLoc">Atlanta, GA</div>
+        </div>
+        <ul class="expBullets">
+          <li><b>3%</b> alpha generated over benchmark.</li>
+          <li>Researched <b>30+</b> U.S. equities weekly using Bloomberg & WSJ.</li>
+          <li>Drove <b>$500K+</b> in weekly reallocations.</li>
+        </ul>
+      </div>
+
+      <div class="expCard">
+        <div class="expTop">
+          <div class="expRole">ANTLON — Senior Financial Analyst</div>
+          <div class="expLoc">Hyderabad, India</div>
+        </div>
+        <ul class="expBullets">
+          <li>Managed <b>$70M+</b> budgets with <b>97%</b> forecast accuracy.</li>
+          <li>Unlocked <b>$6M</b> liquidity via Monte Carlo cash flow simulations.</li>
+          <li>Cut reporting cycle time by <b>65%</b> using Python automation.</li>
+        </ul>
+      </div>
+
+      <div class="expCard">
+        <div class="expTop">
+          <div class="expRole">ANTLON — Financial Analyst</div>
+          <div class="expLoc">Hyderabad, India</div>
+        </div>
+        <ul class="expBullets">
+          <li>Designed IRR/NPV models for a <b>$48M+</b> portfolio of 27 builds.</li>
+          <li>Detected <b>$2.1M</b> in procurement leakage using Tableau.</li>
+          <li>Saved <b>$1.7M</b> in interest expense via liquidity modeling.</li>
+        </ul>
+      </div>
+
+      <div class="expCard">
+        <div class="expTop">
+          <div class="expRole">Neti Amaravathi — Finance Intern</div>
+          <div class="expLoc">Rajahmundry, India</div>
+        </div>
+        <ul class="expBullets">
+          <li>Saved <b>$1.2M</b> by uncovering inefficiencies in 25+ distribution centers.</li>
+          <li>Managed <b>$3M+</b> in media production budgets.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+/* =========================
+   EXPERIENCE (PAGE 3)
+   ========================= */
+.experience{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:110px 16px 70px;
+  position:relative;
+}
+
+.expList{
+  margin-top: 26px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.expCard{
+  border-radius: 22px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(12,18,34,.55);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 55px rgba(0,0,0,.35);
+  padding: 18px 18px 18px;
+  position:relative;
+  overflow:hidden;
+}
+
+.expCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(520px 260px at 18% 25%, rgba(0,255,65,.12), transparent 60%),
+    radial-gradient(520px 260px at 82% 70%, rgba(244,0,9,.10), transparent 62%);
+  opacity:.6;
+  pointer-events:none;
+}
+
+.expTop{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.expRole{
+  font-weight:900;
+  font-size:16px;
+  letter-spacing:.01em;
+}
+
+.expLoc{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:12px;
+  color: rgba(232,236,255,.60);
+  white-space:nowrap;
+  padding-top:2px;
+}
+
+.expBullets{
+  position:relative;
+  z-index:1;
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(232,236,255,.74);
+  line-height:1.7;
+}
+
+.expBullets li{ margin:6px 0; }
+
+.expBullets b{
+  color: rgba(0,255,65,.95);
+  font-weight:900;
+}
+
+@media (max-width: 980px){
+  .expRole{ font-size:15px; }
+}
