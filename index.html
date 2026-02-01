@@ -3,20 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Harish Reddy Goluguri — High-Performance Hybrid Portfolio</title>
-  <meta name="description" content="High-Performance Hybrid Portfolio — Operations Strategist + Capital Markets Analyst." />
+  <title>Harish Reddy Goluguri — Portfolio</title>
+  <meta name="description" content="Harish Reddy Goluguri — About, Experience, Skills." />
+
+  <!-- Fast fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#0a0f1c;
       --fg:#e8eefc;
       --muted: rgba(232,238,252,.72);
+      --line: rgba(232,238,252,.12);
+
       --green:#00ff41;
       --red:#f40009;
-      --line: rgba(232,238,252,.12);
-      --card: rgba(255,255,255,.03);
+
       --shadow: 0 18px 55px rgba(0,0,0,.45);
       --max: 1180px;
-
       --radius: 22px;
     }
 
@@ -26,11 +32,10 @@
       margin:0;
       background: var(--bg);
       color: var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       overflow-x:hidden;
       cursor:none;
     }
-
     a{ color:inherit; text-decoration:none; }
     button, input, textarea{ font:inherit; color:inherit; }
 
@@ -46,22 +51,21 @@
       scroll-snap-align:start;
       display:flex;
       align-items:center;
-      padding: 88px 0;
+      padding: 92px 0;
       position:relative;
+      isolation:isolate;
     }
     .container{
       width:min(var(--max), calc(100% - 56px));
       margin:0 auto;
       position:relative;
-      z-index:2;
+      z-index:3;
     }
 
-    /* top nav */
+    /* nav */
     .nav{
       position:fixed;
-      top:18px;
-      left:0;
-      right:0;
+      top:18px; left:0; right:0;
       z-index:50;
       pointer-events:none;
     }
@@ -78,6 +82,7 @@
       background: rgba(10,15,28,.62);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
+      gap:14px;
     }
     .brand{
       display:flex;
@@ -85,17 +90,20 @@
       align-items:center;
       font-weight:900;
       letter-spacing:-0.02em;
+      white-space:nowrap;
     }
     .brandDot{
       width:10px;height:10px;border-radius:99px;
       background: var(--green);
       box-shadow: 0 0 18px rgba(0,255,65,.5);
+      flex:0 0 auto;
     }
     .navLinks{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
       justify-content:flex-end;
+      align-items:center;
     }
     .navLinks a{
       padding: 10px 12px;
@@ -103,6 +111,10 @@
       border: 1px solid transparent;
       color: var(--muted);
       transition: transform .12s ease, border-color .12s ease, background .12s ease, color .12s ease;
+      font-weight:800;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      font-size:12px;
     }
     .navLinks a:hover{
       transform: translateY(-1px);
@@ -110,26 +122,40 @@
       border-color: rgba(0,255,65,.25);
       background: rgba(0,255,65,.07);
     }
+    @media (max-width: 980px){
+      .navLinks{ display:none; }
+    }
 
     /* typography */
-    .kicker{
+    .label{
       text-transform:uppercase;
-      letter-spacing:.24em;
-      font-weight:800;
+      letter-spacing:.26em;
+      font-weight:900;
       font-size:12px;
-      color: var(--muted);
+      color: rgba(232,238,252,.55);
+      margin-bottom: 10px;
     }
     .huge{
       font-weight:950;
       line-height:.92;
-      letter-spacing:-0.045em;
+      letter-spacing:-0.05em;
       font-size: clamp(46px, 6.2vw, 98px);
-      margin: 14px 0 10px;
+      margin: 0 0 10px;
+    }
+    .greet{
+      font-family:"Sora", system-ui;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+    .name{
+      font-family:"Inter", system-ui;
+      font-weight:950;
+      letter-spacing:-0.06em;
     }
     .sub{
       font-size: clamp(16px, 1.35vw, 20px);
       color: var(--muted);
-      max-width: 74ch;
+      max-width: 78ch;
       line-height:1.55;
     }
     .mono{
@@ -150,8 +176,8 @@
       border: 1px solid var(--line);
       background: rgba(255,255,255,.02);
       backdrop-filter: blur(10px);
-      font-weight:900;
-      letter-spacing:.06em;
+      font-weight:950;
+      letter-spacing:.08em;
       text-transform:uppercase;
       transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
       will-change: transform;
@@ -167,9 +193,9 @@
       background: rgba(244,0,9,.07);
       box-shadow: 0 14px 45px rgba(244,0,9,.08);
     }
-    .btn small{ opacity:.75; font-weight:800; letter-spacing:.14em; }
+    .btn small{ opacity:.75; font-weight:900; letter-spacing:.14em; }
 
-    /* layout helpers */
+    /* layout */
     .grid2{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -179,17 +205,14 @@
     }
     @media (max-width: 980px){
       .grid2{ grid-template-columns: 1fr; }
-      .navLinks{ display:none; }
     }
-
     .card{
       border: 1px solid var(--line);
-      background: var(--card);
+      background: rgba(255,255,255,.02);
       border-radius: var(--radius);
       padding: 18px;
       box-shadow: var(--shadow);
     }
-
     .bigStat{
       font-size: clamp(30px, 3.4vw, 56px);
       font-weight: 950;
@@ -197,8 +220,8 @@
       line-height:1;
       margin: 0 0 10px;
     }
-    .bigStat .g{ color: var(--green); }
-    .bigStat .r{ color: var(--red); }
+    .g{ color: var(--green); }
+    .r{ color: var(--red); }
 
     .pillRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
     .pill{
@@ -206,37 +229,82 @@
       border-radius: 999px;
       padding: 10px 12px;
       background: rgba(255,255,255,.02);
-      color: var(--muted);
-      font-weight: 800;
-      letter-spacing:.05em;
-      font-size:12px;
+      color: rgba(232,238,252,.62);
+      font-weight: 900;
+      letter-spacing:.10em;
+      font-size:11px;
       text-transform:uppercase;
     }
 
-    /* HERO split */
+    /* HERO split background: left green tint, right red tint */
     .heroBg{
       position:absolute; inset:0;
-      display:grid; grid-template-columns:1fr 1fr;
+      display:grid; grid-template-columns: 1fr 1fr;
       z-index:1;
     }
     .heroLeft{
       border-right: 1px solid rgba(232,238,252,.08);
       background:
-        radial-gradient(1100px 650px at 25% 40%, rgba(255,255,255,.07), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+        radial-gradient(950px 520px at 30% 35%, rgba(0,255,65,.10), transparent 60%),
+        linear-gradient(180deg, rgba(0,255,65,.06), transparent);
     }
     .heroRight{
       background:
-        radial-gradient(1050px 650px at 75% 40%, rgba(0,255,65,.12), transparent 55%),
-        linear-gradient(180deg, rgba(0,255,65,.06), transparent);
+        radial-gradient(950px 520px at 70% 35%, rgba(244,0,9,.10), transparent 60%),
+        linear-gradient(180deg, rgba(244,0,9,.06), transparent);
     }
+
+    /* Stock background overlay (SVG + scrolling tape) */
+    .stockLayer{
+      position:absolute; inset:0;
+      z-index:2;
+      opacity:.45;
+      pointer-events:none;
+      mix-blend-mode: screen;
+      filter: saturate(1.1);
+    }
+    .stockLayer .tape{
+      position:absolute;
+      left: -15%;
+      right: -15%;
+      bottom: 10%;
+      height: 44px;
+      border-top: 1px solid rgba(232,238,252,.08);
+      border-bottom: 1px solid rgba(232,238,252,.08);
+      background: rgba(10,15,28,.35);
+      overflow:hidden;
+      transform: skewY(-2deg);
+    }
+    .tapeTrack{
+      display:flex;
+      gap:32px;
+      white-space:nowrap;
+      will-change: transform;
+      padding: 10px 0;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12px;
+      color: rgba(232,238,252,.70);
+      animation: tape 18s linear infinite;
+    }
+    .tapeTrack b{ color: var(--green); }
+    .tapeTrack i{ color: var(--red); font-style:normal; }
+    @keyframes tape{
+      from{ transform: translateX(0); }
+      to{ transform: translateX(-50%); }
+    }
+
+    /* hover label */
     .hoverLabel{
       height: 22px;
-      margin-top: 16px;
-      color: var(--green);
-      letter-spacing:.18em;
+      margin-top: 14px;
+      letter-spacing:.20em;
       font-weight:950;
+      color: rgba(232,238,252,.85);
     }
+    .hoverLabel .left{ color: var(--green); }
+    .hoverLabel .right{ color: var(--red); }
 
     /* timeline */
     .timeline{
@@ -287,16 +355,16 @@
       font-size: 18px;
     }
     .meta{
-      color: var(--muted);
-      font-weight: 800;
-      letter-spacing:.08em;
+      color: rgba(232,238,252,.65);
+      font-weight: 900;
+      letter-spacing:.10em;
       text-transform:uppercase;
       font-size: 12px;
     }
     .bullets{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.55; }
     .bullets li{ margin: 6px 0; }
 
-    /* HUD grid (Skills) */
+    /* HUD grid (skills) */
     .hud{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -311,103 +379,12 @@
       font-size: 14px;
       letter-spacing:.18em;
       text-transform: uppercase;
+      font-weight: 950;
     }
     .hud ul{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.55; }
     .hud li{ margin:6px 0; }
 
-    /* badges */
-    .badgeGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    @media (max-width: 980px){
-      .badgeGrid{ grid-template-columns: 1fr; }
-    }
-    .badge{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:center;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 14px 14px;
-      background: rgba(255,255,255,.02);
-    }
-    .badge strong{
-      font-weight: 950;
-      letter-spacing:-0.02em;
-    }
-    .badge span{
-      color: var(--muted);
-      font-weight: 800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-size: 12px;
-      white-space:nowrap;
-    }
-
-    /* projects */
-    .projGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
-    @media (max-width: 980px){
-      .projGrid{ grid-template-columns: 1fr; }
-    }
-    .projTitle{
-      font-weight: 950;
-      letter-spacing:-0.02em;
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-
-    /* interests collage (lightweight gradients, no heavy images) */
-    .collage{
-      position:absolute; inset:0;
-      z-index:1;
-      background:
-        radial-gradient(900px 520px at 20% 30%, rgba(244,0,9,.10), transparent 55%),
-        radial-gradient(900px 520px at 75% 40%, rgba(0,255,65,.10), transparent 55%),
-        radial-gradient(700px 420px at 50% 85%, rgba(255,255,255,.06), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.02), transparent 70%);
-      filter: saturate(1.1);
-    }
-
-    /* contact */
-    form{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 18px;
-    }
-    form .full{ grid-column: 1 / -1; }
-    input, textarea{
-      width:100%;
-      padding: 14px 14px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(10,15,28,.62);
-      outline:none;
-      color: var(--fg);
-      transition: border-color .12s ease, background .12s ease;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(0,255,65,.45);
-      background: rgba(0,255,65,.05);
-    }
-    textarea{ min-height: 140px; resize: vertical; }
-
-    .contactMeta{
-      margin-top: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* cursor */
+    /* custom cursor */
     .cursor{
       position:fixed;
       top:0; left:0;
@@ -432,34 +409,34 @@
       .cursor{ display:none; }
     }
   </style>
-
-  <!-- GSAP + Lenis via CDN (fast) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 </head>
 
-<body data-cursor="candle">
+<body>
   <!-- NAV -->
   <div class="nav">
     <div class="bar">
       <div class="brand" data-crosshair="true">
         <span class="brandDot"></span>
-        HARISH GOLUGURI
+        HARISH REDDY GOLUGURI
       </div>
+
       <div class="navLinks">
-        <a href="#hybrid" data-crosshair="true">Hybrid</a>
+        <a href="#about" data-crosshair="true">About Me</a>
         <a href="#experience" data-crosshair="true">Experience</a>
         <a href="#skills" data-crosshair="true">Skills</a>
+        <a href="#education" data-crosshair="true">Education</a>
+        <a href="#certifications" data-crosshair="true">Certifications</a>
+        <a href="#awards" data-crosshair="true">Awards</a>
         <a href="#projects" data-crosshair="true">Projects</a>
+        <a href="#interests" data-crosshair="true">Interests</a>
         <a href="#contact" data-crosshair="true">Contact</a>
       </div>
     </div>
   </div>
 
-  <!-- CUSTOM CURSOR -->
+  <!-- CURSOR -->
   <div class="cursor" id="cursor" aria-hidden="true">
-    <!-- candlestick -->
-    <svg id="cursorSvg" width="28" height="42" viewBox="0 0 28 42" fill="none">
+    <svg width="28" height="42" viewBox="0 0 28 42" fill="none">
       <rect x="12.5" y="2.2" width="3" height="37.6" rx="1.5" fill="rgba(0,255,65,.95)"/>
       <rect x="7" y="11" width="14" height="20" rx="3.2" fill="rgba(0,255,65,.20)" stroke="rgba(0,255,65,.95)"/>
     </svg>
@@ -467,27 +444,73 @@
 
   <div class="snap" id="scrollRoot">
 
-    <!-- PAGE 1: HERO -->
-    <section id="hero">
+    <!-- HOME -->
+    <section id="home">
       <div class="heroBg" aria-hidden="true">
         <div class="heroLeft" id="heroLeft"></div>
         <div class="heroRight" id="heroRight"></div>
       </div>
 
+      <!-- Stock market graphs + numbers -->
+      <div class="stockLayer" aria-hidden="true">
+        <svg viewBox="0 0 1200 700" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; inset:0;">
+          <g opacity="0.28">
+            <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200" stroke="rgba(232,238,252,.20)"/>
+            <path d="M120 0V700M240 0V700M360 0V700M480 0V700M600 0V700M720 0V700M840 0V700M960 0V700M1080 0V700" stroke="rgba(232,238,252,.14)"/>
+          </g>
+
+          <path d="M0 520 C 140 560, 220 460, 320 480 C 420 500, 470 380, 580 410 C 700 440, 740 290, 860 320 C 980 350, 1040 210, 1200 240"
+                stroke="rgba(0,255,65,.85)" stroke-width="3" fill="none" opacity=".85"/>
+
+          <path d="M0 260 C 140 240, 220 330, 320 310 C 420 290, 470 390, 580 360 C 700 330, 760 480, 860 450 C 980 420, 1040 520, 1200 490"
+                stroke="rgba(244,0,9,.75)" stroke-width="3" fill="none" opacity=".70"/>
+
+          <g opacity="0.55" font-family="Inter, system-ui" font-weight="900" font-size="14" fill="rgba(232,238,252,.75)">
+            <text x="70" y="90">SPX 5,0XX</text>
+            <text x="320" y="140">VIX 1X.XX</text>
+            <text x="560" y="110">USD</text>
+            <text x="820" y="160">YLD 4.XX</text>
+            <text x="1020" y="120">BETA 1.0X</text>
+
+            <text x="90" y="660">EPS +12%</text>
+            <text x="380" y="640">REV +9%</text>
+            <text x="640" y="660">FCF +18%</text>
+            <text x="940" y="640">GM +220bp</text>
+          </g>
+        </svg>
+
+        <div class="tape">
+          <div class="tapeTrack">
+            <span>NASDAQ <b>+1.24%</b></span>
+            <span>SPX <b>+0.68%</b></span>
+            <span>RATES <i>-7bp</i></span>
+            <span>VOL <i>-3.1%</i></span>
+            <span>OIL <b>+0.9%</b></span>
+            <span>FX <i>-0.2%</i></span>
+            <span>NASDAQ <b>+1.24%</b></span>
+            <span>SPX <b>+0.68%</b></span>
+            <span>RATES <i>-7bp</i></span>
+            <span>VOL <i>-3.1%</i></span>
+            <span>OIL <b>+0.9%</b></span>
+            <span>FX <i>-0.2%</i></span>
+          </div>
+        </div>
+      </div>
+
       <div class="container">
-        <div class="kicker" data-anim="in">The "High-Performance Hybrid" Portfolio</div>
-        <h1 class="huge" data-anim="in">
-          HELLO FINANCE PEOPLE, WELCOME.<br/>
-          I AM HARISH REDDY GOLUGURI.
+        <h1 class="huge">
+          <span class="greet">HELLO FINANCE PEOPLE, WELCOME.</span><br/>
+          <span class="name">I AM HARISH REDDY</span><br/>
+          <span class="name">GOLUGURI.</span>
         </h1>
 
-        <div class="sub" data-anim="in">
+        <div class="sub">
           <span id="typeTarget"></span><span style="color:var(--green)">▍</span>
         </div>
 
-        <div class="hoverLabel mono" id="hoverLabel" data-anim="in"></div>
+        <div class="hoverLabel mono" id="hoverLabel"></div>
 
-        <div class="btnRow" data-anim="in">
+        <div class="btnRow">
           <a class="btn" href="./Harish_Goluguri_Resume.pdf" download data-crosshair="true">
             DOWNLOAD RESUME <small>PDF</small>
           </a>
@@ -495,52 +518,41 @@
             CONTACT ME
           </a>
         </div>
-
-        <div class="pillRow" data-anim="in">
-          <span class="pill">Zero Lag</span>
-          <span class="pill">Kinetic Typography</span>
-          <span class="pill">Dark Mode Financial</span>
-          <span class="pill">60fps+ mindset</span>
-        </div>
       </div>
     </section>
 
-    <!-- PAGE 2: HYBRID -->
-    <section id="hybrid">
+    <!-- ABOUT ME -->
+    <section id="about">
       <div class="container">
-        <div class="kicker" data-anim="in">PAGE 2</div>
-        <h2 class="huge" data-anim="in">THE HYBRID ENGINE.</h2>
-        <p class="sub" data-anim="in">
-          Why choose between the ledger and the ticker? I thrive in both.
+        <div class="label">ABOUT ME</div>
+        <h2 class="huge">THE HYBRID ADVANTAGE.</h2>
+        <p class="sub">
+          I operate where operational finance meets capital markets — execution-first thinking, backed by modeling discipline and market awareness.
         </p>
 
         <div class="grid2">
-          <div class="card" data-anim="in">
+          <div class="card">
             <div class="mono" style="color:var(--green);">OPERATIONAL RIGOR</div>
             <div class="bigStat"><span class="g">$70M+</span> budgets. <span class="g">97%</span> accuracy.</div>
             <p class="sub">
-              I bring 5+ years of operational finance experience. I’ve managed $70M+ budgets and unlocked $6M in liquidity on the ground.
-              I don't just track costs; I crush inefficiencies to drive margin growth.
+              I build planning systems that hold up in the real world — budgeting, forecasting, variance control, and liquidity decisions that protect margin and cash.
             </p>
             <div class="pillRow">
               <span class="pill">Budgeting</span>
               <span class="pill">Forecasting</span>
               <span class="pill">Liquidity</span>
-              <span class="pill">Automation</span>
             </div>
           </div>
 
-          <div class="card" data-anim="in">
+          <div class="card">
             <div class="mono" style="color:var(--red);">MARKET INTELLIGENCE</div>
             <div class="bigStat"><span class="g">Series 65</span> + <span class="g">Bloomberg</span> + <span class="g">CFI</span></div>
             <p class="sub">
-              I am obsessed with the markets. My weekends are spent analyzing charts, testing volatility models, and tracking macro trends.
-              I bring a trader's instinct backed by institutional-grade modeling.
+              I track markets, macro signals, and price action — translating volatility and fundamentals into decisions, not opinions.
             </p>
             <div class="pillRow">
               <span class="pill">Equities</span>
               <span class="pill">Derivatives</span>
-              <span class="pill">Macro</span>
               <span class="pill">Valuation</span>
             </div>
           </div>
@@ -548,15 +560,15 @@
       </div>
     </section>
 
-    <!-- PAGE 3: EXPERIENCE -->
+    <!-- EXPERIENCE -->
     <section id="experience">
       <div class="container">
-        <div class="kicker" data-anim="in">PAGE 3</div>
-        <h2 class="huge" data-anim="in">EXPERIENCE. THE TRACK RECORD.</h2>
-        <p class="sub" data-anim="in">Vertical timeline. Massive numbers. No fluff. All signal.</p>
+        <div class="label">EXPERIENCE</div>
+        <h2 class="huge">EXPERIENCE.</h2>
+        <p class="sub">Vertical timeline. Massive numbers. No fluff. All signal.</p>
 
         <div class="timeline">
-          <div class="tItem" data-anim="in">
+          <div class="tItem">
             <div class="tHead">
               <div class="role">Fact Finders Pro — Investor Relations & Strategy Analyst</div>
               <div class="meta">Seattle, WA</div>
@@ -568,7 +580,7 @@
             </ul>
           </div>
 
-          <div class="tItem" data-anim="in">
+          <div class="tItem">
             <div class="tHead">
               <div class="role">Georgia State University — Graduate Research Assistant</div>
               <div class="meta">Atlanta, GA</div>
@@ -580,7 +592,7 @@
             </ul>
           </div>
 
-          <div class="tItem" data-anim="in">
+          <div class="tItem">
             <div class="tHead">
               <div class="role">Portfolio Management Group — Investment Analyst</div>
               <div class="meta">Atlanta, GA</div>
@@ -592,7 +604,7 @@
             </ul>
           </div>
 
-          <div class="tItem" data-anim="in">
+          <div class="tItem">
             <div class="tHead">
               <div class="role">ANTLON — Senior Financial Analyst</div>
               <div class="meta">Hyderabad, India</div>
@@ -604,7 +616,7 @@
             </ul>
           </div>
 
-          <div class="tItem" data-anim="in">
+          <div class="tItem">
             <div class="tHead">
               <div class="role">ANTLON — Financial Analyst</div>
               <div class="meta">Hyderabad, India</div>
@@ -616,7 +628,7 @@
             </ul>
           </div>
 
-          <div class="tItem" data-anim="in">
+          <div class="tItem">
             <div class="tHead">
               <div class="role">Neti Amaravathi — Finance Intern</div>
               <div class="meta">Rajahmundry, India</div>
@@ -630,15 +642,15 @@
       </div>
     </section>
 
-    <!-- PAGE 4: SKILLS -->
+    <!-- SKILLS -->
     <section id="skills">
       <div class="container">
-        <div class="kicker" data-anim="in">PAGE 4</div>
-        <h2 class="huge" data-anim="in">ARSENAL.</h2>
-        <p class="sub" data-anim="in">Heads-Up Display grid. Market weapons + operational engines + technical core.</p>
+        <div class="label">SKILLS</div>
+        <h2 class="huge">ARSENAL.</h2>
+        <p class="sub">Market weapons. Operational engines. Technical core.</p>
 
         <div class="hud">
-          <div class="card" data-anim="in">
+          <div class="card">
             <h3 style="color:var(--green);">MARKET WEAPONS</h3>
             <ul>
               <li>Bloomberg Terminal (4x Certified)</li>
@@ -648,7 +660,7 @@
             </ul>
           </div>
 
-          <div class="card" data-anim="in">
+          <div class="card">
             <h3 style="color:var(--red);">OPERATIONAL ENGINES</h3>
             <ul>
               <li>SAP S/4HANA (Budgeting)</li>
@@ -658,7 +670,7 @@
             </ul>
           </div>
 
-          <div class="card" data-anim="in">
+          <div class="card">
             <h3>TECHNICAL CORE</h3>
             <ul>
               <li>Python (Automation/Modeling)</li>
@@ -671,176 +683,32 @@
       </div>
     </section>
 
-    <!-- PAGE 5: EDUCATION -->
-    <section id="education">
+    <!-- STOP HERE FOR PART 1 -->
+    <section id="stop">
       <div class="container">
-        <div class="kicker" data-anim="in">PAGE 5</div>
-        <h2 class="huge" data-anim="in">FOUNDATION.</h2>
-
-        <div class="grid2">
-          <div class="card" data-anim="in">
-            <div class="mono" style="color:var(--green)">Georgia State University</div>
-            <div class="bigStat">Master of Science in Finance</div>
-            <p class="sub">GPA: <b style="color:var(--green)">3.64</b></p>
-          </div>
-
-          <div class="card" data-anim="in">
-            <div class="mono" style="color:var(--red)">Bharath University</div>
-            <div class="bigStat">Bachelor of Business Administration</div>
-            <p class="sub">GPA: <b style="color:var(--green)">8.04</b></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PAGE 6: CREDENTIALS & AWARDS -->
-    <section id="credentials">
-      <div class="container">
-        <div class="kicker" data-anim="in">PAGE 6</div>
-        <h2 class="huge" data-anim="in">VERIFIED.</h2>
-        <p class="sub" data-anim="in">Grid of badges. Clean. Prestigious. No clutter.</p>
-
-        <div class="badgeGrid">
-          <div class="badge" data-anim="in"><strong>Series 65</strong><span>Scheduled Feb 2026</span></div>
-          <div class="badge" data-anim="in"><strong>SIE (FINRA)</strong><span>Completed</span></div>
-          <div class="badge" data-anim="in"><strong>CMSA (CFI)</strong><span>Capital Markets</span></div>
-          <div class="badge" data-anim="in"><strong>FPWMP (CFI)</strong><span>Wealth Mgmt</span></div>
-          <div class="badge" data-anim="in"><strong>Bloomberg Certified</strong><span>BMC/ESG/FF/SA</span></div>
-        </div>
-
-        <div class="grid2" style="margin-top:18px;">
-          <div class="card" data-anim="in">
-            <div class="mono" style="color:var(--green)">AWARDS</div>
-            <ul class="bullets">
-              <li>🏆 All Rounder 2025 — Georgia State University</li>
-              <li>🏆 Employee of the Year 2023 — ANTLON</li>
-            </ul>
-          </div>
-
-          <div class="card" data-anim="in">
-            <div class="mono" style="color:var(--red)">NOTE</div>
-            <p class="sub">
-              Want certificate images & logos? Add them later in <b>assets/</b>. This build stays fast and lightweight.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PAGE 7: PROJECTS -->
-    <section id="projects">
-      <div class="container">
-        <div class="kicker" data-anim="in">PAGE 7</div>
-        <h2 class="huge" data-anim="in">ANALYSIS. THE LAB.</h2>
-
-        <div class="projGrid">
-          <div class="card" data-anim="in">
-            <div class="projTitle">Valuation Engine (Coty Inc.)</div>
-            <p class="sub">Full-scale DCF + Buy/Hold recommendation based on 5-year fundamentals and trend drivers.</p>
-          </div>
-
-          <div class="card" data-anim="in">
-            <div class="projTitle">Decoding Volatility (Accenture)</div>
-            <p class="sub">Time-series analysis on 20+ years of equity data to predict price limits and regime shifts.</p>
-          </div>
-
-          <div class="card" data-anim="in">
-            <div class="projTitle">Future of Money (CBDC)</div>
-            <p class="sub">Award-winning blockchain research on U.S. Central Bank feasibility and system design tradeoffs.</p>
-          </div>
-
-          <div class="card" data-anim="in">
-            <div class="projTitle">Churn Prediction (QNBT)</div>
-            <p class="sub">Predictive model with Python/Power BI to improve retention by 15% via segmentation + intervention triggers.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PAGE 8: INTERESTS -->
-    <section id="interests">
-      <div class="collage" aria-hidden="true"></div>
-      <div class="container">
-        <div class="kicker" data-anim="in">PAGE 8</div>
-        <h2 class="huge" data-anim="in">FUEL & FOCUS.</h2>
-        <p class="sub" data-anim="in">
-          The Obsessions: The Stock Market, The Economy, Finance, Tennis, Formula 1.
-        </p>
-
-        <div class="grid2">
-          <div class="card" data-anim="in">
-            <div class="mono" style="color:var(--green)">THE FUEL</div>
-            <div class="bigStat">BIRYANI.</div>
-            <p class="sub">Always hunting for the best.</p>
-          </div>
-
-          <div class="card" data-anim="in">
-            <div class="mono" style="color:var(--red)">FUN FACT</div>
-            <div class="bigStat">COCA-COLA.</div>
-            <p class="sub" id="colaLine">I can finish a whole bottle of Coca-Cola without putting it down once. Hire me, and I'll prove it!</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PAGE 9: CONTACT -->
-    <section id="contact">
-      <div class="container">
-        <div class="kicker" data-anim="in">PAGE 9</div>
-        <h2 class="huge" data-anim="in">DEPLOY ME.</h2>
-        <p class="sub" data-anim="in">
-          Fast contact. Fast response. (GitHub Pages is static — this form will open your email client by default.)
-        </p>
-
-        <!-- Static mailto form (works without backend) -->
-        <form id="contactForm" class="card" data-anim="in">
-          <input name="name" placeholder="Name" required data-crosshair="true"/>
-          <input name="email" type="email" placeholder="Email" required data-crosshair="true"/>
-          <input class="full" name="subject" placeholder="Subject" required data-crosshair="true"/>
-          <textarea class="full" name="message" placeholder="Message" required data-crosshair="true"></textarea>
-          <button class="btn red full" type="submit" data-crosshair="true">SEND</button>
-        </form>
-
-        <div class="contactMeta" data-anim="in">
-          <div><b>Harish Reddy Goluguri</b> — Atlanta, Georgia, USA</div>
-          <div>+1 (872) 344-7207</div>
-          <div><a href="mailto:harishreddyice@gmail.com" data-crosshair="true" style="color:var(--green)">harishreddyice@gmail.com</a></div>
-          <div style="margin-top:10px;">
-            <a href="https://www.linkedin.com/in/harishredz/" data-crosshair="true" class="btn">LinkedIn</a>
-          </div>
-          <div style="margin-top:10px; color:rgba(232,238,252,.45); font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:12px;">
-            No GitHub link (as requested)
-          </div>
-        </div>
+        <div class="label">PART 2</div>
+        <h2 class="huge">NEXT.</h2>
+        <p class="sub">We will add Education + Certifications + Awards + Projects + Interests + Contact in the next part.</p>
       </div>
     </section>
 
   </div>
 
   <script>
-    // ---------- Lenis ----------
-    window.addEventListener("load", () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      if (!window.Lenis) return;
+    // Typewriter (home)
+    (function typewriter(){
+      const target = document.getElementById("typeTarget");
+      if (!target) return;
+      const full = "I'M A FINANCE NERD WITH MARKETS AND FINANCE IN MIND, BIRYANI AND COCA COLA IN BELLY, WHEELS IN FEET.";
+      let i = 0;
+      const t = setInterval(() => {
+        i++;
+        target.textContent = full.slice(0, i);
+        if (i >= full.length) clearInterval(t);
+      }, 16);
+    })();
 
-      const root = document.getElementById("scrollRoot");
-      const lenis = new Lenis({
-        wrapper: root,
-        content: root,
-        smoothWheel: true,
-        lerp: 0.08,
-        wheelMultiplier: 1.0,
-        syncTouch: true,
-      });
-
-      function raf(time){
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-    });
-
-    // ---------- Cursor (candlestick -> crosshair) ----------
+    // Cursor (candlestick -> crosshair on interactive)
     (function cursor(){
       const c = document.getElementById("cursor");
       if (!c) return;
@@ -880,67 +748,17 @@
       }, {passive:true});
     })();
 
-    // ---------- HERO hover label ----------
+    // Hero hover label (left = green, right = red)
     (function heroHover(){
       const left = document.getElementById("heroLeft");
       const right = document.getElementById("heroRight");
       const label = document.getElementById("hoverLabel");
       if (!left || !right || !label) return;
 
-      left.addEventListener("mouseenter", ()=> label.textContent = "OPERATIONS STRATEGIST");
+      left.addEventListener("mouseenter", ()=> label.innerHTML = '<span class="left">OPERATIONS STRATEGIST</span>');
       left.addEventListener("mouseleave", ()=> label.textContent = "");
-      right.addEventListener("mouseenter", ()=> label.textContent = "CAPITAL MARKETS ANALYST");
+      right.addEventListener("mouseenter", ()=> label.innerHTML = '<span class="right">CAPITAL MARKETS ANALYST</span>');
       right.addEventListener("mouseleave", ()=> label.textContent = "");
-    })();
-
-    // ---------- Typewriter ----------
-    (function typewriter(){
-      const target = document.getElementById("typeTarget");
-      if (!target) return;
-      const full = "I'M A FINANCE NERD WITH MARKETS AND FINANCE IN MIND, BIRYANI AND COCA COLA IN BELLY, WHEELS IN FEET.";
-      let i = 0;
-      const t = setInterval(() => {
-        i++;
-        target.textContent = full.slice(0, i);
-        if (i >= full.length) clearInterval(t);
-      }, 18);
-    })();
-
-    // ---------- GSAP entrance animations ----------
-    window.addEventListener("load", () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      if (!window.gsap) return;
-
-      gsap.from("[data-anim='in']", {
-        y: 18,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.06,
-        ease: "power3.out"
-      });
-    });
-
-    // ---------- Contact form (mailto fallback) ----------
-    (function contact(){
-      const form = document.getElementById("contactForm");
-      if (!form) return;
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const subject = form.subject.value.trim();
-        const message = form.message.value.trim();
-
-        if (!name || !email || !subject || !message) return;
-
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\n${message}`
-        );
-
-        const mailto = `mailto:harishreddyice@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-        window.location.href = mailto;
-      });
     })();
   </script>
 </body>
