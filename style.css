@@ -37,7 +37,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   *{ animation:none !important; transition:none !important; }
 }
 
-/* ---------- NAV ---------- */
+/* ---------------- NAV (ONE LINE FIX) ---------------- */
 .navWrap{
   position:fixed;
   top:16px;
@@ -46,6 +46,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   z-index:50;
   pointer-events:none;
 }
+
 .nav{
   pointer-events:auto;
   width:min(var(--max), calc(100% - 24px));
@@ -59,18 +60,23 @@ button,input,textarea{ font:inherit; color:inherit; }
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:14px;
+  gap:12px;
 }
+
+/* brand left */
 .brand{
   display:flex;
   align-items:center;
   gap:10px;
-  min-width: 260px;
+  flex:0 0 auto;
+  min-width: 240px;
 }
+
 .dot{
   width:9px;height:9px;border-radius:999px;background:var(--green);
   box-shadow:0 0 20px rgba(0,255,65,.6);
 }
+
 .brandName{
   font-weight:900;
   letter-spacing:.02em;
@@ -79,37 +85,39 @@ button,input,textarea{ font:inherit; color:inherit; }
   white-space:nowrap;
 }
 
+/* links center/right — never wrap on desktop */
 .navLinks{
   display:flex;
-  gap:14px;
   align-items:center;
+  gap:12px;
+  flex:1 1 auto;
   justify-content:flex-end;
+  flex-wrap:nowrap;          /* IMPORTANT: prevents 2 lines */
+  min-width:0;
+  overflow:hidden;           /* ensures it won't push contact down */
+}
 
-  flex-wrap:nowrap;        /* ✅ no second line */
-  white-space:nowrap;      /* ✅ keep everything on one line */
-}
-/* If space gets tight, shrink menu text slightly before wrapping */
-@media (max-width: 1200px){
-  .navLink{ font-size:11px; padding:9px 8px; }
-  .navLinks{ gap:12px; }
-}
 .navLink{
   font-family:var(--mono);
-  font-size:12px;
-  letter-spacing:.18em;
+  font-size:11px;            /* slightly smaller to fit */
+  letter-spacing:.16em;
   text-transform:uppercase;
   color:rgba(232,236,255,.78);
   padding:10px 10px;
   border-radius:999px;
   transition: transform .15s ease, color .15s ease, background .15s ease, border-color .15s ease;
   border:1px solid transparent;
+  white-space:nowrap;
+  flex:0 0 auto;
 }
+
 .navLink:hover{
   color:var(--fg);
   background:rgba(232,236,255,.06);
   border-color:rgba(232,236,255,.10);
   transform:translateY(-1px);
 }
+
 .navCta{
   border-color:rgba(244,0,9,.35);
   background:rgba(244,0,9,.08);
@@ -119,6 +127,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   background:rgba(0,255,65,.08);
 }
 
+/* burger (mobile only) */
 .navBurger{
   display:none;
   width:44px;height:44px;
@@ -126,6 +135,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   background:rgba(232,236,255,.06);
   border:1px solid rgba(232,236,255,.10);
   cursor:pointer;
+  flex:0 0 auto;
 }
 .navBurger span{
   display:block;
@@ -134,6 +144,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   background:rgba(232,236,255,.85);
   border-radius:10px;
 }
+
 .navMobile{
   pointer-events:auto;
   width:min(var(--max), calc(100% - 24px));
@@ -162,12 +173,13 @@ button,input,textarea{ font:inherit; color:inherit; }
 }
 .navMobile.open{ display:block; }
 
-@media (max-width: 980px){
+/* Switch to burger earlier so nav never breaks */
+@media (max-width: 1100px){
   .navLinks{ display:none; }
   .navBurger{ display:block; }
 }
 
-/* ---------- TICKER ---------- */
+/* ---------------- TICKERS ---------------- */
 .tickerTop, .tickerBottom{
   position:fixed;
   left:0; right:0;
@@ -199,7 +211,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   to{ transform:translateX(-50%); }
 }
 
-/* ---------- SECTIONS ---------- */
+/* ---------------- SECTIONS ---------------- */
 .section{
   position:relative;
   min-height:100vh;
@@ -235,7 +247,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   line-height:1.6;
 }
 
-/* ---------- BACKGROUND ---------- */
+/* ---------------- BACKGROUNDS ---------------- */
 .bgMarket{
   position:absolute;
   inset:-18%;
@@ -292,7 +304,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   filter: drop-shadow(0 0 18px rgba(244,0,9,.25));
 }
 
-/* Floating background tape text across sections (includes USD/INR/CAD/GBP + $) */
+/* Floating background tape text across sections */
 .hero::before,
 .about::before,
 .experience::before,
@@ -316,7 +328,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   opacity:.9;
 }
 
-/* ---------- HERO CONTENT ---------- */
+/* ---------------- HERO ---------------- */
 .hero{ display:flex; align-items:center; }
 .heroInner{ padding-top:24px; }
 .heroCopy{ max-width: 980px; }
@@ -325,7 +337,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   font-family:var(--mono);
   letter-spacing:.26em;
   text-transform:uppercase;
-  font-size:14px;   /* increased */
+  font-size:14px;
   color:rgba(232,236,255,.80);
   margin-bottom:14px;
 }
@@ -336,10 +348,10 @@ button,input,textarea{ font:inherit; color:inherit; }
   letter-spacing:-.04em;
   font-size:clamp(52px, 6.2vw, 92px);
   line-height:1.02;
-  white-space:nowrap;        /* keeps in one line on desktop */
+  white-space:nowrap;
 }
 @media (max-width: 900px){
-  .heroTitle{ white-space:normal; } /* allow wrap on mobile */
+  .heroTitle{ white-space:normal; }
 }
 
 .glow{
@@ -371,6 +383,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   flex-wrap:wrap;
   margin-top:8px;
 }
+
 .btn{
   display:inline-flex;
   align-items:center;
@@ -402,7 +415,10 @@ button,input,textarea{ font:inherit; color:inherit; }
 }
 .btnGhost:hover{ border-color: rgba(244,0,9,.45); }
 
-/* ---------- CARDS / GRID ---------- */
+.btnFull{ width:100%; margin-top: 12px; }
+.btnSmall{ margin-top: 12px; padding:10px 14px; }
+
+/* ---------------- GRID + CARDS ---------------- */
 .grid2{
   display:grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
@@ -448,7 +464,7 @@ button,input,textarea{ font:inherit; color:inherit; }
 .bigStat{
   font-weight:900;
   letter-spacing:-.02em;
-  font-size: clamp(26px, 2.6vw, 40px);
+  font-size: clamp(24px, 2.4vw, 38px);
   line-height:1.05;
   margin-bottom:10px;
 }
@@ -478,6 +494,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   color: rgba(232,236,255,.72);
 }
 
+/* powered row */
 .powered{
   margin-top:18px;
   padding:14px 16px;
@@ -504,7 +521,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   color: rgba(232,236,255,.88);
 }
 
-/* ---------- TIMELINE ---------- */
+/* ---------------- TIMELINE ---------------- */
 .timeline{
   position:relative;
   margin-top: 18px;
@@ -520,10 +537,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   background: linear-gradient(180deg, rgba(0,255,65,.65), rgba(232,236,255,.10), rgba(244,0,9,.45));
   opacity:.8;
 }
-.tItem{
-  position:relative;
-  margin: 0 0 16px;
-}
+.tItem{ position:relative; margin: 0 0 16px; }
 .tDot{
   position:absolute;
   left: -22px;
@@ -570,7 +584,7 @@ button,input,textarea{ font:inherit; color:inherit; }
 }
 .tBullets b{ color: rgba(0,255,65,.95); }
 
-/* ---------- SKILLS HUD ---------- */
+/* ---------------- SKILLS HUD ---------------- */
 .skills .bgIcons{
   position:absolute;
   inset:0;
@@ -617,7 +631,72 @@ button,input,textarea{ font:inherit; color:inherit; }
 }
 .hudItem:last-child{ margin-bottom:0; }
 
-/* ---------- FORM ---------- */
+/* ---------------- AWARDS ---------------- */
+.awardsCard{
+  margin-top: 16px;
+}
+.award{
+  padding: 12px 0;
+  border-top: 1px solid rgba(232,236,255,.10);
+}
+.award:first-of-type{ border-top: 0; padding-top: 0; }
+.awardTitle{
+  font-weight:900;
+  letter-spacing:-.01em;
+  font-size:14px;
+}
+.awardBody{
+  margin-top:6px;
+  color: rgba(232,236,255,.72);
+  line-height:1.6;
+  font-size:13px;
+}
+
+/* ---------------- PROJECT ACCENTS ---------------- */
+.proj{
+  padding-bottom: 14px;
+}
+.projTitle{
+  font-size: clamp(22px, 2.2vw, 32px);
+}
+.projTag{
+  display:inline-flex;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(232,236,255,.10);
+  background:rgba(0,0,0,.16);
+  color: rgba(232,236,255,.72);
+}
+
+/* green project */
+.projGreen{
+  border-color: rgba(0,255,65,.18);
+}
+.projGreen::after{
+  background: radial-gradient(520px 220px at 20% 20%, rgba(0,255,65,.16), transparent 60%);
+}
+.projGreen .projTag{
+  border-color: rgba(0,255,65,.22);
+  color: rgba(0,255,65,.9);
+}
+
+/* red project */
+.projRed{
+  border-color: rgba(244,0,9,.18);
+}
+.projRed::after{
+  background: radial-gradient(520px 220px at 20% 20%, rgba(244,0,9,.16), transparent 60%);
+}
+.projRed .projTag{
+  border-color: rgba(244,0,9,.22);
+  color: rgba(244,0,9,.9);
+}
+
+/* ---------------- FORM ---------------- */
 .form{
   max-width: 760px;
   margin-top: 18px;
@@ -639,13 +718,8 @@ button,input,textarea{ font:inherit; color:inherit; }
   outline:none;
   box-shadow: 0 10px 28px rgba(0,0,0,.25);
 }
-.field:focus{
-  border-color: rgba(0,255,65,.35);
-}
+.field:focus{ border-color: rgba(0,255,65,.35); }
 .area{ min-height: 140px; resize: vertical; }
-
-.btnFull{ width:100%; margin-top: 12px; }
-.btnSmall{ margin-top: 12px; padding:10px 14px; }
 
 .contactMeta{
   margin-top: 18px;
@@ -654,7 +728,7 @@ button,input,textarea{ font:inherit; color:inherit; }
 .metaLine{ margin: 6px 0; }
 .link{ text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---------- CUSTOM CURSOR ---------- */
+/* ---------------- CURSOR ---------------- */
 .cursor{
   position:fixed;
   top:0; left:0;
