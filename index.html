@@ -202,37 +202,6 @@
       z-index:2;
     }
 
-    /* hover zones */
-    .hoverZone{
-      position:absolute;
-      top:0;
-      bottom:0;
-      width:50%;
-      z-index:3;
-    }
-    .hoverZone.left{ left:0; }
-    .hoverZone.right{ right:0; }
-
-    .hoverLabel{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%) scale(.96);
-      font-size: clamp(34px, 5.6vw, 70px);
-      font-weight:900;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .12s ease, transform .12s ease;
-      z-index:4;
-      text-align:center;
-      mix-blend-mode:screen;
-      text-shadow: 0 0 24px rgba(0,0,0,.35);
-    }
-    .hoverLabel.green{ color: var(--green); }
-    .hoverLabel.red{ color: var(--red); }
-
     /* hero content */
     .container{
       width:min(var(--max), 100%);
@@ -442,11 +411,6 @@
       </div>
     </div>
 
-    <!-- Hover Zones + Label -->
-    <div class="hoverZone left" aria-hidden="true"></div>
-    <div class="hoverZone right" aria-hidden="true"></div>
-    <div class="hoverLabel" id="hoverLabel" aria-hidden="true"></div>
-
     <!-- Center Content -->
     <div class="container">
       <div class="kicker" data-anim="in">HEY VISITOR, WELCOME.</div>
@@ -515,28 +479,6 @@
       });
     })();
 
-    // ===== Hover reveal text (left/right) =====
-    (function hoverReveal(){
-      const label = document.getElementById("hoverLabel");
-      const left = document.querySelector(".hoverZone.left");
-      const right = document.querySelector(".hoverZone.right");
-
-      function show(text, colorClass){
-        label.textContent = text;
-        label.className = "hoverLabel " + colorClass;
-        label.style.opacity = "1";
-        label.style.transform = "translate(-50%, -50%) scale(1)";
-      }
-      function hide(){
-        label.style.opacity = "0";
-        label.style.transform = "translate(-50%, -50%) scale(.96)";
-      }
-
-      left.addEventListener("mouseenter", ()=> show("CORPORATE FINANCE", "green"));
-      right.addEventListener("mouseenter", ()=> show("MARKETS", "red"));
-      left.addEventListener("mouseleave", hide);
-      right.addEventListener("mouseleave", hide);
-    })();
 
     // ===== Typewriter text =====
     (function typewriter(){
