@@ -491,13 +491,169 @@
     </div>
   </section>
 
-  <!-- placeholders for later -->
-  <div id="experience"></div>
-  <div id="skills"></div>
-  <div id="education"></div>
-  <div id="certifications"></div>
-  <div id="projects"></div>
-  <div id="interests"></div>
-  <div id="contact"></div>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="label">EXPERIENCE</div>
+    <h2 class="sectionTitle">WHAT DID I DO?</h2>
+
+    <div class="timeline">
+      <div class="tItem">
+        <div class="tDot"></div>
+        <div class="tCard">
+          <div class="tTop">
+            <div class="tRole">Fact Finders Pro  Investor Relations & Strategy Analyst</div>
+            <div class="tLoc">Seattle, WA</div>
+          </div>
+          <ul class="tBullets">
+            <li><b>$1.5M</b> capital roadmap structured.</li>
+            <li>Engineered VC and Berkus valuation models to stress-test pricing tiers.</li>
+            <li>Targeted <b>$10M–$12M</b> valuation via sensitivity analysis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tItem">
+        <div class="tDot"></div>
+        <div class="tCard">
+          <div class="tTop">
+            <div class="tRole">Georgia State University  Graduate Research Assistant</div>
+            <div class="tLoc">Atlanta, GA</div>
+          </div>
+          <ul class="tBullets">
+            <li>Investigated ESG metrics across <b>50+</b> U.S. firms using Bloomberg BQL.</li>
+            <li>Enhanced predictive model accuracy by <b>18%</b>.</li>
+            <li>Built <b>7</b> interactive Power BI dashboards for insights.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tItem">
+        <div class="tDot"></div>
+        <div class="tCard">
+          <div class="tTop">
+            <div class="tRole">Portfolio Management Group  Investment Analyst</div>
+            <div class="tLoc">Atlanta, GA</div>
+          </div>
+          <ul class="tBullets">
+            <li>Generated <b>3%</b> alpha versus benchmark through thesis-driven positioning.</li>
+            <li>Researched <b>30+</b> U.S. equities weekly using Bloomberg and WSJ.</li>
+            <li>Drove <b>$500K+</b> weekly reallocations with risk controls.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tItem">
+        <div class="tDot"></div>
+        <div class="tCard">
+          <div class="tTop">
+            <div class="tRole">ANTLON  Senior Financial Analyst</div>
+            <div class="tLoc">Hyderabad, India</div>
+          </div>
+          <ul class="tBullets">
+            <li>Managed <b>$70M+</b> budgets with <b>97%</b> forecast accuracy.</li>
+            <li>Unlocked <b>$6M</b> liquidity using Monte Carlo cash-flow simulations.</li>
+            <li>Cut reporting cycle time by <b>65%</b> via automation and process redesign.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* EXPERIENCE */
+  .timeline{
+    margin-top: 34px;
+    position: relative;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left: 10px;
+    top: 6px;
+    bottom: 6px;
+    width:2px;
+    background: linear-gradient(180deg, rgba(0,255,65,.55), rgba(232,238,252,.10));
+    opacity:.9;
+  }
+  .tItem{
+    position:relative;
+    display:grid;
+    grid-template-columns: 24px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+  }
+  .tDot{
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 18px rgba(0,255,65,.55);
+    margin-left: 4px;
+    margin-top: 10px;
+    z-index:2;
+  }
+  .tCard{
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(12,18,34,.55);
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .tCard::before{
+    content:"";
+    position:absolute; inset:-2px;
+    background:
+      radial-gradient(900px 260px at 18% 0%, rgba(0,255,65,.10), transparent 60%),
+      radial-gradient(900px 260px at 82% 0%, rgba(244,0,9,.08), transparent 60%);
+    opacity:.85;
+    pointer-events:none;
+  }
+  .tTop{
+    position:relative;
+    z-index:1;
+    display:flex;
+    justify-content:space-between;
+    gap: 12px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    margin-bottom: 8px;
+  }
+  .tRole{
+    font-weight: 900;
+    letter-spacing: -.01em;
+    font-size: 16px;
+  }
+  .tLoc{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    font-size: 12px;
+    color: rgba(232,238,252,.60);
+    white-space: nowrap;
+  }
+  .tBullets{
+    position:relative;
+    z-index:1;
+    margin: 0;
+    padding-left: 18px;
+    color: rgba(232,238,252,.74);
+    line-height: 1.7;
+  }
+  .tBullets li{ margin: 6px 0; }
+  .tBullets b{
+    color: rgba(0,255,65,.95);
+    font-weight: 900;
+  }
+
+  @media (max-width: 900px){
+    .timeline::before{ left: 8px; }
+    .tItem{ grid-template-columns: 20px 1fr; gap: 12px; }
+    .tDot{ margin-left: 2px; }
+  }
+</style>
 </body>
 </html>
