@@ -5,56 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Harish Reddy Goluguri</title>
 
-  <!-- Font (fast + clean) -->
+  <!-- Fonts (fast) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-  <!-- GSAP + Lenis (lightweight CDNs; no video backgrounds) -->
+  <!-- GSAP + Lenis (lightweight; no videos) -->
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.45/bundled/lenis.min.js"></script>
 
   <style>
-    /* ===== Hover Zones ===== */
-.hoverZone{
-  position:absolute;
-  top:0;
-  bottom:0;
-  width:50%;
-  z-index:4;
-}
-
-.hoverZone.left{ left:0; }
-.hoverZone.right{ right:0; }
-
-.hoverLabel{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%) scale(.96);
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight:900;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  opacity:0;
-  pointer-events:none;
-  transition: opacity .12s ease, transform .12s ease;
-  z-index:5;
-  text-align:center;
-  mix-blend-mode:screen;
-}
-
-.hoverLabel.green{ color: var(--green); }
-.hoverLabel.red{ color: var(--red); }
-
-/* Faster button hover */
-.btn{
-  transition: transform .08s ease, background .08s ease, border-color .08s ease;
-}
     :root{
       --bg:#0a0f1c;
       --fg:#e8eefc;
-      --muted:rgba(232,238,252,.72);
+      --muted:rgba(232,238,252,.78);
       --line:rgba(232,238,252,.12);
       --green:#00ff41;
       --red:#f40009;
@@ -64,20 +28,20 @@
     }
 
     *{ box-sizing:border-box; }
-    html, body{ height:100%; }
+    html,body{ height:100%; }
     body{
       margin:0;
       background:var(--bg);
       color:var(--fg);
       font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       overflow-x:hidden;
-      cursor:none; /* custom candlestick cursor */
+      cursor:none; /* custom cursor */
     }
-
     a{ color:inherit; text-decoration:none; }
-    button, input, textarea{ font:inherit; color:inherit; }
 
-    /* ======= NAV ======= */
+    /* =========================
+       NAV
+       ========================= */
     .nav{
       position:fixed;
       top:18px;
@@ -125,15 +89,22 @@
       color:rgba(232,238,252,.78);
       padding:10px 10px;
       border-radius:999px;
-      transition: background .15s ease, color .15s ease, transform .15s ease;
+      transition: background .12s ease, color .12s ease, transform .12s ease;
     }
     .navLinks a:hover{
       color:rgba(232,238,252,.95);
       background:rgba(255,255,255,.06);
       transform:translateY(-1px);
     }
+    @media (max-width: 920px){
+      .navLinks{ display:none; }
+      body{ cursor:auto; }
+      .cursor{ display:none; }
+    }
 
-    /* ======= HERO (HOME) ======= */
+    /* =========================
+       HOME / HERO
+       ========================= */
     .hero{
       min-height:100vh;
       position:relative;
@@ -144,21 +115,38 @@
       padding:120px 16px 70px;
     }
 
-    /* green(left) + dark/red(right) split */
+    /* split screen overlay: left green, right darker/red */
     .heroSplit{
       position:absolute;
       inset:0;
       background:linear-gradient(90deg,
-        rgba(0,255,65,.14) 0%,
+        rgba(0,255,65,.18) 0%,
         rgba(0,255,65,.10) 48%,
-        rgba(244,0,9,.08) 52%,
+        rgba(244,0,9,.06) 52%,
         rgba(244,0,9,.14) 100%
       );
       opacity:.95;
       pointer-events:none;
+      z-index:0;
     }
 
-    /* subtle grid */
+    /* "factory wireframe" feel on left (subtle) */
+    .factoryWire{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+      opacity:.22;
+      background:
+        linear-gradient(transparent 0 0),
+        repeating-linear-gradient(0deg, rgba(232,238,252,.10) 0 1px, transparent 1px 18px),
+        repeating-linear-gradient(90deg, rgba(232,238,252,.06) 0 1px, transparent 1px 22px);
+      mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0 52%, rgba(0,0,0,0) 78%);
+      -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0 52%, rgba(0,0,0,0) 78%);
+      filter: blur(.2px);
+    }
+
+    /* stock market background grid */
     .heroGrid{
       position:absolute;
       inset:0;
@@ -168,9 +156,10 @@
       background-size: 64px 64px;
       opacity:.12;
       pointer-events:none;
+      z-index:1;
     }
 
-    /* stock tickers text */
+    /* tickers / numbers */
     .tickersTop, .tickersBottom{
       position:absolute;
       left:0; right:0;
@@ -184,12 +173,12 @@
       white-space:nowrap;
       pointer-events:none;
       opacity:.9;
+      z-index:2;
       mix-blend-mode:screen;
     }
-    .tickersTop{ top:18px; padding-left:18px; }
-    .tickersBottom{ bottom:18px; padding-left:18px; }
+    .tickersTop{ top:22px; padding-left:18px; }
+    .tickersBottom{ bottom:22px; padding-left:18px; }
 
-    /* animated marquee */
     .marquee{
       display:inline-flex;
       gap:18px;
@@ -202,7 +191,7 @@
       to{ transform: translateX(-50%); }
     }
 
-    /* SVG stock lines overlay */
+    /* stock chart lines */
     .heroLines{
       position:absolute;
       inset:0;
@@ -210,23 +199,56 @@
       pointer-events:none;
       mix-blend-mode:screen;
       filter: drop-shadow(0 12px 28px rgba(0,0,0,.35));
+      z-index:2;
     }
 
+    /* hover zones */
+    .hoverZone{
+      position:absolute;
+      top:0;
+      bottom:0;
+      width:50%;
+      z-index:3;
+    }
+    .hoverZone.left{ left:0; }
+    .hoverZone.right{ right:0; }
+
+    .hoverLabel{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%) scale(.96);
+      font-size: clamp(34px, 5.6vw, 70px);
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .12s ease, transform .12s ease;
+      z-index:4;
+      text-align:center;
+      mix-blend-mode:screen;
+      text-shadow: 0 0 24px rgba(0,0,0,.35);
+    }
+    .hoverLabel.green{ color: var(--green); }
+    .hoverLabel.red{ color: var(--red); }
+
+    /* hero content */
     .container{
       width:min(var(--max), 100%);
       margin:0 auto;
       position:relative;
-      z-index:3;
+      z-index:5;
     }
 
     .kicker{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
       text-transform:uppercase;
       letter-spacing:.24em;
-      font-weight:800;
+      font-weight:900;
       font-size:14px;
-      color:rgba(232,238,252,.80);
-      margin-bottom:16px;
+      color:rgba(232,238,252,.84);
+      margin-bottom:14px;
     }
 
     .headline{
@@ -235,23 +257,32 @@
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:-.03em;
-      font-size: clamp(44px, 6.8vw, 92px);
+      font-size: clamp(44px, 6.2vw, 86px);
       text-shadow: 0 18px 55px rgba(0,0,0,.45);
     }
     .headline .thin{
       font-weight:800;
       letter-spacing:-.02em;
       opacity:.95;
+      margin-right:10px;
+      display:inline-block;
+    }
+    .nameGlow{
+      text-shadow:
+        0 0 18px rgba(0,255,65,.16),
+        0 0 26px rgba(0,255,65,.10),
+        0 18px 55px rgba(0,0,0,.45);
     }
 
     .sub{
       margin:18px 0 26px;
-      max-width: 820px;
+      max-width: 860px;
       font-size: 16px;
       line-height:1.65;
-      color: rgba(232,238,252,.80);
+      color: rgba(232,238,252,.82);
     }
 
+    /* Buttons */
     .btnRow{
       display:flex;
       gap:14px;
@@ -262,7 +293,7 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:12px 16px;
+      padding:13px 18px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
       background:rgba(12,18,34,.55);
@@ -271,26 +302,31 @@
       letter-spacing:.12em;
       text-transform:uppercase;
       font-size:12px;
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      transition: transform .08s ease, border-color .08s ease, background .08s ease;
       will-change: transform;
     }
-    .btn:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.22); }
-    .btnPrimary{
-      border-color: rgba(0,255,65,.30);
+    .btn:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.24); }
+    .btnPrimary{ border-color: rgba(0,255,65,.32); }
+    .btnPrimary:hover{ background: rgba(0,255,65,.08); border-color: rgba(0,255,65,.48); }
+    .btnSecondary{ border-color: rgba(244,0,9,.28); }
+    .btnSecondary:hover{ background: rgba(244,0,9,.08); border-color: rgba(244,0,9,.42); }
+
+    /* =========================
+       TYPEWRITER
+       ========================= */
+    .type{
+      display:inline;
+      border-right: 2px solid rgba(0,255,65,.7);
+      padding-right:4px;
+      animation: caret .9s steps(1) infinite;
     }
-    .btnPrimary:hover{
-      background: rgba(0,255,65,.08);
-      border-color: rgba(0,255,65,.45);
-    }
-    .btnSecondary{
-      border-color: rgba(244,0,9,.28);
-    }
-    .btnSecondary:hover{
-      background: rgba(244,0,9,.08);
-      border-color: rgba(244,0,9,.42);
+    @keyframes caret{
+      50%{ border-right-color: transparent; }
     }
 
-    /* ======= CUSTOM CURSOR ======= */
+    /* =========================
+       CUSTOM CURSOR
+       ========================= */
     .cursor{
       position:fixed;
       left:0; top:0;
@@ -321,8 +357,6 @@
       border-radius:2px;
       box-shadow: 0 0 10px rgba(0,255,65,.55);
     }
-
-    /* crosshair state */
     .cursor.crosshair .candlestick,
     .cursor.crosshair .wick{ opacity:0; }
     .cursor.crosshair::before,
@@ -338,19 +372,11 @@
     .cursor.crosshair::before{ width:28px; height:2px; }
     .cursor.crosshair::after{ width:2px; height:28px; }
 
-    /* reduce motion */
     @media (prefers-reduced-motion: reduce){
       body{ cursor:auto; }
       .cursor{ display:none; }
       .marquee{ animation:none; }
-    }
-
-    /* mobile nav wrap */
-    @media (max-width: 820px){
-      .nav{ padding:12px; }
-      .navLinks{ gap:8px; }
-      .navLinks a{ padding:8px 8px; font-size:11px; }
-      .sub{ font-size:15px; }
+      .type{ border-right:none; animation:none; }
     }
   </style>
 </head>
@@ -380,164 +406,163 @@
     </nav>
   </header>
 
-<!-- HOME -->
-<section class="hero" id="home">
-  <div class="heroSplit"></div>
-  <div class="heroGrid"></div>
+  <!-- HOME -->
+  <section class="hero" id="home">
+    <div class="heroSplit"></div>
+    <div class="factoryWire"></div>
+    <div class="heroGrid"></div>
 
-  <!-- Hover Zones -->
-  <div class="hoverZone left"></div>
-  <div class="hoverZone right"></div>
-  <div class="hoverLabel" id="hoverLabel"></div>
-
-  <!-- Existing hero content stays here -->
-</section>
-
-    <!-- top tickers -->
-    <div class="tickersTop">
+    <!-- tickers -->
+    <div class="tickersTop" aria-hidden="true">
       <div class="marquee">
-        <span>SPX 5,0XX</span><span>VIX 1X.XX</span><span>USD</span><span>YLD 4.XX</span><span>BETA 1.0X</span>
-        <span>SPX 5,0XX</span><span>VIX 1X.XX</span><span>USD</span><span>YLD 4.XX</span><span>BETA 1.0X</span>
+        <span>TSLA</span><span>AAPL</span><span>MSFT</span><span>NVDA</span><span>USD</span><span>SPX</span><span>VIX</span><span>YLD</span>
+        <span>TSLA</span><span>AAPL</span><span>MSFT</span><span>NVDA</span><span>USD</span><span>SPX</span><span>VIX</span><span>YLD</span>
       </div>
     </div>
 
-    <!-- stock lines -->
+    <!-- stock chart lines + labels -->
     <svg class="heroLines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,520 C120,440 220,600 340,520 C460,440 560,560 700,480 C840,400 980,580 1200,520"
-            fill="none" stroke="rgba(0,255,65,.65)" stroke-width="5"/>
-      <path d="M0,560 C160,520 220,660 360,600 C520,540 600,620 760,560 C920,500 1040,640 1200,610"
-            fill="none" stroke="rgba(244,0,9,.35)" stroke-width="5"/>
-      <text x="90" y="210" fill="rgba(232,238,252,.22)" font-size="22" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">VIX 1X.XX</text>
-      <text x="860" y="160" fill="rgba(232,238,252,.18)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">USD</text>
-      <text x="780" y="360" fill="rgba(232,238,252,.16)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">YLD 4.XX</text>
-      <text x="120" y="120" fill="rgba(232,238,252,.16)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">SPX 5,0XX</text>
-      <text x="920" y="520" fill="rgba(232,238,252,.14)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">GM +220BP</text>
+      <path
+        d="M0,520 C120,440 220,600 340,520 C460,440 560,560 700,480 C840,400 980,580 1200,520"
+        fill="none" stroke="rgba(0,255,65,.68)" stroke-width="5"/>
+      <path
+        d="M0,565 C160,520 220,660 360,610 C520,545 600,640 760,585 C920,520 1040,660 1200,635"
+        fill="none" stroke="rgba(244,0,9,.38)" stroke-width="5"/>
+      <text x="80" y="140" fill="rgba(232,238,252,.18)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">AAPL 1XX.XX</text>
+      <text x="880" y="160" fill="rgba(232,238,252,.16)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">TSLA 2XX.XX</text>
+      <text x="820" y="340" fill="rgba(232,238,252,.14)" font-size="16" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">USD</text>
+      <text x="140" y="250" fill="rgba(232,238,252,.14)" font-size="16" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">SPX</text>
+      <text x="910" y="520" fill="rgba(232,238,252,.12)" font-size="16" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">VIX</text>
     </svg>
 
-    <!-- bottom tickers -->
-    <div class="tickersBottom">
+    <div class="tickersBottom" aria-hidden="true">
       <div class="marquee">
-        <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7BP</span><span>VOL -3.1%</span><span>OIL +0.9%</span><span>FX -0.2%</span><span>EPS +12%</span><span>FCF +18%</span>
-        <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7BP</span><span>VOL -3.1%</span><span>OIL +0.9%</span><span>FX -0.2%</span><span>EPS +12%</span><span>FCF +18%</span>
+        <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7BP</span><span>VOL -3.1%</span><span>OIL +0.9%</span><span>FX -0.2%</span><span>FCF +18%</span><span>GM +220BP</span>
+        <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7BP</span><span>VOL -3.1%</span><span>OIL +0.9%</span><span>FX -0.2%</span><span>FCF +18%</span><span>GM +220BP</span>
       </div>
     </div>
 
+    <!-- Hover Zones + Label -->
+    <div class="hoverZone left" aria-hidden="true"></div>
+    <div class="hoverZone right" aria-hidden="true"></div>
+    <div class="hoverLabel" id="hoverLabel" aria-hidden="true"></div>
+
+    <!-- Center Content -->
     <div class="container">
       <div class="kicker" data-anim="in">HEY VISITOR, WELCOME.</div>
 
-      <h1 class="headline" data-anim="in">
+      <h1 class="headline nameGlow" data-anim="in">
         <span class="thin">I AM</span> HARISH REDDY<br/>
         GOLUGURI.
       </h1>
 
       <p class="sub" data-anim="in">
-        I'm a Finance nerd with markets &amp; finance in mind, biryani and coca cola in belly, wheels in feet.
+        <span class="type" id="typeText"></span>
       </p>
 
       <div class="btnRow" data-anim="in">
-        <!-- Put your PDF in repo root with EXACT name: Harish_Goluguri_Resume.pdf -->
-        <a class="btn btnPrimary" href="./Harish_Goluguri_Resume.pdf" download data-crosshair="true">Download Resume</a>
-        <a class="btn btnSecondary" href="#contact" data-crosshair="true">Contact</a>
+        <!-- Put PDF in repo root with EXACT name below -->
+        <a class="btn btnPrimary" href="./Harish_Goluguri_Resume.pdf" download data-crosshair="true">DOWNLOAD RESUME</a>
+        <a class="btn btnSecondary" href="#contact" data-crosshair="true">CONTACT ME</a>
       </div>
     </div>
   </section>
 
-  <!-- placeholders for later sections (we’ll build after home) -->
-  <section id="about" style="height:1px"></section>
-  <section id="experience" style="height:1px"></section>
-  <section id="skills" style="height:1px"></section>
-  <section id="education" style="height:1px"></section>
-  <section id="projects" style="height:1px"></section>
-  <section id="interests" style="height:1px"></section>
-  <section id="contact" style="height:1px"></section>
+  <!-- placeholders for later -->
+  <div id="about"></div>
+  <div id="experience"></div>
+  <div id="skills"></div>
+  <div id="education"></div>
+  <div id="projects"></div>
+  <div id="interests"></div>
+  <div id="contact"></div>
 
   <script>
-    // ====== Lenis smooth scroll (butter smooth) ======
+    // ===== Lenis smooth scroll (butter smooth) =====
     (function initLenis(){
-      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) return;
       if (!window.Lenis) return;
       const lenis = new Lenis({ smoothWheel: true, smoothTouch: false });
       function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
       requestAnimationFrame(raf);
     })();
 
-    // ====== Custom cursor (candlestick + crosshair on links) ======
+    // ===== Custom cursor (candlestick + crosshair on hover) =====
     (function initCursor(){
       const cursor = document.getElementById("cursor");
       if (!cursor) return;
 
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce){ cursor.style.display = "none"; document.body.style.cursor = "auto"; return; }
+      if (reduce) { cursor.style.display="none"; document.body.style.cursor="auto"; return; }
 
-      let x = window.innerWidth * 0.5, y = window.innerHeight * 0.5;
+      let x = window.innerWidth*0.5, y = window.innerHeight*0.5;
       let tx = x, ty = y;
 
-      window.addEventListener("mousemove", (e) => {
-        tx = e.clientX; ty = e.clientY;
-      }, { passive:true });
+      window.addEventListener("mousemove", (e)=>{ tx=e.clientX; ty=e.clientY; }, {passive:true});
 
       function tick(){
-        // smooth follow (no lag feel)
-        x += (tx - x) * 0.22;
-        y += (ty - y) * 0.22;
+        x += (tx - x)*0.22;
+        y += (ty - y)*0.22;
         cursor.style.transform = `translate(${x}px, ${y}px)`;
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
 
-      // crosshair on hover for interactive elements
-      const hoverTargets = document.querySelectorAll("[data-crosshair='true']");
-      hoverTargets.forEach(el => {
-        el.addEventListener("mouseenter", () => cursor.classList.add("crosshair"));
-        el.addEventListener("mouseleave", () => cursor.classList.remove("crosshair"));
+      document.querySelectorAll("[data-crosshair='true']").forEach(el=>{
+        el.addEventListener("mouseenter", ()=> cursor.classList.add("crosshair"));
+        el.addEventListener("mouseleave", ()=> cursor.classList.remove("crosshair"));
       });
     })();
 
-    // ====== Lightweight intro animation (GSAP) ======
+    // ===== Hover reveal text (left/right) =====
+    (function hoverReveal(){
+      const label = document.getElementById("hoverLabel");
+      const left = document.querySelector(".hoverZone.left");
+      const right = document.querySelector(".hoverZone.right");
+
+      function show(text, colorClass){
+        label.textContent = text;
+        label.className = "hoverLabel " + colorClass;
+        label.style.opacity = "1";
+        label.style.transform = "translate(-50%, -50%) scale(1)";
+      }
+      function hide(){
+        label.style.opacity = "0";
+        label.style.transform = "translate(-50%, -50%) scale(.96)";
+      }
+
+      left.addEventListener("mouseenter", ()=> show("CORPORATE FINANCE", "green"));
+      right.addEventListener("mouseenter", ()=> show("MARKETS", "red"));
+      left.addEventListener("mouseleave", hide);
+      right.addEventListener("mouseleave", hide);
+    })();
+
+    // ===== Typewriter text =====
+    (function typewriter(){
+      const el = document.getElementById("typeText");
+      const text = "I'M A FINANCE NERD WITH MARKETS & FINANCE IN MIND, BIRYANI & COCA COLA IN BELLY, WHEELS IN FEET.";
+      let i = 0;
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce){ el.textContent = text; return; }
+
+      function step(){
+        el.textContent = text.slice(0, i);
+        i++;
+        if (i <= text.length) setTimeout(step, 16); // fast, smooth
+      }
+      step();
+    })();
+
+    // ===== Lightweight GSAP intro =====
     (function intro(){
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduce) return;
       if (!window.gsap) return;
-
       const els = document.querySelectorAll("[data-anim='in']");
       gsap.set(els, { y: 12, opacity: 0 });
-      gsap.to(els, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.08,
-        delay: 0.15
-      });
+      gsap.to(els, { y: 0, opacity: 1, duration: 0.75, ease: "power3.out", stagger: 0.08, delay: 0.12 });
     })();
-    <script>
-  (function hoverReveal(){
-    const label = document.getElementById("hoverLabel");
-    const left = document.querySelector(".hoverZone.left");
-    const right = document.querySelector(".hoverZone.right");
-
-    left.addEventListener("mouseenter", () => {
-      label.textContent = "CORPORATE FINANCE";
-      label.className = "hoverLabel green";
-      label.style.opacity = "1";
-      label.style.transform = "translate(-50%, -50%) scale(1)";
-    });
-
-    right.addEventListener("mouseenter", () => {
-      label.textContent = "MARKETS";
-      label.className = "hoverLabel red";
-      label.style.opacity = "1";
-      label.style.transform = "translate(-50%, -50%) scale(1)";
-    });
-
-    [left, right].forEach(zone => {
-      zone.addEventListener("mouseleave", () => {
-        label.style.opacity = "0";
-        label.style.transform = "translate(-50%, -50%) scale(.96)";
-      });
-    });
-  })();
-</script>
   </script>
 </body>
 </html>
