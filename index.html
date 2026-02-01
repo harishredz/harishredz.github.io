@@ -10,12 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- IMPORTANT: keep these paths exactly like this in repo root -->
   <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-  <!-- Custom Cursor (candlestick -> crosshair on hover) -->
+  <!-- Custom Cursor -->
   <div class="cursor" id="cursor" aria-hidden="true">
     <div class="candle">
       <div class="wick"></div>
@@ -24,7 +23,7 @@
     <div class="crosshair"></div>
   </div>
 
-  <!-- Top Nav -->
+  <!-- NAV -->
   <header class="navWrap">
     <nav class="nav" aria-label="Primary">
       <a class="brand" href="#home">
@@ -60,22 +59,23 @@
     </div>
   </header>
 
-  <!-- Subtle “market tape” -->
+  <!-- TICKER (top) -->
   <div class="tickerTop" aria-hidden="true">
     <div class="tickerInner">
-      <span>SPX 5,0XX</span><span>VIX 1X.XX</span><span>USD</span><span>INR</span><span>CAD</span><span>GBP</span>
-      <span>EUR</span><span>JPY</span><span>AUD</span><span>$</span><span>$</span><span>$</span>
+      <span>$</span><span>₹</span><span>£</span><span>€</span>
+      <span>USD</span><span>INR</span><span>CAD</span><span>GBP</span><span>EUR</span><span>JPY</span>
+      <span>SPX 5,0XX</span><span>VIX 1X.XX</span><span>YLD 4.XX</span><span>BETA 1.0X</span>
       <span>TSLA</span><span>AAPL</span><span>NVDA</span><span>MSFT</span><span>AMZN</span><span>META</span>
-      <span>SPX 5,0XX</span><span>VIX 1X.XX</span><span>USD</span><span>INR</span><span>CAD</span><span>GBP</span>
-      <span>EUR</span><span>JPY</span><span>AUD</span><span>$</span><span>$</span><span>$</span>
+      <span>$</span><span>₹</span><span>£</span><span>€</span>
+      <span>USD</span><span>INR</span><span>CAD</span><span>GBP</span><span>EUR</span><span>JPY</span>
+      <span>SPX 5,0XX</span><span>VIX 1X.XX</span><span>YLD 4.XX</span><span>BETA 1.0X</span>
       <span>TSLA</span><span>AAPL</span><span>NVDA</span><span>MSFT</span><span>AMZN</span><span>META</span>
     </div>
   </div>
 
   <main>
-    <!-- PAGE 1: HERO -->
+    <!-- HERO -->
     <section class="section hero" id="home">
-      <!-- Background layers -->
       <div class="bgMarket" aria-hidden="true"></div>
       <div class="bgSplit" aria-hidden="true"></div>
       <div class="bgGrid" aria-hidden="true"></div>
@@ -89,10 +89,9 @@
 
       <div class="container heroInner">
         <div class="heroCopy">
-          <div class="kicker">HEY VISITOR, WELCOME.</div>
+          <div class="kicker kickerBig">HEY VISITOR, WELCOME.</div>
 
-          <!-- ONE LINE (no <br>) -->
-          <h1 class="heroTitle">
+          <h1 class="heroTitle oneLineName">
             I AM <span class="glow">HARISH</span> REDDY GOLUGURI<span class="dotEnd">.</span>
           </h1>
 
@@ -101,29 +100,32 @@
           </p>
 
           <div class="heroBtns">
-            <!-- IMPORTANT: match your actual PDF filename in repo root -->
             <a class="btn btnPrimary" href="./Harish_Goluguri_Resume.pdf" download>DOWNLOAD RESUME</a>
             <a class="btn btnGhost" href="#contact">CONTACT ME</a>
           </div>
 
-          <!-- REMOVED microBadges completely -->
+          <div class="heroMini">
+            Finance-first. Market-aware. Execution-obsessed.
+          </div>
         </div>
       </div>
 
-      <!-- Bottom tape -->
+      <!-- TICKER (bottom) -->
       <div class="tickerBottom" aria-hidden="true">
         <div class="tickerInner slow">
-          <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7bp</span><span>VOL -3.1%</span>
-          <span>OIL +0.9%</span><span>GOLD +0.6%</span><span>DXY -0.2%</span><span>$</span><span>$</span><span>$</span>
+          <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7bp</span><span>VOL -3.1%</span><span>OIL +0.9%</span>
+          <span>FX -0.2%</span><span>EPS +12%</span><span>FCF +18%</span><span>GM +220bp</span>
+          <span>$</span><span>₹</span><span>£</span><span>€</span>
           <span>USD</span><span>INR</span><span>CAD</span><span>GBP</span><span>EUR</span><span>JPY</span>
-          <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7bp</span><span>VOL -3.1%</span>
-          <span>OIL +0.9%</span><span>GOLD +0.6%</span><span>DXY -0.2%</span><span>$</span><span>$</span><span>$</span>
+          <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7bp</span><span>VOL -3.1%</span><span>OIL +0.9%</span>
+          <span>FX -0.2%</span><span>EPS +12%</span><span>FCF +18%</span><span>GM +220bp</span>
+          <span>$</span><span>₹</span><span>£</span><span>€</span>
           <span>USD</span><span>INR</span><span>CAD</span><span>GBP</span><span>EUR</span><span>JPY</span>
         </div>
       </div>
     </section>
 
-    <!-- PAGE 2: ABOUT -->
+    <!-- ABOUT -->
     <section class="section about" id="about">
       <div class="bgMarket faint" aria-hidden="true"></div>
       <div class="bgGrid" aria-hidden="true"></div>
@@ -141,9 +143,8 @@
               <span class="g">97%</span> accuracy.
             </div>
             <p class="cardBody">
-              I bring 5+ years of operational finance experience. I’ve managed $70M+ budgets and
-              unlocked $6M in liquidity on the ground. I don't just track costs; I crush inefficiencies
-              to drive margin growth.
+              I bring operational finance discipline: budgeting, forecasting, variance control, and liquidity execution.
+              I don’t just track costs — I crush inefficiencies to protect margin.
             </p>
             <div class="pillRow">
               <span class="pill">BUDGETING</span>
@@ -160,9 +161,8 @@
               <span class="g">Bloomberg</span> + <span class="g">CFI</span>
             </div>
             <p class="cardBody">
-              I am obsessed with the markets. My weekends are spent analyzing charts, testing volatility
-              models, and tracking macro trends. I bring a trader's instinct backed by institutional-grade
-              modeling (Series 65, Bloomberg, CFI).
+              I’m market-obsessed: equities, derivatives, macro signals, and valuation logic.
+              I blend trading intuition with institutional-grade modeling.
             </p>
             <div class="pillRow">
               <span class="pill">EQUITIES</span>
@@ -175,12 +175,12 @@
 
         <div class="powered">
           <span class="poweredLabel">POWERED BY</span>
-          <span class="poweredLine">Excel · Bloomberg Terminal · Power BI</span>
+          <span class="poweredLine">Excel · Bloomberg Terminal · Power BI · Python</span>
         </div>
       </div>
     </section>
 
-    <!-- PAGE 3: EXPERIENCE -->
+    <!-- EXPERIENCE -->
     <section class="section experience" id="experience">
       <div class="bgMarket faint" aria-hidden="true"></div>
       <div class="bgGrid" aria-hidden="true"></div>
@@ -214,8 +214,8 @@
               </div>
               <ul class="tBullets">
                 <li>Investigated ESG metrics across <b class="g">50+</b> U.S. firms using Bloomberg BQL.</li>
-                <li>Enhanced predictive model accuracy by <b class="g">18%</b>.</li>
-                <li>Curated <b class="g">7</b> interactive Power BI dashboards.</li>
+                <li>Improved model performance by <b class="g">18%</b> via feature engineering + validation.</li>
+                <li>Built <b class="g">7</b> Power BI dashboards for research reporting.</li>
               </ul>
             </div>
           </div>
@@ -228,9 +228,9 @@
                 <div class="tLoc">ATLANTA, GA</div>
               </div>
               <ul class="tBullets">
-                <li><b class="g">3%</b> alpha generated over benchmark.</li>
-                <li>Researched <b class="g">30+</b> U.S. equities weekly using Bloomberg & WSJ.</li>
-                <li>Drove <b class="g">$500K+</b> in weekly reallocations.</li>
+                <li><b class="g">3%</b> alpha generated vs benchmark.</li>
+                <li>Researched <b class="g">30+</b> U.S. equities weekly using Bloomberg + WSJ.</li>
+                <li>Drove <b class="g">$500K+</b> weekly reallocations.</li>
               </ul>
             </div>
           </div>
@@ -244,8 +244,8 @@
               </div>
               <ul class="tBullets">
                 <li>Managed <b class="g">$70M+</b> budgets with <b class="g">97%</b> forecast accuracy.</li>
-                <li>Unlocked <b class="g">$6M</b> liquidity via Monte Carlo cash flow simulations.</li>
-                <li>Cut reporting cycle times by <b class="g">65%</b> using Python automation.</li>
+                <li>Unlocked <b class="g">$6M</b> liquidity via cash-flow scenario modeling.</li>
+                <li>Cut reporting cycle time by <b class="g">65%</b> using automation workflows.</li>
               </ul>
             </div>
           </div>
@@ -258,9 +258,9 @@
                 <div class="tLoc">HYDERABAD, INDIA</div>
               </div>
               <ul class="tBullets">
-                <li>Designed IRR/NPV models for a <b class="g">$48M+</b> portfolio of <b class="g">27</b> builds.</li>
-                <li>Detected <b class="g">$2.1M</b> procurement leakage using Tableau.</li>
-                <li>Saved <b class="g">$1.7M</b> in interest expense via liquidity modeling.</li>
+                <li>Built IRR/NPV models for a <b class="g">$48M+</b> portfolio of <b class="g">27</b> builds.</li>
+                <li>Detected <b class="g">$2.1M</b> procurement leakage via analysis + controls.</li>
+                <li>Saved <b class="g">$1.7M</b> interest expense via liquidity optimization.</li>
               </ul>
             </div>
           </div>
@@ -273,8 +273,8 @@
                 <div class="tLoc">RAJAHMUNDRY, INDIA</div>
               </div>
               <ul class="tBullets">
-                <li>Saved <b class="g">$1.2M</b> by uncovering inefficiencies in <b class="g">25+</b> distribution centers.</li>
-                <li>Managed <b class="g">$3M+</b> in media production budgets.</li>
+                <li>Uncovered inefficiencies across <b class="g">25+</b> distribution centers.</li>
+                <li>Managed <b class="g">$3M+</b> production budgets.</li>
               </ul>
             </div>
           </div>
@@ -283,7 +283,7 @@
       </div>
     </section>
 
-    <!-- PAGE 4: SKILLS -->
+    <!-- SKILLS -->
     <section class="section skills" id="skills">
       <div class="bgMarket faint" aria-hidden="true"></div>
       <div class="bgGrid" aria-hidden="true"></div>
@@ -297,76 +297,70 @@
           <div class="hudCol">
             <div class="hudTitle">MARKET WEAPONS</div>
             <div class="hudItem">Bloomberg Terminal (4× Certified)</div>
-            <div class="hudItem">Derivatives & Equities</div>
-            <div class="hudItem">DCF / LBO Modeling</div>
-            <div class="hudItem">WRDS & FactSet</div>
+            <div class="hudItem">Equities · Derivatives · Macro</div>
+            <div class="hudItem">Valuation: DCF · Comp · Scenario</div>
+            <div class="hudItem">WRDS · FactSet</div>
           </div>
 
           <div class="hudCol">
             <div class="hudTitle">OPERATIONAL ENGINES</div>
-            <div class="hudItem">SAP S/4HANA (Budgeting)</div>
-            <div class="hudItem">Cost Accounting & Variance Analysis</div>
-            <div class="hudItem">GAAP / SOX Compliance</div>
+            <div class="hudItem">Budgeting · Forecasting · Variance</div>
+            <div class="hudItem">Cost Accounting · Controls</div>
+            <div class="hudItem">GAAP · SOX Awareness</div>
           </div>
 
           <div class="hudCol">
             <div class="hudTitle">TECHNICAL CORE</div>
             <div class="hudItem">Python</div>
-            <div class="hudItem">SQL & Power BI</div>
-            <div class="hudItem">Advanced Excel (VBA/Macros)</div>
+            <div class="hudItem">SQL · Power BI</div>
+            <div class="hudItem">Advanced Excel</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PAGE 5: EDUCATION -->
-   <section class="section education" id="education">
-  <div class="bgMarket faint" aria-hidden="true"></div>
-  <div class="bgGrid" aria-hidden="true"></div>
+    <!-- EDUCATION + AWARDS -->
+    <section class="section education" id="education">
+      <div class="bgMarket faint" aria-hidden="true"></div>
+      <div class="bgGrid" aria-hidden="true"></div>
 
-  <div class="container">
-    <div class="pageTag">EDUCATION</div>
-    <h2 class="huge">FOUNDATION.</h2>
+      <div class="container">
+        <div class="pageTag">EDUCATION</div>
+        <h2 class="huge">FOUNDATION.</h2>
 
-    <div class="grid2">
-      <article class="card">
-        <div class="cardLabel green">GEORGIA STATE UNIVERSITY</div>
-        <div class="bigStat">Master of Science in Finance</div>
-        <p class="cardBody">GPA: <b class="g">3.64</b></p>
-      </article>
+        <div class="grid2">
+          <article class="card">
+            <div class="cardLabel green">GEORGIA STATE UNIVERSITY</div>
+            <div class="bigStat">Master of Science in Finance</div>
+            <p class="cardBody">GPA: <b class="g">3.64</b></p>
+          </article>
 
-      <article class="card">
-        <div class="cardLabel red">BHARATH UNIVERSITY</div>
-        <div class="bigStat">Bachelor of Business Administration</div>
-        <p class="cardBody">GPA: <b class="g">8.04</b></p>
-      </article>
-    </div>
+          <article class="card">
+            <div class="cardLabel red">BHARATH UNIVERSITY</div>
+            <div class="bigStat">Bachelor of Business Administration</div>
+            <p class="cardBody">GPA: <b class="g">8.04</b></p>
+          </article>
+        </div>
 
-    <!-- AWARDS -->
-    <div class="awards">
-      <div class="awardsTag">AWARDS</div>
+        <article class="card awardsCard">
+          <div class="cardLabel green">AWARDS</div>
 
-      <div class="awardsGrid">
-        <article class="awardCard">
-          <div class="awardTitle">ALL ROUNDER 2025 — GEORGIA STATE UNIVERSITY</div>
-          <div class="awardDesc">
-            Presented for academic excellence, leadership, and campus contribution.
-          </div>
-        </article>
+          <div class="awardList">
+            <div class="awardItem">
+              <div class="awardTitle">ALL ROUNDER 2025 — GEORGIA STATE UNIVERSITY</div>
+              <div class="awardDesc">Presented for academic excellence, leadership, and campus contribution.</div>
+            </div>
 
-        <article class="awardCard">
-          <div class="awardTitle">EMPLOYEE OF THE YEAR 2023 — ANTLON</div>
-          <div class="awardDesc">
-            Recognized for top leadership and setting elite benchmarks in digital financial reporting.
+            <div class="awardItem">
+              <div class="awardTitle">EMPLOYEE OF THE YEAR 2023 — ANTLON</div>
+              <div class="awardDesc">Recognized for top leadership and setting elite benchmarks in digital financial reporting.</div>
+            </div>
           </div>
         </article>
       </div>
-    </div>
+    </section>
 
-  </div>
-</section>
-
-    <!-- PAGE 7: PROJECTS -->
+    <!-- PROJECTS -->
     <section class="section projects" id="projects">
       <div class="bgMarket faint" aria-hidden="true"></div>
       <div class="bgGrid" aria-hidden="true"></div>
@@ -376,27 +370,30 @@
         <h2 class="huge">ANALYSIS.</h2>
 
         <div class="grid2">
-          <article class="card">
-            <div class="bigStat">Valuation Engine (Coty Inc.)</div>
+          <article class="card proj projGreen">
+            <div class="projTitle">Valuation Engine (Coty Inc.)</div>
             <p class="cardBody">Full-scale DCF + Buy/Hold recommendation based on 5-year trends.</p>
           </article>
-          <article class="card">
-            <div class="bigStat">Decoding Volatility (Accenture)</div>
+
+          <article class="card proj projRed">
+            <div class="projTitle">Decoding Volatility (Accenture)</div>
             <p class="cardBody">Time-series analysis on 20+ years of equity data to predict price limits.</p>
           </article>
-          <article class="card">
-            <div class="bigStat">Future of Money (CBDC)</div>
-            <p class="cardBody">Award-winning blockchain research for U.S. Central Bank feasibility.</p>
+
+          <article class="card proj projRed">
+            <div class="projTitle">Future of Money (CBDC)</div>
+            <p class="cardBody">Blockchain feasibility research for U.S. Central Bank frameworks.</p>
           </article>
-          <article class="card">
-            <div class="bigStat">Churn Prediction (QNBT)</div>
+
+          <article class="card proj projGreen">
+            <div class="projTitle">Churn Prediction (QNBT)</div>
             <p class="cardBody">Predictive model using Python/Power BI to improve retention by 15%.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- PAGE 8: INTERESTS -->
+    <!-- INTERESTS -->
     <section class="section interests" id="interests">
       <div class="bgMarket faint" aria-hidden="true"></div>
       <div class="bgGrid" aria-hidden="true"></div>
@@ -404,27 +401,64 @@
       <div class="container">
         <div class="pageTag">INTERESTS</div>
         <h2 class="huge">FUEL &amp; FOCUS.</h2>
-        <p class="lead">The Obsessions: The Stock Market, The Economy, Finance, Tennis, Formula 1.</p>
 
-        <div class="grid2">
-          <article class="card">
-            <!-- made neutral label so both feel equal -->
-            <div class="cardLabel">THE FUEL</div>
-            <div class="bigStat">BIRYANI.</div>
-            <p class="cardBody">Always hunting for the best.</p>
+        <p class="lead">
+          Markets keep my mind sharp. Sport keeps my body sharp. Curiosity keeps everything moving.
+        </p>
+
+        <div class="interestGrid">
+          <article class="card interestCard">
+            <div class="interestTop">
+              <span class="interestIcon greenDot"></span>
+              <div class="interestName">THE STOCK MARKET</div>
+            </div>
+            <p class="cardBody">Price action, earnings, narratives, and execution — daily.</p>
           </article>
 
-          <article class="card">
-            <!-- made neutral label so both feel equal -->
-            <div class="cardLabel">FUN FACT</div>
-            <div class="bigStat">COCA-COLA.</div>
-            <p class="cardBody">I can finish a whole bottle without putting it down once.</p>
+          <article class="card interestCard">
+            <div class="interestTop">
+              <span class="interestIcon redDot"></span>
+              <div class="interestName">THE ECONOMY</div>
+            </div>
+            <p class="cardBody">Rates, inflation, growth cycles, and global risk signals.</p>
+          </article>
+
+          <article class="card interestCard">
+            <div class="interestTop">
+              <span class="interestIcon greenDot"></span>
+              <div class="interestName">FINANCE</div>
+            </div>
+            <p class="cardBody">Valuation, strategy, and decision-making under constraints.</p>
+          </article>
+
+          <article class="card interestCard">
+            <div class="interestTop">
+              <span class="interestIcon redDot"></span>
+              <div class="interestName">TENNIS</div>
+            </div>
+            <p class="cardBody">Footwork, endurance, and precision under pressure.</p>
+          </article>
+
+          <article class="card interestCard">
+            <div class="interestTop">
+              <span class="interestIcon redDot"></span>
+              <div class="interestName">FORMULA 1</div>
+            </div>
+            <p class="cardBody">Strategy, pit timing, risk control, and engineering excellence.</p>
+          </article>
+
+          <article class="card interestCard">
+            <div class="interestTop">
+              <span class="interestIcon greenDot"></span>
+              <div class="interestName">BIRYANI &amp; COCA-COLA</div>
+            </div>
+            <p class="cardBody">Simple joys — earned after the work is done.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- PAGE 9: CONTACT -->
+    <!-- CONTACT -->
     <section class="section contact" id="contact">
       <div class="bgMarket faint" aria-hidden="true"></div>
       <div class="bgGrid" aria-hidden="true"></div>
@@ -453,11 +487,8 @@
     </section>
   </main>
 
-  <!-- Lightweight libs (only 2, no video) -->
   <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-
-  <!-- IMPORTANT: keep this in repo root -->
   <script defer src="./app.js"></script>
 </body>
 </html>
