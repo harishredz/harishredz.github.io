@@ -15,6 +15,42 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.45/bundled/lenis.min.js"></script>
 
   <style>
+    /* ===== Hover Zones ===== */
+.hoverZone{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:50%;
+  z-index:4;
+}
+
+.hoverZone.left{ left:0; }
+.hoverZone.right{ right:0; }
+
+.hoverLabel{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) scale(.96);
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .12s ease, transform .12s ease;
+  z-index:5;
+  text-align:center;
+  mix-blend-mode:screen;
+}
+
+.hoverLabel.green{ color: var(--green); }
+.hoverLabel.red{ color: var(--red); }
+
+/* Faster button hover */
+.btn{
+  transition: transform .08s ease, background .08s ease, border-color .08s ease;
+}
     :root{
       --bg:#0a0f1c;
       --fg:#e8eefc;
@@ -344,10 +380,18 @@
     </nav>
   </header>
 
-  <!-- HOME -->
-  <section class="hero" id="home">
-    <div class="heroSplit"></div>
-    <div class="heroGrid"></div>
+<!-- HOME -->
+<section class="hero" id="home">
+  <div class="heroSplit"></div>
+  <div class="heroGrid"></div>
+
+  <!-- Hover Zones -->
+  <div class="hoverZone left"></div>
+  <div class="hoverZone right"></div>
+  <div class="hoverLabel" id="hoverLabel"></div>
+
+  <!-- Existing hero content stays here -->
+</section>
 
     <!-- top tickers -->
     <div class="tickersTop">
@@ -387,7 +431,7 @@
       </h1>
 
       <p class="sub" data-anim="in">
-        I'm a finance nerd with markets &amp; finance in mind, biryani and coca cola in belly, wheels in feet.
+        I'm a Finance nerd with markets &amp; finance in mind, biryani and coca cola in belly, wheels in feet.
       </p>
 
       <div class="btnRow" data-anim="in">
@@ -466,6 +510,34 @@
         delay: 0.15
       });
     })();
+    <script>
+  (function hoverReveal(){
+    const label = document.getElementById("hoverLabel");
+    const left = document.querySelector(".hoverZone.left");
+    const right = document.querySelector(".hoverZone.right");
+
+    left.addEventListener("mouseenter", () => {
+      label.textContent = "CORPORATE FINANCE";
+      label.className = "hoverLabel green";
+      label.style.opacity = "1";
+      label.style.transform = "translate(-50%, -50%) scale(1)";
+    });
+
+    right.addEventListener("mouseenter", () => {
+      label.textContent = "MARKETS";
+      label.className = "hoverLabel red";
+      label.style.opacity = "1";
+      label.style.transform = "translate(-50%, -50%) scale(1)";
+    });
+
+    [left, right].forEach(zone => {
+      zone.addEventListener("mouseleave", () => {
+        label.style.opacity = "0";
+        label.style.transform = "translate(-50%, -50%) scale(.96)";
+      });
+    });
+  })();
+</script>
   </script>
 </body>
 </html>
