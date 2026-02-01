@@ -41,7 +41,7 @@
     </h1>
 
     <p class="heroSub">
-      I'M A FINANCE NERD WITH MARKETS AND FINANCE IN MIND, BIRYANI AND COCA COLA IN BELLY, WHEELS IN FEET.
+      I'M A FINANCE NERD WITH MARKETS & FINANCE IN MIND, BIRYANI & COCA COLA IN BELLY, WHEELS IN FEET.
     </p>
 
     <div class="heroBtns">
@@ -50,3 +50,188 @@
     </div>
   </div>
 </section>
+/* =========================
+   HOME / HERO (PAGE 1)
+   ========================= */
+.hero{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:110px 16px 70px;
+}
+
+/* left green / right red split */
+.heroSplit{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(90deg,
+    rgba(0,255,65,.16) 0%,
+    rgba(0,255,65,.10) 48%,
+    rgba(244,0,9,.10) 52%,
+    rgba(244,0,9,.16) 100%);
+  opacity:.95;
+}
+
+/* overlay */
+.marketOverlay{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:1;
+}
+
+/* grid */
+.marketOverlay .grid{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity:.25;
+  mix-blend-mode: screen;
+}
+
+/* top tickers */
+.tickerRow{
+  position:absolute;
+  top:120px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1180px, calc(100% - 24px));
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  font-size:12px;
+  color: rgba(232,236,255,.35);
+}
+@media (max-width: 900px){
+  .tickerRow{ display:none; }
+}
+
+/* waves */
+.waves{
+  position:absolute;
+  inset:auto 0 0 0;
+  height:55vh;
+  width:100%;
+  opacity:.9;
+  filter: blur(.2px);
+}
+.waveG{
+  fill:none;
+  stroke: rgba(0,255,65,.65);
+  stroke-width:3.2;
+  filter: drop-shadow(0 0 10px rgba(0,255,65,.35));
+}
+.waveR{
+  fill:none;
+  stroke: rgba(244,0,9,.55);
+  stroke-width:3.2;
+  filter: drop-shadow(0 0 10px rgba(244,0,9,.25));
+}
+
+/* bottom tape */
+.bottomTape{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:28px;
+  width:min(1180px, calc(100% - 24px));
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:11px;
+  color: rgba(232,236,255,.28);
+}
+
+/* content */
+.heroInner{
+  position:relative;
+  z-index:5;
+  width:min(1180px, 100%);
+}
+
+.heroKicker{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-size:13px;
+  color: rgba(232,236,255,.65);
+  margin:0 0 14px;
+}
+
+/* headline */
+.heroTitle{
+  margin:0;
+  line-height:.92;
+  font-size: clamp(54px, 6.6vw, 96px);
+  font-weight:900;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+}
+
+/* spacing between name parts */
+.nameFirst{
+  display:inline-block;
+  margin-left:10px;
+  margin-right:14px;
+}
+.nameLast{
+  display:block;
+  margin-top:8px;
+}
+
+/* sub text */
+.heroSub{
+  margin:18px 0 0;
+  max-width: 760px;
+  color: rgba(232,236,255,.70);
+  font-size: 15px;
+  line-height:1.6;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+}
+
+/* buttons */
+.heroBtns{
+  display:flex;
+  gap:14px;
+  margin-top:22px;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 18px;
+  border-radius: 14px;
+  background: rgba(12,18,34,.65);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 18px 55px rgba(0,0,0,.35);
+  backdrop-filter: blur(12px);
+  color: rgba(232,236,255,.92);
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-size:12px;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.btn:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.22);
+  background: rgba(12,18,34,.78);
+}
+.btn.red{
+  border-color: rgba(244,0,9,.35);
+}
