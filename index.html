@@ -1,510 +1,319 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Harish Reddy Goluguri</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harish Reddy Goluguri</title>
 
-  <!-- Fonts (fast) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-  <!-- GSAP + Lenis (lightweight; no videos) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.45/bundled/lenis.min.js"></script>
+<style>
+:root{
+  --bg:#0a0f1c;
+  --fg:#e8eefc;
+  --muted:rgba(232,238,252,.65);
+  --green:#00ff41;
+  --red:#f40009;
+  --max:1200px;
+}
 
-  <style>
-    :root{
-      --bg:#0a0f1c;
-      --fg:#e8eefc;
-      --muted:rgba(232,238,252,.78);
-      --line:rgba(232,238,252,.12);
-      --green:#00ff41;
-      --red:#f40009;
-      --shadow:0 18px 55px rgba(0,0,0,.45);
-      --radius:22px;
-      --max:1180px;
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto;
+  background:var(--bg);
+  color:var(--fg);
+  overflow-x:hidden;
+}
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--fg);
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      overflow-x:hidden;
-      cursor:none; /* custom cursor */
-    }
-    a{ color:inherit; text-decoration:none; }
+/* ================= NAV ================= */
+.nav{
+  position:fixed;
+  top:16px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 32px);
+  max-width:var(--max);
+  background:rgba(12,18,34,.65);
+  backdrop-filter:blur(10px);
+  border-radius:14px;
+  padding:14px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:50;
+}
 
-    /* =========================
-       NAV
-       ========================= */
-    .nav{
-      position:fixed;
-      top:18px;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(var(--max), calc(100% - 24px));
-      z-index:50;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(12,18,34,.58);
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
-      padding:12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      letter-spacing:.02em;
-      white-space:nowrap;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--green);
-      box-shadow:0 0 18px rgba(0,255,65,.65);
-      flex:0 0 auto;
-    }
-    .navLinks{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .navLinks a{
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:rgba(232,238,252,.78);
-      padding:10px 10px;
-      border-radius:999px;
-      transition: background .12s ease, color .12s ease, transform .12s ease;
-    }
-    .navLinks a:hover{
-      color:rgba(232,238,252,.95);
-      background:rgba(255,255,255,.06);
-      transform:translateY(-1px);
-    }
-    @media (max-width: 920px){
-      .navLinks{ display:none; }
-      body{ cursor:auto; }
-      .cursor{ display:none; }
-    }
+.brand{
+  font-weight:800;
+  letter-spacing:.04em;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand::before{
+  content:"";
+  width:10px;height:10px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
+}
 
-    /* =========================
-       HOME / HERO
-       ========================= */
-    .hero{
-      min-height:100vh;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:120px 16px 70px;
-    }
+.nav a{
+  color:var(--fg);
+  text-decoration:none;
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-left:18px;
+  opacity:.8;
+}
+.nav a:hover{opacity:1}
 
-    /* split screen overlay: left green, right darker/red */
-    .heroSplit{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(90deg,
-        rgba(0,255,65,.18) 0%,
-        rgba(0,255,65,.10) 48%,
-        rgba(244,0,9,.06) 52%,
-        rgba(244,0,9,.14) 100%
-      );
-      opacity:.95;
-      pointer-events:none;
-      z-index:0;
-    }
+/* ================= MARKET BACKGROUND ================= */
+.marketBG{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
 
-    /* "factory wireframe" feel on left (subtle) */
-    .factoryWire{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      z-index:1;
-      opacity:.22;
-      background:
-        linear-gradient(transparent 0 0),
-        repeating-linear-gradient(0deg, rgba(232,238,252,.10) 0 1px, transparent 1px 18px),
-        repeating-linear-gradient(90deg, rgba(232,238,252,.06) 0 1px, transparent 1px 22px);
-      mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0 52%, rgba(0,0,0,0) 78%);
-      -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0 52%, rgba(0,0,0,0) 78%);
-      filter: blur(.2px);
-    }
+.marketBG svg{
+  width:100%;
+  height:100%;
+}
 
-    /* stock market background grid */
-    .heroGrid{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(rgba(232,238,252,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,238,252,.06) 1px, transparent 1px);
-      background-size: 64px 64px;
-      opacity:.12;
-      pointer-events:none;
-      z-index:1;
-    }
+/* ================= HERO ================= */
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+}
 
-    /* tickers / numbers */
-    .tickersTop, .tickersBottom{
-      position:absolute;
-      left:0; right:0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      text-transform:uppercase;
-      letter-spacing:.22em;
-      font-size:12px;
-      color:rgba(232,238,252,.55);
-      display:flex;
-      gap:16px;
-      white-space:nowrap;
-      pointer-events:none;
-      opacity:.9;
-      z-index:2;
-      mix-blend-mode:screen;
-    }
-    .tickersTop{ top:22px; padding-left:18px; }
-    .tickersBottom{ bottom:22px; padding-left:18px; }
+.heroSplit{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,
+    rgba(0,255,65,.18) 0%,
+    rgba(0,255,65,.08) 48%,
+    rgba(244,0,9,.10) 52%,
+    rgba(244,0,9,.18) 100%);
+}
 
-    .marquee{
-      display:inline-flex;
-      gap:18px;
-      animation: marquee 22s linear infinite;
-      will-change: transform;
-    }
-    .tickersBottom .marquee{ animation-duration: 28s; }
-    @keyframes marquee{
-      from{ transform: translateX(0); }
-      to{ transform: translateX(-50%); }
-    }
+.heroContent{
+  position:relative;
+  max-width:var(--max);
+  padding:140px 24px 80px;
+  margin:auto;
+  z-index:2;
+}
 
-    /* stock chart lines */
-    .heroLines{
-      position:absolute;
-      inset:0;
-      opacity:.95;
-      pointer-events:none;
-      mix-blend-mode:screen;
-      filter: drop-shadow(0 12px 28px rgba(0,0,0,.35));
-      z-index:2;
-    }
+.kicker{
+  font-size:14px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:16px;
+}
 
-    /* hero content */
-    .container{
-      width:min(var(--max), 100%);
-      margin:0 auto;
-      position:relative;
-      z-index:5;
-    }
+.hero h1{
+  font-size:clamp(42px,6vw,82px);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-.02em;
+}
 
-    .kicker{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
-      text-transform:uppercase;
-      letter-spacing:.24em;
-      font-weight:900;
-      font-size:14px;
-      color:rgba(232,238,252,.84);
-      margin-bottom:14px;
-    }
+.hero h1 span{
+  color:var(--green);
+}
 
-    .headline{
-      margin:0;
-      line-height:.92;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:-.03em;
-      font-size: clamp(44px, 6.2vw, 86px);
-      text-shadow: 0 18px 55px rgba(0,0,0,.45);
-    }
-    .headline .thin{
-      font-weight:800;
-      letter-spacing:-.02em;
-      opacity:.95;
-      margin-right:10px;
-      display:inline-block;
-    }
-    .nameGlow{
-      text-shadow:
-        0 0 18px rgba(0,255,65,.16),
-        0 0 26px rgba(0,255,65,.10),
-        0 18px 55px rgba(0,0,0,.45);
-    }
+.sub{
+  margin-top:20px;
+  max-width:720px;
+  font-size:18px;
+  color:var(--muted);
+  line-height:1.6;
+}
 
-    .sub{
-      margin:18px 0 26px;
-      max-width: 860px;
-      font-size: 16px;
-      line-height:1.65;
-      color: rgba(232,238,252,.82);
-    }
+.btnRow{
+  display:flex;
+  gap:14px;
+  margin-top:34px;
+}
 
-    /* Buttons */
-    .btnRow{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:13px 18px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(12,18,34,.55);
-      box-shadow: var(--shadow);
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:12px;
-      transition: transform .08s ease, border-color .08s ease, background .08s ease;
-      will-change: transform;
-    }
-    .btn:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.24); }
-    .btnPrimary{ border-color: rgba(0,255,65,.32); }
-    .btnPrimary:hover{ background: rgba(0,255,65,.08); border-color: rgba(0,255,65,.48); }
-    .btnSecondary{ border-color: rgba(244,0,9,.28); }
-    .btnSecondary:hover{ background: rgba(244,0,9,.08); border-color: rgba(244,0,9,.42); }
+.btn{
+  padding:14px 22px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(18,24,46,.6);
+  color:var(--fg);
+  cursor:pointer;
+  transition:.15s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{
+  border-color:var(--green);
+  box-shadow:0 0 18px rgba(0,255,65,.35);
+}
 
-    /* =========================
-       TYPEWRITER
-       ========================= */
-    .type{
-      display:inline;
-      border-right: 2px solid rgba(0,255,65,.7);
-      padding-right:4px;
-      animation: caret .9s steps(1) infinite;
-    }
-    @keyframes caret{
-      50%{ border-right-color: transparent; }
-    }
+/* ================= ABOUT ================= */
+.about{
+  position:relative;
+  padding:120px 24px 160px;
+}
 
-    /* =========================
-       CUSTOM CURSOR
-       ========================= */
-    .cursor{
-      position:fixed;
-      left:0; top:0;
-      width:34px; height:34px;
-      pointer-events:none;
-      z-index:9999;
-      transform: translate(-50%, -50%);
-      will-change: transform;
-      filter: drop-shadow(0 0 18px rgba(0,255,65,.55));
-    }
-    .candlestick{
-      position:absolute;
-      left:50%; top:50%;
-      transform: translate(-50%, -50%);
-      width:12px; height:20px;
-      border-radius:6px;
-      background: linear-gradient(180deg, rgba(0,255,65,1), rgba(0,255,65,.55));
-      box-shadow: 0 0 14px rgba(0,255,65,.55);
-    }
-    .wick{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform: translate(-50%, -50%);
-      width:2px;
-      height:30px;
-      background: rgba(0,255,65,.95);
-      border-radius:2px;
-      box-shadow: 0 0 10px rgba(0,255,65,.55);
-    }
-    .cursor.crosshair .candlestick,
-    .cursor.crosshair .wick{ opacity:0; }
-    .cursor.crosshair::before,
-    .cursor.crosshair::after{
-      content:"";
-      position:absolute;
-      left:50%; top:50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,255,65,.92);
-      border-radius:999px;
-      box-shadow: 0 0 16px rgba(0,255,65,.45);
-    }
-    .cursor.crosshair::before{ width:28px; height:2px; }
-    .cursor.crosshair::after{ width:2px; height:28px; }
+.aboutWrap{
+  max-width:var(--max);
+  margin:auto;
+  position:relative;
+  z-index:2;
+}
 
-    @media (prefers-reduced-motion: reduce){
-      body{ cursor:auto; }
-      .cursor{ display:none; }
-      .marquee{ animation:none; }
-      .type{ border-right:none; animation:none; }
-    }
-  </style>
+.about h2{
+  font-size:clamp(36px,5vw,64px);
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.about p{
+  max-width:780px;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.6;
+}
+
+.aboutGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:28px;
+  margin-top:48px;
+}
+
+.card{
+  background:rgba(12,18,34,.7);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:28px;
+}
+
+.card h3{
+  font-size:22px;
+  margin-bottom:14px;
+}
+
+.card b{color:var(--green)}
+
+.techFooter{
+  margin-top:60px;
+  text-align:center;
+  color:var(--muted);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-size:13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:700px){
+  .nav a{display:none}
+}
+</style>
 </head>
 
 <body>
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor" aria-hidden="true">
-    <div class="wick"></div>
-    <div class="candlestick"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="brand">HARISH REDDY GOLUGURI</div>
+  <div>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a>Experience</a>
+    <a>Skills</a>
+    <a>Education</a>
+    <a>Projects</a>
+    <a>Interests</a>
+    <a>Contact</a>
+  </div>
+</nav>
+
+<!-- HOME -->
+<section class="hero" id="home">
+  <div class="heroSplit"></div>
+
+  <!-- Market Background -->
+  <div class="marketBG">
+    <svg viewBox="0 0 1200 700" preserveAspectRatio="none">
+      <path d="M0,420 C180,380 260,480 420,430 C580,360 700,450 880,410 C1040,370 1120,480 1200,450"
+        fill="none" stroke="rgba(0,255,65,.35)" stroke-width="3"/>
+      <path d="M0,480 C200,450 300,540 480,500 C660,455 760,520 940,480 C1080,450 1140,540 1200,510"
+        fill="none" stroke="rgba(244,0,9,.30)" stroke-width="3"/>
+      <text x="90" y="120" fill="rgba(232,238,252,.12)">USD</text>
+      <text x="760" y="200" fill="rgba(232,238,252,.10)">AAPL</text>
+      <text x="520" y="360" fill="rgba(232,238,252,.10)">SPX</text>
+    </svg>
   </div>
 
-  <!-- NAV -->
-  <header class="nav">
-    <div class="brand">
-      <span class="dot"></span>
-      <span>HARISH REDDY GOLUGURI</span>
+  <div class="heroContent">
+    <div class="kicker">Hey visitor, welcome.</div>
+    <h1>I AM <span>HARISH REDDY</span><br/>GOLUGURI.</h1>
+    <p class="sub">
+      I'm a finance nerd with markets & finance in mind, biryani & coca cola in belly, wheels in feet.
+    </p>
+    <div class="btnRow">
+      <button class="btn primary">Download Resume</button>
+      <button class="btn">Contact Me</button>
     </div>
-    <nav class="navLinks">
-      <a href="#home" data-crosshair="true">Home</a>
-      <a href="#about" data-crosshair="true">About Me</a>
-      <a href="#experience" data-crosshair="true">Experience</a>
-      <a href="#skills" data-crosshair="true">Skills</a>
-      <a href="#education" data-crosshair="true">Education</a>
-      <a href="#projects" data-crosshair="true">Projects</a>
-      <a href="#interests" data-crosshair="true">Interests</a>
-      <a href="#contact" data-crosshair="true">Contact</a>
-    </nav>
-  </header>
+  </div>
+</section>
 
-  <!-- HOME -->
-  <section class="hero" id="home">
-    <div class="heroSplit"></div>
-    <div class="factoryWire"></div>
-    <div class="heroGrid"></div>
+<!-- ABOUT -->
+<section class="about" id="about">
 
-    <!-- tickers -->
-    <div class="tickersTop" aria-hidden="true">
-      <div class="marquee">
-        <span>TSLA</span><span>AAPL</span><span>MSFT</span><span>NVDA</span><span>USD</span><span>SPX</span><span>VIX</span><span>YLD</span>
-        <span>TSLA</span><span>AAPL</span><span>MSFT</span><span>NVDA</span><span>USD</span><span>SPX</span><span>VIX</span><span>YLD</span>
-      </div>
-    </div>
-
-    <!-- stock chart lines + labels -->
-    <svg class="heroLines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
-      <path
-        d="M0,520 C120,440 220,600 340,520 C460,440 560,560 700,480 C840,400 980,580 1200,520"
-        fill="none" stroke="rgba(0,255,65,.68)" stroke-width="5"/>
-      <path
-        d="M0,565 C160,520 220,660 360,610 C520,545 600,640 760,585 C920,520 1040,660 1200,635"
-        fill="none" stroke="rgba(244,0,9,.38)" stroke-width="5"/>
-      <text x="80" y="140" fill="rgba(232,238,252,.18)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">AAPL 1XX.XX</text>
-      <text x="880" y="160" fill="rgba(232,238,252,.16)" font-size="18" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">TSLA 2XX.XX</text>
-      <text x="820" y="340" fill="rgba(232,238,252,.14)" font-size="16" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">USD</text>
-      <text x="140" y="250" fill="rgba(232,238,252,.14)" font-size="16" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">SPX</text>
-      <text x="910" y="520" fill="rgba(232,238,252,.12)" font-size="16" font-family="ui-monospace, Menlo, monospace" letter-spacing="6">VIX</text>
+  <!-- CONTINUED MARKET BACKGROUND -->
+  <div class="marketBG">
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="none">
+      <path d="M0,380 C200,340 300,440 460,400 C620,360 740,430 900,390 C1040,360 1120,430 1200,400"
+        fill="none" stroke="rgba(0,255,65,.22)" stroke-width="3"/>
+      <text x="180" y="220" fill="rgba(232,238,252,.10)">TSLA</text>
+      <text x="820" y="300" fill="rgba(232,238,252,.08)">VIX</text>
     </svg>
+  </div>
 
-    <div class="tickersBottom" aria-hidden="true">
-      <div class="marquee">
-        <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7BP</span><span>VOL -3.1%</span><span>OIL +0.9%</span><span>FX -0.2%</span><span>FCF +18%</span><span>GM +220BP</span>
-        <span>NASDAQ +1.24%</span><span>SPX +0.68%</span><span>RATES -7BP</span><span>VOL -3.1%</span><span>OIL +0.9%</span><span>FX -0.2%</span><span>FCF +18%</span><span>GM +220BP</span>
+  <div class="aboutWrap">
+    <h2>THE HYBRID ENGINE.</h2>
+    <p>
+      Why choose between the ledger and the ticker? I thrive in both.
+    </p>
+
+    <div class="aboutGrid">
+      <div class="card">
+        <h3>Operational Rigor</h3>
+        <p>
+          I bring 5+ years of operational finance experience. I’ve managed <b>$70M+</b> budgets and unlocked
+          <b>$6M</b> in liquidity, achieving <b>97%</b> forecast accuracy to drive margin growth.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Market Intelligence</h3>
+        <p>
+          I am obsessed with the markets. Backed by Series 65 and Bloomberg, I apply institutional-grade
+          modeling to deep equity research, generating <b>3% alpha</b>.
+        </p>
       </div>
     </div>
 
-    <!-- Center Content -->
-    <div class="container">
-      <div class="kicker" data-anim="in">HEY VISITOR, WELCOME.</div>
-
-      <h1 class="headline nameGlow" data-anim="in">
-        <span class="thin">I AM</span> HARISH REDDY<br/>
-        GOLUGURI.
-      </h1>
-
-      <p class="sub" data-anim="in">
-        <span class="type" id="typeText"></span>
-      </p>
-
-      <div class="btnRow" data-anim="in">
-        <!-- Put PDF in repo root with EXACT name below -->
-        <a class="btn btnPrimary" href="./Harish_Goluguri_Resume.pdf" download data-crosshair="true">DOWNLOAD RESUME</a>
-        <a class="btn btnSecondary" href="#contact" data-crosshair="true">CONTACT ME</a>
-      </div>
+    <div class="techFooter">
+      Powered by Excel · Bloomberg Terminal · Power BI
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- placeholders for later -->
-  <div id="about"></div>
-  <div id="experience"></div>
-  <div id="skills"></div>
-  <div id="education"></div>
-  <div id="projects"></div>
-  <div id="interests"></div>
-  <div id="contact"></div>
-
-  <script>
-    // ===== Lenis smooth scroll (butter smooth) =====
-    (function initLenis(){
-      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) return;
-      if (!window.Lenis) return;
-      const lenis = new Lenis({ smoothWheel: true, smoothTouch: false });
-      function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-      requestAnimationFrame(raf);
-    })();
-
-    // ===== Custom cursor (candlestick + crosshair on hover) =====
-    (function initCursor(){
-      const cursor = document.getElementById("cursor");
-      if (!cursor) return;
-
-      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) { cursor.style.display="none"; document.body.style.cursor="auto"; return; }
-
-      let x = window.innerWidth*0.5, y = window.innerHeight*0.5;
-      let tx = x, ty = y;
-
-      window.addEventListener("mousemove", (e)=>{ tx=e.clientX; ty=e.clientY; }, {passive:true});
-
-      function tick(){
-        x += (tx - x)*0.22;
-        y += (ty - y)*0.22;
-        cursor.style.transform = `translate(${x}px, ${y}px)`;
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-
-      document.querySelectorAll("[data-crosshair='true']").forEach(el=>{
-        el.addEventListener("mouseenter", ()=> cursor.classList.add("crosshair"));
-        el.addEventListener("mouseleave", ()=> cursor.classList.remove("crosshair"));
-      });
-    })();
-
-
-    // ===== Typewriter text =====
-    (function typewriter(){
-      const el = document.getElementById("typeText");
-      const text = "I'M A FINANCE NERD WITH MARKETS & FINANCE IN MIND, BIRYANI & COCA COLA IN BELLY, WHEELS IN FEET.";
-      let i = 0;
-      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce){ el.textContent = text; return; }
-
-      function step(){
-        el.textContent = text.slice(0, i);
-        i++;
-        if (i <= text.length) setTimeout(step, 16); // fast, smooth
-      }
-      step();
-    })();
-
-    // ===== Lightweight GSAP intro =====
-    (function intro(){
-      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) return;
-      if (!window.gsap) return;
-      const els = document.querySelectorAll("[data-anim='in']");
-      gsap.set(els, { y: 12, opacity: 0 });
-      gsap.to(els, { y: 0, opacity: 1, duration: 0.75, ease: "power3.out", stagger: 0.08, delay: 0.12 });
-    })();
-  </script>
 </body>
 </html>
