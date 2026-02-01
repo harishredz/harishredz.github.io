@@ -1,576 +1,503 @@
-<section id="home" class="hero">
-  <!-- split background -->
-  <div class="heroSplit" aria-hidden="true"></div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harish Reddy Goluguri</title>
 
-  <!-- market graphics overlay -->
-  <div class="marketOverlay" aria-hidden="true">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0a0f1c;
+      --fg:#e8eefc;
+      --muted: rgba(232,238,252,.72);
+      --line: rgba(232,238,252,.12);
+
+      --green:#00ff41;
+      --red:#f40009;
+
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --radius: 22px;
+      --max: 1180px;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(var(--max), 92vw); margin:0 auto; }
+
+    /* ---------- GLOBAL MARKET BACKGROUND (runs across sections) ---------- */
+    .marketBG{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      background:
+        radial-gradient(1200px 700px at 20% 35%, rgba(0,255,65,.18), transparent 55%),
+        radial-gradient(1200px 700px at 78% 38%, rgba(244,0,9,.15), transparent 55%),
+        radial-gradient(900px 650px at 50% 88%, rgba(120,140,255,.10), transparent 55%),
+        linear-gradient(180deg, rgba(10,15,28,1) 0%, rgba(10,15,28,1) 100%);
+    }
+
+    .grid{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(rgba(232,238,252,.06) 1px, transparent 1px) 0 0 / 80px 80px,
+        linear-gradient(90deg, rgba(232,238,252,.06) 1px, transparent 1px) 0 0 / 80px 80px;
+      opacity:.28;
+      filter: blur(.2px);
+    }
+
+    /* subtle market numbers */
+    .hud{
+      position:absolute; inset:0;
+      opacity:.22;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:12px;
+      color: rgba(232,238,252,.70);
+    }
+    .hud span{
+      position:absolute;
+      white-space:nowrap;
+      opacity:.9;
+      filter: drop-shadow(0 12px 40px rgba(0,0,0,.6));
+    }
+    .hud .t1{ top:90px; left:30px; }
+    .hud .t2{ top:160px; left:33%; }
+    .hud .t3{ top:130px; right:40px; }
+    .hud .t4{ top:300px; right:18%; }
+    .hud .t5{ top:340px; left:12%; }
+    .hud .t6{ bottom:120px; left:12%; }
+    .hud .t7{ bottom:160px; right:15%; }
+    .hud .t8{ bottom:80px; right:28%; }
+
+    /* animated ticker */
+    .tickerTop{
+      position:absolute; left:0; right:0; top:0;
+      padding:10px 18px;
+      background: linear-gradient(90deg, rgba(0,255,65,.08), rgba(244,0,9,.08));
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      color: rgba(232,238,252,.82);
+    }
+    .tickerBottom{
+      position:absolute; left:0; right:0; bottom:0;
+      padding:10px 18px;
+      background: rgba(12,18,34,.35);
+      border-top: 1px solid rgba(255,255,255,.10);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:12px;
+      color: rgba(232,238,252,.80);
+      overflow:hidden;
+    }
+    .scrollRow{
+      display:inline-block;
+      white-space:nowrap;
+      animation: scroll 18s linear infinite;
+    }
+    @keyframes scroll{
+      from{ transform: translateX(0); }
+      to{ transform: translateX(-50%); }
+    }
+
+    /* chart waves */
+    .waves{
+      position:absolute; inset:0;
+      opacity:.62;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 18px 55px rgba(0,0,0,.55));
+    }
+
+    /* ---------- NAV ---------- */
+    .navWrap{
+      position:fixed; left:0; right:0; top:18px;
+      z-index:50;
+      pointer-events:none;
+    }
+    .nav{
+      pointer-events:auto;
+      width:min(1200px, 92vw);
+      margin:0 auto;
+      padding:12px 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(12,18,34,.60);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      box-shadow: var(--shadow);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--green);
+      box-shadow: 0 0 16px rgba(0,255,65,.55);
+      flex:0 0 auto;
+    }
+    .navLinks{
+      display:flex; gap:18px; align-items:center;
+      font-weight:800;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(232,238,252,.82);
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .navLinks a{ opacity:.9; }
+    .navLinks a:hover{ opacity:1; }
+
+    /* ---------- SECTIONS ---------- */
+    section{
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      padding: 120px 0 70px;
+    }
+
+    /* Hero split overlay */
+    .split{
+      position:absolute; inset:0;
+      background: linear-gradient(90deg,
+        rgba(0,255,65,.16) 0%,
+        rgba(0,255,65,.08) 48%,
+        rgba(244,0,9,.08) 52%,
+        rgba(244,0,9,.16) 100%);
+      opacity:.95;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .kicker{
+      font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+      font-weight:700;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:12px;
+      color: rgba(232,238,252,.80);
+      margin-bottom:14px;
+    }
+
+    /* Title typography: smaller for "Hello..." + massive for name */
+    .heroTitleSmall{
+      margin:0;
+      font-size: clamp(28px, 4.2vw, 56px);
+      font-weight:900;
+      letter-spacing:-.02em;
+      text-transform:uppercase;
+      line-height: .98;
+    }
+    .heroTitleBig{
+      margin: 10px 0 0;
+      font-size: clamp(44px, 6.8vw, 94px);
+      font-weight:900;
+      letter-spacing:-.03em;
+      text-transform:uppercase;
+      line-height: .92;
+    }
+    .nameRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px; /* spacing between words */
+      align-items:baseline;
+    }
+    .nameRow .first{
+      display:inline-block;
+    }
+    .nameRow .last{
+      display:inline-block;
+    }
+
+    .sub{
+      margin-top:18px;
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .btnRow{
+      margin-top: 28px;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(12,18,34,.60);
+      font-weight:900;
+      letter-spacing:.14em;
+      font-size:11px;
+      text-transform:uppercase;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); }
+    .btn.red{ border-color: rgba(244,0,9,.35); }
+    .btn.red:hover{ border-color: rgba(244,0,9,.55); }
+
+    /* About */
+    .sectionTitle{
+      margin:0;
+      font-size: clamp(44px, 6.2vw, 84px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: .95;
+    }
+    .label{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:12px;
+      color: rgba(232,238,252,.70);
+      margin-bottom: 14px;
+    }
+    .cards{
+      margin-top: 34px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .card{
+      position:relative;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(12,18,34,.55);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(800px 200px at 20% 0%, rgba(0,255,65,.12), transparent 55%),
+                  radial-gradient(800px 200px at 80% 0%, rgba(244,0,9,.10), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .monoTag{
+      position:relative;
+      z-index:1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:900;
+      font-size:12px;
+      color: rgba(232,238,252,.82);
+      margin-bottom: 10px;
+    }
+    .bigStat{
+      position:relative;
+      z-index:1;
+      margin:0 0 12px 0;
+      font-weight: 900;
+      letter-spacing:-.02em;
+      line-height: .98;
+      font-size: clamp(28px, 3.2vw, 44px);
+      text-transform:none;
+    }
+    .g{ color: var(--green); }
+    .r{ color: var(--red); }
+    .card p{
+      position:relative;
+      z-index:1;
+      margin:0;
+      color: rgba(232,238,252,.72);
+      line-height: 1.65;
+      font-size: 14px;
+      max-width: 60ch;
+    }
+    .pillRow{
+      position:relative;
+      z-index:1;
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(12,18,34,.35);
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:10px;
+      color: rgba(232,238,252,.78);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .navLinks{ display:none; }
+      .cards{ grid-template-columns: 1fr; }
+      section{ padding: 110px 0 60px; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .scrollRow{ animation:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background layer -->
+  <div class="marketBG" aria-hidden="true">
     <div class="grid"></div>
 
-    <div class="tickerRow">
-      <span>SPX 5,0XX</span>
-      <span>VIX 1X.XX</span>
-      <span>USD</span>
-      <span>YLD 4.XX</span>
-      <span>BETA 1.0X</span>
+    <div class="hud">
+      <span class="t1">SPX 5,0XX</span>
+      <span class="t2">VIX 1X.XX</span>
+      <span class="t3">USD</span>
+      <span class="t4">YLD 4.XX</span>
+      <span class="t5">BETA 1.0X</span>
+      <span class="t6">FCF +18%</span>
+      <span class="t7">GM +220bp</span>
+      <span class="t8">REV +9%</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="navWrap">
+    <div class="nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>HARISH REDDY GOLUGURI</span>
+      </div>
+      <div class="navLinks">
+        <a href="#home">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#projects">Projects</a>
+        <a href="#interests">Interests</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="split" aria-hidden="true"></div>
+
+    <div class="tickerTop" aria-hidden="true">
+      SPX 5,0XX  VIX 1X.XX  USD  YLD 4.XX  BETA 1.0X
     </div>
 
-    <svg class="waves" viewBox="0 0 1200 260" preserveAspectRatio="none">
-      <path class="waveG" d="M0,160 C120,120 240,220 360,180 C480,140 600,60 720,110 C840,160 960,210 1080,170 C1140,150 1170,135 1200,125 L1200,260 L0,260 Z"></path>
-      <path class="waveR" d="M0,210 C140,170 260,240 380,205 C520,160 640,120 760,150 C900,190 980,230 1100,215 C1150,208 1180,202 1200,198 L1200,260 L0,260 Z"></path>
+    <div class="tickerBottom" aria-hidden="true">
+      <div class="scrollRow">
+        NASDAQ +1.24%  SPX +0.68%  RATES -7bp  VOL -3.1%  OIL +0.9%  FX -0.2%  EPS +12%  FCF +18%  GM +220bp
+        &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+        NASDAQ +1.24%  SPX +0.68%  RATES -7bp  VOL -3.1%  OIL +0.9%  FX -0.2%  EPS +12%  FCF +18%  GM +220bp
+      </div>
+    </div>
+
+    <!-- chart waves -->
+    <svg class="waves" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,460 C160,420 220,540 360,500 C520,450 560,360 700,420 C860,490 920,610 1200,520"
+            fill="none" stroke="rgba(0,255,65,.55)" stroke-width="4"/>
+      <path d="M0,520 C160,480 220,600 360,560 C520,510 560,420 700,480 C860,550 920,650 1200,580"
+            fill="none" stroke="rgba(244,0,9,.35)" stroke-width="4"/>
     </svg>
 
-    <div class="bottomTape">
-      <span>NASDAQ +1.24%</span>
-      <span>SPX +0.68%</span>
-      <span>RATES -7bp</span>
-      <span>VOL -3.1%</span>
-      <span>OIL +0.9%</span>
-      <span>FX -0.2%</span>
-      <span>EPS +12%</span>
-      <span>FCF +18%</span>
-      <span>GM +220bp</span>
-    </div>
-  </div>
+    <div class="container">
+      <div class="kicker">HELLO FINANCE PEOPLE, WELCOME.</div>
 
-  <div class="heroInner">
-    <p class="heroKicker">HELLO FINANCE PEOPLE, WELCOME.</p>
+      <h1 class="heroTitleBig" style="margin-top:0;">
+        <span class="nameRow">
+          <span class="first">I AM HARISH REDDY</span>
+          <span class="last">GOLUGURI.</span>
+        </span>
+      </h1>
 
-    <h1 class="heroTitle">
-      I AM <span class="nameFirst">HARISH REDDY</span>
-      <span class="nameLast">GOLUGURI.</span>
-    </h1>
+      <p class="sub">
+        I’m a finance nerd with markets and corporate finance in mind — execution-first thinking backed by modeling discipline and market awareness.
+      </p>
 
-    <p class="heroSub">
-      I'M A FINANCE NERD WITH MARKETS & FINANCE IN MIND, BIRYANI & COCA COLA IN BELLY, WHEELS IN FEET.
-    </p>
-
-    <div class="heroBtns">
-      <a class="btn" href="./Harish_Goluguri_Resume.pdf" download>DOWNLOAD RESUME</a>
-      <a class="btn red" href="#contact">CONTACT ME</a>
-    </div>
-  </div>
-</section>
-/* =========================
-   HOME / HERO (PAGE 1)
-   ========================= */
-.hero{
-  min-height:100vh;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:110px 16px 70px;
-}
-
-/* left green / right red split */
-.heroSplit{
-  position:absolute;
-  inset:0;
-  background: linear-gradient(90deg,
-    rgba(0,255,65,.16) 0%,
-    rgba(0,255,65,.10) 48%,
-    rgba(244,0,9,.10) 52%,
-    rgba(244,0,9,.16) 100%);
-  opacity:.95;
-}
-
-/* overlay */
-.marketOverlay{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  opacity:1;
-}
-
-/* grid */
-.marketOverlay .grid{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity:.25;
-  mix-blend-mode: screen;
-}
-
-/* top tickers */
-.tickerRow{
-  position:absolute;
-  top:120px;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(1180px, calc(100% - 24px));
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  text-transform:uppercase;
-  letter-spacing:.22em;
-  font-size:12px;
-  color: rgba(232,236,255,.35);
-}
-@media (max-width: 900px){
-  .tickerRow{ display:none; }
-}
-
-/* waves */
-.waves{
-  position:absolute;
-  inset:auto 0 0 0;
-  height:55vh;
-  width:100%;
-  opacity:.9;
-  filter: blur(.2px);
-}
-.waveG{
-  fill:none;
-  stroke: rgba(0,255,65,.65);
-  stroke-width:3.2;
-  filter: drop-shadow(0 0 10px rgba(0,255,65,.35));
-}
-.waveR{
-  fill:none;
-  stroke: rgba(244,0,9,.55);
-  stroke-width:3.2;
-  filter: drop-shadow(0 0 10px rgba(244,0,9,.25));
-}
-
-/* bottom tape */
-.bottomTape{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:28px;
-  width:min(1180px, calc(100% - 24px));
-  display:flex;
-  gap:18px;
-  flex-wrap:wrap;
-  justify-content:center;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  font-size:11px;
-  color: rgba(232,236,255,.28);
-}
-
-/* content */
-.heroInner{
-  position:relative;
-  z-index:5;
-  width:min(1180px, 100%);
-}
-
-.heroKicker{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  text-transform:uppercase;
-  letter-spacing:.28em;
-  font-size:13px;
-  color: rgba(232,236,255,.65);
-  margin:0 0 14px;
-}
-
-/* headline */
-.heroTitle{
-  margin:0;
-  line-height:.92;
-  font-size: clamp(54px, 6.6vw, 96px);
-  font-weight:900;
-  letter-spacing:-.02em;
-  text-transform:uppercase;
-}
-
-/* spacing between name parts */
-.nameFirst{
-  display:inline-block;
-  margin-left:10px;
-  margin-right:14px;
-}
-.nameLast{
-  display:block;
-  margin-top:8px;
-}
-
-/* sub text */
-.heroSub{
-  margin:18px 0 0;
-  max-width: 760px;
-  color: rgba(232,236,255,.70);
-  font-size: 15px;
-  line-height:1.6;
-  letter-spacing:.02em;
-  text-transform:uppercase;
-}
-
-/* buttons */
-.heroBtns{
-  display:flex;
-  gap:14px;
-  margin-top:22px;
-  flex-wrap:wrap;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:12px 18px;
-  border-radius: 14px;
-  background: rgba(12,18,34,.65);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow: 0 18px 55px rgba(0,0,0,.35);
-  backdrop-filter: blur(12px);
-  color: rgba(232,236,255,.92);
-  font-weight:800;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  font-size:12px;
-  transition: transform .15s ease, border-color .15s ease, background .15s ease;
-}
-.btn:hover{
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,.22);
-  background: rgba(12,18,34,.78);
-}
-.btn.red{
-  border-color: rgba(244,0,9,.35);
-}
-<section id="about" class="about">
-  <div class="wrap">
-    <p class="sectionKicker">ABOUT ME</p>
-    <h2 class="sectionTitle">THE HYBRID ADVANTAGE.</h2>
-    <p class="sectionLead">
-      I operate where operational finance meets capital markets — execution-first thinking, backed by modeling discipline and market awareness.
-    </p>
-
-    <div class="aboutGrid">
-      <div class="aboutCard">
-        <div class="aboutTag green">OPERATIONAL RIGOR</div>
-        <div class="aboutStat"><span class="g">$70M+</span> budgets. <span class="g">97%</span> accuracy.</div>
-        <p class="aboutText">
-          I build planning systems that hold up in the real world — budgeting, forecasting, variance control, and liquidity decisions that protect margin and cash.
-        </p>
-        <div class="pillRow">
-          <span class="pill">Budgeting</span>
-          <span class="pill">Forecasting</span>
-          <span class="pill">Liquidity</span>
-        </div>
+      <div class="btnRow">
+        <a class="btn" href="./Harish_Goluguri_Resume.pdf" download>DOWNLOAD RESUME</a>
+        <a class="btn red" href="#contact">CONTACT ME</a>
       </div>
+    </div>
+  </section>
 
-      <div class="aboutCard">
-        <div class="aboutTag red">MARKET INTELLIGENCE</div>
-        <div class="aboutStat"><span class="g">Series 65</span> + <span class="g">Bloomberg</span> + <span class="g">CFI</span></div>
-        <p class="aboutText">
-          I track markets, macro signals, and price action — translating volatility and fundamentals into decisions, not opinions.
-        </p>
-        <div class="pillRow">
-          <span class="pill">Equities</span>
-          <span class="pill">Derivatives</span>
-          <span class="pill">Valuation</span>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="label">ABOUT ME</div>
+      <h2 class="sectionTitle">THE HYBRID ADVANTAGE.</h2>
+      <p class="sub">
+        I operate where operational finance meets capital markets — translating fundamentals, variance drivers, and price action into decisions, not opinions.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="monoTag"><span class="g">OPERATIONAL</span> RIGOR</div>
+          <div class="bigStat"><span class="g">$70M+</span> budgets. <span class="g">97%</span> accuracy.</div>
+          <p>
+            I build planning systems that hold up in the real world — budgeting, forecasting, variance control, and liquidity decisions that protect margin and cash.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Budgeting</span>
+            <span class="pill">Forecasting</span>
+            <span class="pill">Liquidity</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="monoTag"><span class="r">MARKET</span> INTELLIGENCE</div>
+          <div class="bigStat"><span class="g">Series 65</span> + <span class="g">Bloomberg</span> + <span class="g">CFI</span></div>
+          <p>
+            I track markets, macro signals, and price action — connecting volatility and fundamentals to risk-aware decisions with a clean, investor-grade mindset.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Equities</span>
+            <span class="pill">Derivatives</span>
+            <span class="pill">Valuation</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-/* =========================
-   ABOUT (PAGE 2)
-   ========================= */
+  </section>
 
-.wrap{
-  width:min(1180px, calc(100% - 24px));
-  margin:0 auto;
-  position:relative;
-  z-index:2;
-}
-
-.about{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  padding:110px 16px 70px;
-  position:relative;
-}
-
-.sectionKicker{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  text-transform:uppercase;
-  letter-spacing:.28em;
-  font-size:13px;
-  color: rgba(232,236,255,.60);
-  margin:0 0 14px;
-}
-
-.sectionTitle{
-  margin:0;
-  line-height:.95;
-  font-size: clamp(44px, 5.6vw, 84px);
-  font-weight:900;
-  letter-spacing:-.02em;
-  text-transform:uppercase;
-}
-
-.sectionLead{
-  margin:14px 0 0;
-  max-width: 860px;
-  color: rgba(232,236,255,.70);
-  font-size: 16px;
-  line-height:1.7;
-}
-
-.aboutGrid{
-  margin-top:26px;
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:16px;
-}
-
-.aboutCard{
-  border-radius: 22px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(12,18,34,.55);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 18px 55px rgba(0,0,0,.35);
-  padding: 20px;
-  position:relative;
-  overflow:hidden;
-}
-
-.aboutCard::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(520px 260px at 18% 25%, rgba(0,255,65,.14), transparent 60%),
-    radial-gradient(520px 260px at 82% 70%, rgba(244,0,9,.12), transparent 62%);
-  opacity:.6;
-  pointer-events:none;
-}
-
-.aboutTag{
-  position:relative;
-  z-index:1;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  text-transform:uppercase;
-  letter-spacing:.22em;
-  font-size:12px;
-  margin-bottom:12px;
-  font-weight:800;
-}
-
-.aboutTag.green{ color: rgba(0,255,65,.95); }
-.aboutTag.red{ color: rgba(244,0,9,.90); }
-
-.aboutStat{
-  position:relative;
-  z-index:1;
-  font-weight:900;
-  font-size: clamp(28px, 3.2vw, 48px);
-  line-height:1.06;
-  letter-spacing:-.01em;
-  margin: 0 0 10px;
-}
-
-.aboutText{
-  position:relative;
-  z-index:1;
-  margin:0;
-  color: rgba(232,236,255,.72);
-  line-height:1.7;
-  font-size: 15px;
-}
-
-.pillRow{
-  position:relative;
-  z-index:1;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:14px;
-}
-
-.pill{
-  font-size:11px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  padding: 8px 10px;
-  border-radius: 999px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(12,18,34,.40);
-  color: rgba(232,236,255,.78);
-}
-
-.g{ color: rgba(0,255,65,.95); }
-
-@media (max-width: 980px){
-  .aboutGrid{ grid-template-columns: 1fr; }
-}
-<section id="experience" class="experience">
-  <div class="wrap">
-    <p class="sectionKicker">EXPERIENCE</p>
-    <h2 class="sectionTitle">WHAT DID I DO?</h2>
-    <p class="sectionLead">
-      High-impact work across investor strategy, research, portfolio decisions, and operational finance.
-    </p>
-
-    <div class="expList">
-
-      <div class="expCard">
-        <div class="expTop">
-          <div class="expRole">Fact Finders Pro — Investor Relations & Strategy Analyst</div>
-          <div class="expLoc">Seattle, WA</div>
-        </div>
-        <ul class="expBullets">
-          <li><b>$1.5M</b> capital roadmap structured.</li>
-          <li>Engineered VC & Berkus valuation models to stress-test pricing tiers.</li>
-          <li>Targeted <b>$10M–$12M</b> valuation via sensitivity analysis.</li>
-        </ul>
-      </div>
-
-      <div class="expCard">
-        <div class="expTop">
-          <div class="expRole">Georgia State University — Graduate Research Assistant</div>
-          <div class="expLoc">Atlanta, GA</div>
-        </div>
-        <ul class="expBullets">
-          <li>Investigated ESG metrics across <b>50+</b> U.S. firms using Bloomberg BQL.</li>
-          <li>Enhanced predictive model accuracy by <b>18%</b>.</li>
-          <li>Curated <b>7</b> interactive Power BI dashboards.</li>
-        </ul>
-      </div>
-
-      <div class="expCard">
-        <div class="expTop">
-          <div class="expRole">Portfolio Management Group — Investment Analyst</div>
-          <div class="expLoc">Atlanta, GA</div>
-        </div>
-        <ul class="expBullets">
-          <li><b>3%</b> alpha generated over benchmark.</li>
-          <li>Researched <b>30+</b> U.S. equities weekly using Bloomberg & WSJ.</li>
-          <li>Drove <b>$500K+</b> in weekly reallocations.</li>
-        </ul>
-      </div>
-
-      <div class="expCard">
-        <div class="expTop">
-          <div class="expRole">ANTLON — Senior Financial Analyst</div>
-          <div class="expLoc">Hyderabad, India</div>
-        </div>
-        <ul class="expBullets">
-          <li>Managed <b>$70M+</b> budgets with <b>97%</b> forecast accuracy.</li>
-          <li>Unlocked <b>$6M</b> liquidity via Monte Carlo cash flow simulations.</li>
-          <li>Cut reporting cycle time by <b>65%</b> using Python automation.</li>
-        </ul>
-      </div>
-
-      <div class="expCard">
-        <div class="expTop">
-          <div class="expRole">ANTLON — Financial Analyst</div>
-          <div class="expLoc">Hyderabad, India</div>
-        </div>
-        <ul class="expBullets">
-          <li>Designed IRR/NPV models for a <b>$48M+</b> portfolio of 27 builds.</li>
-          <li>Detected <b>$2.1M</b> in procurement leakage using Tableau.</li>
-          <li>Saved <b>$1.7M</b> in interest expense via liquidity modeling.</li>
-        </ul>
-      </div>
-
-      <div class="expCard">
-        <div class="expTop">
-          <div class="expRole">Neti Amaravathi — Finance Intern</div>
-          <div class="expLoc">Rajahmundry, India</div>
-        </div>
-        <ul class="expBullets">
-          <li>Saved <b>$1.2M</b> by uncovering inefficiencies in 25+ distribution centers.</li>
-          <li>Managed <b>$3M+</b> in media production budgets.</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-/* =========================
-   EXPERIENCE (PAGE 3)
-   ========================= */
-.experience{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  padding:110px 16px 70px;
-  position:relative;
-}
-
-.expList{
-  margin-top: 26px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-
-.expCard{
-  border-radius: 22px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(12,18,34,.55);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 18px 55px rgba(0,0,0,.35);
-  padding: 18px 18px 18px;
-  position:relative;
-  overflow:hidden;
-}
-
-.expCard::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(520px 260px at 18% 25%, rgba(0,255,65,.12), transparent 60%),
-    radial-gradient(520px 260px at 82% 70%, rgba(244,0,9,.10), transparent 62%);
-  opacity:.6;
-  pointer-events:none;
-}
-
-.expTop{
-  position:relative;
-  z-index:1;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:14px;
-  flex-wrap:wrap;
-  margin-bottom:10px;
-}
-
-.expRole{
-  font-weight:900;
-  font-size:16px;
-  letter-spacing:.01em;
-}
-
-.expLoc{
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  font-size:12px;
-  color: rgba(232,236,255,.60);
-  white-space:nowrap;
-  padding-top:2px;
-}
-
-.expBullets{
-  position:relative;
-  z-index:1;
-  margin: 0;
-  padding-left: 18px;
-  color: rgba(232,236,255,.74);
-  line-height:1.7;
-}
-
-.expBullets li{ margin:6px 0; }
-
-.expBullets b{
-  color: rgba(0,255,65,.95);
-  font-weight:900;
-}
-
-@media (max-width: 980px){
-  .expRole{ font-size:15px; }
-}
+  <!-- placeholders so nav doesn’t feel broken (we’ll fill later) -->
+  <div id="experience"></div>
+  <div id="skills"></div>
+  <div id="education"></div>
+  <div id="certifications"></div>
+  <div id="projects"></div>
+  <div id="interests"></div>
+  <div id="contact"></div>
+</body>
+</html>
