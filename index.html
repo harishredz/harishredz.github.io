@@ -6,7 +6,7 @@
   <title>Harish Reddy Goluguri — Portfolio</title>
   <meta name="description" content="Harish Reddy Goluguri — About, Experience, Skills." />
 
-  <!-- Fast fonts -->
+  <!-- Fonts: hero intro uses Sora, name uses Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Sora:wght@700;800&display=swap" rel="stylesheet">
@@ -39,7 +39,6 @@
     a{ color:inherit; text-decoration:none; }
     button, input, textarea{ font:inherit; color:inherit; }
 
-    /* smooth sections */
     .snap{
       height:100vh;
       overflow:auto;
@@ -62,7 +61,7 @@
       z-index:3;
     }
 
-    /* nav */
+    /* NAV */
     .nav{
       position:fixed;
       top:18px; left:0; right:0;
@@ -91,6 +90,7 @@
       font-weight:900;
       letter-spacing:-0.02em;
       white-space:nowrap;
+      text-transform:uppercase;
     }
     .brandDot{
       width:10px;height:10px;border-radius:99px;
@@ -126,7 +126,7 @@
       .navLinks{ display:none; }
     }
 
-    /* typography */
+    /* TEXT */
     .label{
       text-transform:uppercase;
       letter-spacing:.26em;
@@ -142,16 +142,27 @@
       font-size: clamp(46px, 6.2vw, 98px);
       margin: 0 0 10px;
     }
-    .greet{
-      font-family:"Sora", system-ui;
+
+    /* HERO: smaller greeting + different font */
+    .heroIntro{
+      font-family: "Sora", system-ui;
       font-weight:800;
-      letter-spacing:-0.03em;
+      letter-spacing:-0.02em;
+      font-size: clamp(22px, 2.2vw, 40px);
+      line-height:1.05;
+      margin: 0 0 10px;
+      opacity:.95;
     }
-    .name{
+    .heroName{
       font-family:"Inter", system-ui;
       font-weight:950;
       letter-spacing:-0.06em;
+      font-size: clamp(46px, 6.0vw, 92px);
+      line-height:.90;
+      margin:0 0 10px;
+      word-spacing: 0.12em; /* fixes cramped spacing */
     }
+
     .sub{
       font-size: clamp(16px, 1.35vw, 20px);
       color: var(--muted);
@@ -165,7 +176,7 @@
       font-size: 12px;
     }
 
-    /* buttons */
+    /* BUTTONS */
     .btnRow{ display:flex; gap:14px; flex-wrap:wrap; margin-top:22px; }
     .btn{
       display:inline-flex;
@@ -195,7 +206,7 @@
     }
     .btn small{ opacity:.75; font-weight:900; letter-spacing:.14em; }
 
-    /* layout */
+    /* LAYOUT */
     .grid2{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -236,7 +247,7 @@
       text-transform:uppercase;
     }
 
-    /* HERO split background: left green tint, right red tint */
+    /* HERO split background */
     .heroBg{
       position:absolute; inset:0;
       display:grid; grid-template-columns: 1fr 1fr;
@@ -254,7 +265,7 @@
         linear-gradient(180deg, rgba(244,0,9,.06), transparent);
     }
 
-    /* Stock background overlay (SVG + scrolling tape) */
+    /* Stock background (HOME only) */
     .stockLayer{
       position:absolute; inset:0;
       z-index:2;
@@ -293,6 +304,17 @@
     @keyframes tape{
       from{ transform: translateX(0); }
       to{ transform: translateX(-50%); }
+    }
+
+    /* remove weird overlays on other sections */
+    .cleanBg:before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(900px 480px at 30% 20%, rgba(0,255,65,.06), transparent 60%),
+                  radial-gradient(900px 480px at 75% 30%, rgba(244,0,9,.05), transparent 60%);
+      opacity:.55;
+      z-index:1;
+      pointer-events:none;
     }
 
     /* hover label */
@@ -364,7 +386,7 @@
     .bullets{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.55; }
     .bullets li{ margin: 6px 0; }
 
-    /* HUD grid (skills) */
+    /* HUD grid (skills) + icons */
     .hud{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -374,13 +396,32 @@
     @media (max-width: 980px){
       .hud{ grid-template-columns: 1fr; }
     }
+    .hudTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
     .hud .card h3{
-      margin: 0 0 10px;
+      margin:0;
       font-size: 14px;
       letter-spacing:.18em;
       text-transform: uppercase;
       font-weight: 950;
     }
+    .iconRow{
+      display:flex; gap:10px; flex-wrap:wrap; opacity:.9;
+    }
+    .ic{
+      width:18px; height:18px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid rgba(232,238,252,.14);
+      border-radius:8px;
+      background: rgba(255,255,255,.02);
+    }
+    .ic svg{ width:14px; height:14px; }
+
     .hud ul{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.55; }
     .hud li{ margin:6px 0; }
 
@@ -402,7 +443,6 @@
       filter: drop-shadow(0 0 12px rgba(0,255,65,.45));
     }
 
-    /* reduce motion */
     @media (prefers-reduced-motion: reduce){
       *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
       body{ cursor:auto; }
@@ -426,7 +466,6 @@
         <a href="#skills" data-crosshair="true">Skills</a>
         <a href="#education" data-crosshair="true">Education</a>
         <a href="#certifications" data-crosshair="true">Certifications</a>
-        <a href="#awards" data-crosshair="true">Awards</a>
         <a href="#projects" data-crosshair="true">Projects</a>
         <a href="#interests" data-crosshair="true">Interests</a>
         <a href="#contact" data-crosshair="true">Contact</a>
@@ -498,11 +537,8 @@
       </div>
 
       <div class="container">
-        <h1 class="huge">
-          <span class="greet">HELLO FINANCE PEOPLE, WELCOME.</span><br/>
-          <span class="name">I AM HARISH REDDY</span><br/>
-          <span class="name">GOLUGURI.</span>
-        </h1>
+        <h1 class="heroIntro">HELLO FINANCE PEOPLE, WELCOME.</h1>
+        <h2 class="heroName">I AM HARISH REDDY<br/>GOLUGURI.</h2>
 
         <div class="sub">
           <span id="typeTarget"></span><span style="color:var(--green)">▍</span>
@@ -514,15 +550,13 @@
           <a class="btn" href="./Harish_Goluguri_Resume.pdf" download data-crosshair="true">
             DOWNLOAD RESUME <small>PDF</small>
           </a>
-          <a class="btn red" href="#contact" data-crosshair="true">
-            CONTACT ME
-          </a>
+          <a class="btn red" href="#contact" data-crosshair="true">CONTACT ME</a>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT ME -->
-    <section id="about">
+    <!-- ABOUT ME (clean background; no weird overlays) -->
+    <section id="about" class="cleanBg">
       <div class="container">
         <div class="label">ABOUT ME</div>
         <h2 class="huge">THE HYBRID ADVANTAGE.</h2>
@@ -535,7 +569,7 @@
             <div class="mono" style="color:var(--green);">OPERATIONAL RIGOR</div>
             <div class="bigStat"><span class="g">$70M+</span> budgets. <span class="g">97%</span> accuracy.</div>
             <p class="sub">
-              I build planning systems that hold up in the real world — budgeting, forecasting, variance control, and liquidity decisions that protect margin and cash.
+              I build planning systems that hold up in the real world: budgeting, forecasting, variance control, and liquidity decisions that protect margin and cash.
             </p>
             <div class="pillRow">
               <span class="pill">Budgeting</span>
@@ -548,7 +582,7 @@
             <div class="mono" style="color:var(--red);">MARKET INTELLIGENCE</div>
             <div class="bigStat"><span class="g">Series 65</span> + <span class="g">Bloomberg</span> + <span class="g">CFI</span></div>
             <p class="sub">
-              I track markets, macro signals, and price action — translating volatility and fundamentals into decisions, not opinions.
+              I track markets, macro signals, and price action: translating volatility and fundamentals into decisions, not opinions.
             </p>
             <div class="pillRow">
               <span class="pill">Equities</span>
@@ -561,11 +595,10 @@
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience">
+    <section id="experience" class="cleanBg">
       <div class="container">
         <div class="label">EXPERIENCE</div>
-        <h2 class="huge">EXPERIENCE.</h2>
-        <p class="sub">Vertical timeline. Massive numbers. No fluff. All signal.</p>
+        <h2 class="huge">WHAT DID I DO?</h2>
 
         <div class="timeline">
           <div class="tItem">
@@ -642,16 +675,26 @@
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="skills">
+    <!-- SKILLS (with icons) -->
+    <section id="skills" class="cleanBg">
       <div class="container">
         <div class="label">SKILLS</div>
         <h2 class="huge">ARSENAL.</h2>
-        <p class="sub">Market weapons. Operational engines. Technical core.</p>
+        <p class="sub">Tools I use to build models, decisions, and outcomes.</p>
 
         <div class="hud">
           <div class="card">
-            <h3 style="color:var(--green);">MARKET WEAPONS</h3>
+            <div class="hudTop">
+              <h3 style="color:var(--green);">MARKET WEAPONS</h3>
+              <div class="iconRow" aria-hidden="true">
+                <!-- Bloomberg -->
+                <span class="ic" title="Bloomberg">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 17V7h4v10H4Zm6 0V4h4v13h-4Zm6 0V10h4v7h-4Z" stroke="rgba(232,238,252,.9)" stroke-width="2"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
             <ul>
               <li>Bloomberg Terminal (4x Certified)</li>
               <li>Derivatives & Equities</li>
@@ -661,7 +704,25 @@
           </div>
 
           <div class="card">
-            <h3 style="color:var(--red);">OPERATIONAL ENGINES</h3>
+            <div class="hudTop">
+              <h3 style="color:var(--red);">OPERATIONAL ENGINES</h3>
+              <div class="iconRow" aria-hidden="true">
+                <!-- SAP -->
+                <span class="ic" title="SAP">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 7h16v10H4V7Z" stroke="rgba(232,238,252,.9)" stroke-width="2"/>
+                    <path d="M7 12h10" stroke="rgba(232,238,252,.9)" stroke-width="2"/>
+                  </svg>
+                </span>
+                <!-- Excel -->
+                <span class="ic" title="Excel">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M5 5h14v14H5V5Z" stroke="rgba(232,238,252,.9)" stroke-width="2"/>
+                    <path d="M9 8l6 8M15 8l-6 8" stroke="rgba(0,255,65,.9)" stroke-width="2"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
             <ul>
               <li>SAP S/4HANA (Budgeting)</li>
               <li>Cost Accounting & Variance Analysis</li>
@@ -671,7 +732,24 @@
           </div>
 
           <div class="card">
-            <h3>TECHNICAL CORE</h3>
+            <div class="hudTop">
+              <h3>TECHNICAL CORE</h3>
+              <div class="iconRow" aria-hidden="true">
+                <!-- Python -->
+                <span class="ic" title="Python">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M8 6c0-1 1-2 2-2h4c2 0 3 1 3 3v2H9c-1 0-1 0-1 1v1H8V6Z" stroke="rgba(232,238,252,.9)" stroke-width="2"/>
+                    <path d="M16 18c0 1-1 2-2 2h-4c-2 0-3-1-3-3v-2h8c1 0 1 0 1-1v-1h0v5Z" stroke="rgba(232,238,252,.9)" stroke-width="2"/>
+                  </svg>
+                </span>
+                <!-- Power BI -->
+                <span class="ic" title="Power BI">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M6 18V10M12 18V6M18 18v-8" stroke="rgba(232,238,252,.9)" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
             <ul>
               <li>Python (Automation/Modeling)</li>
               <li>SQL & Power BI</li>
@@ -683,12 +761,12 @@
       </div>
     </section>
 
-    <!-- STOP HERE FOR PART 1 -->
-    <section id="stop">
+    <!-- STOP HERE -->
+    <section id="stop" class="cleanBg">
       <div class="container">
         <div class="label">PART 2</div>
         <h2 class="huge">NEXT.</h2>
-        <p class="sub">We will add Education + Certifications + Awards + Projects + Interests + Contact in the next part.</p>
+        <p class="sub">Once this looks perfect, we’ll add Education + Certifications + Projects + Interests + Contact.</p>
       </div>
     </section>
 
