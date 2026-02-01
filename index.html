@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Harish Reddy Goluguri</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -36,7 +35,7 @@
     a{ color:inherit; text-decoration:none; }
     .container{ width:min(var(--max), 92vw); margin:0 auto; }
 
-    /* ---------- GLOBAL MARKET BACKGROUND (runs across sections) ---------- */
+    /* ---------- GLOBAL MARKET BACKGROUND ---------- */
     .marketBG{
       position:fixed;
       inset:0;
@@ -48,7 +47,6 @@
         radial-gradient(900px 650px at 50% 88%, rgba(120,140,255,.10), transparent 55%),
         linear-gradient(180deg, rgba(10,15,28,1) 0%, rgba(10,15,28,1) 100%);
     }
-
     .grid{
       position:absolute; inset:0;
       background:
@@ -58,7 +56,6 @@
       filter: blur(.2px);
     }
 
-    /* subtle market numbers */
     .hud{
       position:absolute; inset:0;
       opacity:.22;
@@ -83,7 +80,6 @@
     .hud .t7{ bottom:160px; right:15%; }
     .hud .t8{ bottom:80px; right:28%; }
 
-    /* animated ticker */
     .tickerTop{
       position:absolute; left:0; right:0; top:0;
       padding:10px 18px;
@@ -115,14 +111,6 @@
     @keyframes scroll{
       from{ transform: translateX(0); }
       to{ transform: translateX(-50%); }
-    }
-
-    /* chart waves */
-    .waves{
-      position:absolute; inset:0;
-      opacity:.62;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 18px 55px rgba(0,0,0,.55));
     }
 
     /* ---------- NAV ---------- */
@@ -177,7 +165,6 @@
       padding: 120px 0 70px;
     }
 
-    /* Hero split overlay */
     .split{
       position:absolute; inset:0;
       background: linear-gradient(90deg,
@@ -190,27 +177,19 @@
       z-index:-1;
     }
 
+    /* bigger kicker */
     .kicker{
       font-family: "Space Grotesk", Inter, system-ui, sans-serif;
       font-weight:700;
       letter-spacing:.22em;
       text-transform:uppercase;
-      font-size:12px;
-      color: rgba(232,238,252,.80);
+      font-size: 14px; /* increased */
+      color: rgba(232,238,252,.82);
       margin-bottom:14px;
     }
 
-    /* Title typography: smaller for "Hello..." + massive for name */
-    .heroTitleSmall{
-      margin:0;
-      font-size: clamp(28px, 4.2vw, 56px);
-      font-weight:900;
-      letter-spacing:-.02em;
-      text-transform:uppercase;
-      line-height: .98;
-    }
     .heroTitleBig{
-      margin: 10px 0 0;
+      margin: 0;
       font-size: clamp(44px, 6.8vw, 94px);
       font-weight:900;
       letter-spacing:-.03em;
@@ -220,16 +199,9 @@
     .nameRow{
       display:flex;
       flex-wrap:wrap;
-      gap:18px; /* spacing between words */
+      gap:18px;
       align-items:baseline;
     }
-    .nameRow .first{
-      display:inline-block;
-    }
-    .nameRow .last{
-      display:inline-block;
-    }
-
     .sub{
       margin-top:18px;
       max-width: 780px;
@@ -263,6 +235,21 @@
     .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); }
     .btn.red{ border-color: rgba(244,0,9,.35); }
     .btn.red:hover{ border-color: rgba(244,0,9,.55); }
+
+    /* improved "graphs" */
+    .waves{
+      position:absolute; inset:0;
+      opacity:.75;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 18px 55px rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+    .waveGlow{
+      filter: drop-shadow(0 0 18px rgba(0,255,65,.35));
+    }
+    .waveGlowRed{
+      filter: drop-shadow(0 0 18px rgba(244,0,9,.28));
+    }
 
     /* About */
     .sectionTitle{
@@ -323,7 +310,6 @@
       letter-spacing:-.02em;
       line-height: .98;
       font-size: clamp(28px, 3.2vw, 44px);
-      text-transform:none;
     }
     .g{ color: var(--green); }
     .r{ color: var(--red); }
@@ -356,14 +342,11 @@
       color: rgba(232,238,252,.78);
     }
 
-    /* Responsive */
     @media (max-width: 900px){
       .navLinks{ display:none; }
       .cards{ grid-template-columns: 1fr; }
       section{ padding: 110px 0 60px; }
     }
-
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       .scrollRow{ animation:none; }
     }
@@ -371,7 +354,6 @@
 </head>
 
 <body>
-  <!-- Background layer -->
   <div class="marketBG" aria-hidden="true">
     <div class="grid"></div>
 
@@ -387,7 +369,6 @@
     </div>
   </div>
 
-  <!-- NAV -->
   <div class="navWrap">
     <div class="nav">
       <div class="brand">
@@ -395,7 +376,7 @@
         <span>HARISH REDDY GOLUGURI</span>
       </div>
       <div class="navLinks">
-        <a href="#home">About</a>
+        <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
@@ -423,21 +404,40 @@
       </div>
     </div>
 
-    <!-- chart waves -->
+    <!-- improved chart waves -->
     <svg class="waves" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,460 C160,420 220,540 360,500 C520,450 560,360 700,420 C860,490 920,610 1200,520"
-            fill="none" stroke="rgba(0,255,65,.55)" stroke-width="4"/>
-      <path d="M0,520 C160,480 220,600 360,560 C520,510 560,420 700,480 C860,550 920,650 1200,580"
-            fill="none" stroke="rgba(244,0,9,.35)" stroke-width="4"/>
+      <!-- green main -->
+      <path class="waveGlow"
+        d="M0,470
+           C120,410 210,560 330,500
+           C470,430 560,330 700,410
+           C860,510 940,620 1200,520"
+        fill="none" stroke="rgba(0,255,65,.62)" stroke-width="5" />
+
+      <!-- red counter -->
+      <path class="waveGlowRed"
+        d="M0,545
+           C150,505 250,635 380,585
+           C540,520 600,430 740,495
+           C900,575 980,665 1200,600"
+        fill="none" stroke="rgba(244,0,9,.42)" stroke-width="5" />
+
+      <!-- subtle green secondary -->
+      <path
+        d="M0,585
+           C170,560 260,650 410,615
+           C560,580 650,520 800,565
+           C980,640 1040,680 1200,660"
+        fill="none" stroke="rgba(0,255,65,.28)" stroke-width="4" />
     </svg>
 
     <div class="container">
       <div class="kicker">HELLO FINANCE PEOPLE, WELCOME.</div>
 
-      <h1 class="heroTitleBig" style="margin-top:0;">
+      <h1 class="heroTitleBig">
         <span class="nameRow">
-          <span class="first">I AM HARISH REDDY</span>
-          <span class="last">GOLUGURI.</span>
+          <span>I AM HARISH REDDY</span>
+          <span>GOLUGURI.</span>
         </span>
       </h1>
 
@@ -491,7 +491,7 @@
     </div>
   </section>
 
-  <!-- placeholders so nav doesn’t feel broken (we’ll fill later) -->
+  <!-- placeholders for later -->
   <div id="experience"></div>
   <div id="skills"></div>
   <div id="education"></div>
