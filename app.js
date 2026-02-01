@@ -31,7 +31,7 @@ if(burger && navMobile){
   });
 }
 
-/* ---------- Custom Cursor (candlestick -> crosshair on hover links/buttons) ---------- */
+/* ---------- Custom Cursor (candlestick -> crosshair on hover) ---------- */
 const cursor = document.getElementById("cursor");
 
 let mx = window.innerWidth / 2;
@@ -44,7 +44,6 @@ window.addEventListener("mousemove", (e) => {
 }, { passive: true });
 
 function cursorRAF(){
-  // simple smooth follow (fast but buttery)
   cx += (mx - cx) * 0.22;
   cy += (my - cy) * 0.22;
   if(cursor) cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
@@ -88,12 +87,11 @@ window.addEventListener("load", () => {
   gsap.from(".hero .heroBtns .btn", { y: 10, opacity: 0, duration: 0.45, delay: 0.28, stagger: 0.08, ease: "power2.out" });
 });
 
-/* ---------- Contact form: fast validation (no backend yet) ---------- */
+/* ---------- Contact form (no backend yet) ---------- */
 const form = document.getElementById("contactForm");
 if(form){
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    // super light “success” feedback
     const btn = form.querySelector("button[type='submit']");
     if(btn){
       const old = btn.textContent;
