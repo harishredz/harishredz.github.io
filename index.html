@@ -1,144 +1,168 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
-import { Mail, Linkedin, Phone, ExternalLink } from 'lucide-react';
-
-gsap.registerPlugin(ScrollTrigger);
-
-const Portfolio = () => {
-  const cursorRef = useRef(null);
-
-  useEffect(() => {
-    // 1. Smooth Scroll (Lenis)
-    const lenis = new Lenis();
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // 2. Custom Candlestick Cursor
-    const moveCursor = (e) => {
-      gsap.to(cursorRef.current, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1
-      });
-    };
-    window.addEventListener('mousemove', moveCursor);
-
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, []);
-
-  const handleHover = (type) => {
-    if (type === 'enter') {
-      gsap.to(cursorRef.current, { scale: 1.5, opacity: 0.5 });
-    } else {
-      gsap.to(cursorRef.current, { scale: 1, opacity: 1 });
-    }
-  };
-
-  return (
-    <div className="selection:bg-red-600 selection:text-white">
-      {/* CUSTOM CURSOR */}
-      <div id="custom-cursor" ref={cursorRef}>
-        <div className="candlestick"></div>
-      </div>
-
-      {/* PAGE 1: HERO SECTION */}
-      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden border-b border-gray-800">
-        <div className="absolute inset-0 flex">
-          {/* Left: Industrial Wireframe (Factory) Overlay */}
-          <div className="w-1/2 h-full border-r border-gray-800 flex items-center justify-center group relative overflow-hidden bg-opacity-10 bg-white">
-            <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-massive text-4xl text-white z-10">CORPORATE FINANCE</span>
-          </div>
-          {/* Right: Market Chart Overlay */}
-          <div className="w-1/2 h-full flex items-center justify-center group relative overflow-hidden">
-             <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#00ff4122] to-transparent"></div>
-             <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-massive text-4xl text-[#00ff41] z-10">MARKETS</span>
-          </div>
-        </div>
-
-        <div className="z-20 text-center px-4">
-          <p className="text-xl mb-4 tracking-widest font-mono uppercase">Hey Visitor, Welcome.</p>
-          <h1 className="font-massive text-6xl md:text-9xl mb-6">I AM HARISH REDDY GOLUGURI</h1>
-          <p className="text-lg md:text-2xl font-mono text-gray-400">
-             I'M A FINANCE NERD WITH MARKETS IN MIND, BIRYANI IN BELLY.
-          </p>
-          <div className="flex gap-6 mt-12 justify-center">
-            <button className="px-8 py-4 border-2 border-white hover:bg-[#f40009] hover:border-[#f40009] transition-all font-bold uppercase" onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>Download Resume</button>
-            <button className="px-8 py-4 bg-white text-black hover:bg-[#00ff41] transition-all font-bold uppercase" onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>Contact Me</button>
-          </div>
-        </div>
-      </section>
-
-      {/* PAGE 3: EXPERIENCE (The Data Heavy Section) */}
-      <section className="py-24 px-10 bg-black">
-        <h2 className="font-massive text-7xl mb-20 text-center">WHAT DID I DO?</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harish Reddy Goluguri | Finance Hybrid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0a0f1c;
+            --neon-green: #00ff41;
+            --coke-red: #f40009;
+        }
+        body {
+            background-color: var(--bg-deep);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            cursor: none;
+            overflow-x: hidden;
+        }
+        .font-massive { font-weight: 900; text-transform: uppercase; line-height: 0.85; letter-spacing: -0.05em; }
         
-        <div className="max-w-6xl mx-auto space-y-32">
-          {/* Timeline Item 1 */}
-          <div className="flex flex-col md:flex-row gap-10 items-start">
-             <div className="text-[#00ff41] font-massive text-8xl opacity-30">01</div>
-             <div>
-                <h3 className="text-4xl font-bold uppercase">Fact Finders Pro | Strategy Analyst</h3>
-                <div className="text-6xl font-massive text-white my-4">$1.5M</div>
-                <p className="text-xl text-gray-400 max-w-2xl">Capital Roadmap Structured. Engineered VC & Berkus valuation models to stress-test pricing tiers.</p>
-             </div>
-          </div>
+        /* Custom Bullish Cursor */
+        #cursor {
+            position: fixed;
+            width: 4px;
+            height: 30px;
+            background: var(--neon-green);
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+        #cursor::before {
+            content: ''; position: absolute; top: -10px; left: 50%;
+            width: 2px; height: 10px; background: var(--neon-green); transform: translateX(-50%);
+        }
+        #cursor::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%;
+            width: 2px; height: 10px; background: var(--neon-green); transform: translateX(-50%);
+        }
 
-          {/* Timeline Item 4 (ANTLON) */}
-          <div className="flex flex-col md:flex-row gap-10 items-start border-t border-gray-800 pt-20">
-             <div className="text-[#f40009] font-massive text-8xl opacity-30">04</div>
-             <div>
-                <h3 className="text-4xl font-bold uppercase">ANTLON | Sr. Financial Analyst</h3>
-                <div className="text-6xl font-massive text-white my-4">$70M+</div>
-                <p className="text-xl text-gray-400 max-w-2xl">Managed budgets with 97% accuracy. Unlocked $6M in liquidity via Monte Carlo simulations.</p>
-                <div className="text-3xl font-bold text-[#00ff41] mt-4">65% REDUCTION IN CYCLE TIME</div>
-             </div>
-          </div>
+        .hero-split:hover .overlay-text { opacity: 1; }
+        .stat-number { font-size: clamp(4rem, 10vw, 8rem); color: var(--neon-green); }
+        .coke-bg { background-color: var(--coke-red); }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+
+    <section class="h-screen relative flex items-center justify-center overflow-hidden border-b border-gray-800">
+        <div class="absolute inset-0 flex">
+            <div class="w-1/2 h-full border-r border-gray-800 flex items-center justify-center group relative hero-split">
+                <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
+                <h2 class="overlay-text opacity-0 transition-opacity font-massive text-3xl">CORPORATE FINANCE</h2>
+            </div>
+            <div class="w-1/2 h-full flex items-center justify-center group relative hero-split">
+                <div class="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-[#00ff4115] to-transparent"></div>
+                <h2 class="overlay-text opacity-0 transition-opacity font-massive text-3xl text-[#00ff41]">MARKETS</h2>
+            </div>
         </div>
-      </section>
-
-      {/* PAGE 4: ARSENAL (HUD Layout) */}
-      <section className="py-24 px-10 bg-[#0a0f1c] min-h-screen">
-        <h2 className="font-massive text-8xl mb-20">ARSENAL.</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 border border-gray-700 bg-gray-700">
-          <SkillCard title="MARKET WEAPONS" skills={["Bloomberg Terminal", "Derivatives & Equities", "DCF / LBO Modeling"]} color="#00ff41" />
-          <SkillCard title="OPERATIONAL ENGINES" skills={["SAP S/4HANA", "Cost Accounting", "GAAP / SOX Compliance"]} color="#f40009" />
-          <SkillCard title="TECHNICAL CORE" skills={["Python", "SQL & Power BI", "VBA/Macros"]} color="#fff" />
+        <div class="relative z-10 text-center">
+            <p class="tracking-[0.5em] text-sm mb-4">HEY VISITOR, WELCOME.</p>
+            <h1 class="font-massive text-7xl md:text-[10rem]">HARISH REDDY<br>GOLUGURI</h1>
+            <p id="typewriter" class="text-xl mt-6 font-mono text-gray-400">I'M A FINANCE NERD WITH MARKETS & FINANCE IN MIND...</p>
+            <div class="mt-12 space-x-6">
+                <a href="Harish_Goluguri_Resume.pdf" class="px-10 py-4 border-2 border-white font-bold hover:bg-[#f40009] hover:border-[#f40009] transition-all inline-block">DOWNLOAD RESUME</a>
+                <a href="#contact" class="px-10 py-4 bg-white text-black font-bold hover:bg-[#00ff41] transition-all inline-block">CONTACT ME</a>
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* PAGE 9: CONTACT */}
-      <footer className="py-24 px-10 bg-black flex flex-col items-center">
-        <h2 className="font-massive text-9xl mb-12 text-[#f40009]">DEPLOY ME.</h2>
-        <form className="w-full max-w-4xl space-y-6">
-          <input type="text" placeholder="NAME" className="w-full bg-transparent border-b-2 border-gray-700 p-4 text-2xl focus:border-[#00ff41] outline-none transition-colors" />
-          <input type="email" placeholder="EMAIL" className="w-full bg-transparent border-b-2 border-gray-700 p-4 text-2xl focus:border-[#00ff41] outline-none transition-colors" />
-          <textarea placeholder="MESSAGE" rows="4" className="w-full bg-transparent border-b-2 border-gray-700 p-4 text-2xl focus:border-[#00ff41] outline-none transition-colors"></textarea>
-          <button className="w-full py-6 bg-[#f40009] font-massive text-3xl hover:bg-white hover:text-black transition-all">SEND SIGNAL</button>
-        </form>
-        <div className="mt-20 text-center font-mono">
-          <p>ATLANTA, GEORGIA, USA</p>
-          <p>+1 (872) 344-7207 | harishreddyice@gmail.com</p>
+    <section class="py-32 px-6 max-w-7xl mx-auto">
+        <h2 class="font-massive text-6xl md:text-9xl mb-24">WHAT DID I DO?</h2>
+        
+        <div class="space-y-40">
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <span class="stat-number">1.5M</span>
+                    <h3 class="text-3xl font-bold">Fact Finders Pro</h3>
+                    <p class="text-gray-400 mt-4 text-lg">Investor Relations & Strategy Analyst | Seattle, WA</p>
+                </div>
+                <ul class="text-xl space-y-4 border-l border-[#00ff41] pl-8">
+                    <li>• Capital Roadmap Structured</li>
+                    <li>• Engineered VC & Berkus valuation models</li>
+                    <li>• Targeted $10M-$12M valuation</li>
+                </ul>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <span class="stat-number" style="color: var(--coke-red);">$70M+</span>
+                    <h3 class="text-3xl font-bold">ANTLON</h3>
+                    <p class="text-gray-400 mt-4 text-lg">Senior Financial Analyst | Hyderabad, India</p>
+                </div>
+                <ul class="text-xl space-y-4 border-l border-[#f40009] pl-8">
+                    <li>• Unlocked $6M in liquidity</li>
+                    <li>• 97% forecast accuracy on massive budgets</li>
+                    <li>• 65% faster reporting via Python</li>
+                </ul>
+            </div>
         </div>
-      </footer>
-    </div>
-  );
-};
+    </section>
 
-const SkillCard = ({ title, skills, color }) => (
-  <div className="bg-[#0a0f1c] p-10 hover:bg-opacity-50 transition-all">
-    <h4 className="font-bold text-sm tracking-widest mb-6" style={{ color }}>{title}</h4>
-    <ul className="space-y-4">
-      {skills.map(s => (
-        <li key={s} className="text-3xl font-massive leading-none">{s}</li>
-      ))}
-    </ul>
-  </div>
-);
+    <section class="py-32 coke-bg overflow-hidden relative">
+        <div class="absolute top-0 right-0 font-massive text-[20rem] opacity-10 select-none">COKE</div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <h2 class="font-massive text-8xl mb-12">FUEL & FOCUS</h2>
+            <div class="grid md:grid-cols-2 gap-20">
+                <div class="text-3xl space-y-8 font-bold">
+                    <p>THE OBSESSIONS: The Stock Market, The Economy, Finance, Tennis, Formula 1.</p>
+                    <p>THE FUEL: BIRYANI (Always hunting for the best).</p>
+                </div>
+                <div class="border-4 border-white p-10 text-center">
+                    <p class="text-2xl font-mono mb-6">"I can finish a whole bottle of Coca-Cola without putting it down once."</p>
+                    <button class="bg-white text-[#f40009] px-8 py-3 font-bold uppercase">Hire me, and I'll prove it!</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-export default Portfolio;
+    <section id="contact" class="py-32 px-6 bg-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-massive text-8xl mb-16 text-[#00ff41]">DEPLOY ME.</h2>
+            <form class="grid grid-cols-1 gap-8">
+                <input type="text" placeholder="NAME" class="bg-transparent border-b-2 border-gray-700 p-4 outline-none focus:border-[#00ff41] text-2xl">
+                <input type="email" placeholder="EMAIL" class="bg-transparent border-b-2 border-gray-700 p-4 outline-none focus:border-[#00ff41] text-2xl">
+                <textarea placeholder="MESSAGE" rows="4" class="bg-transparent border-b-2 border-gray-700 p-4 outline-none focus:border-[#00ff41] text-2xl"></textarea>
+                <button class="py-6 coke-bg font-massive text-3xl hover:bg-white hover:text-black transition-all">SEND SIGNAL</button>
+            </form>
+            <div class="mt-20 text-gray-400 font-mono text-lg">
+                <p>ATLANTA, GEORGIA, USA</p>
+                <p>+1 (872) 344-7207 | harishreddyice@gmail.com</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Cursor Logic
+        const cursor = document.querySelector('#cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+        });
+
+        // Hover Effect on Links
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(cursor, { scale: 2, backgroundColor: '#f40009', boxShadow: '0 0 20px #f40009' });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(cursor, { scale: 1, backgroundColor: '#00ff41', boxShadow: '0 0 15px #00ff41' });
+            });
+        });
+
+        // Smooth Appearance Animations
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('section').forEach(section => {
+            gsap.from(section, {
+                opacity: 0, y: 50, duration: 1, 
+                scrollTrigger: { trigger: section, start: "top 80%" }
+            });
+        });
+    </script>
+</body>
+</html>
