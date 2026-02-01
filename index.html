@@ -1,422 +1,144 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Harish Reddy Goluguri</title>
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from '@studio-freight/lenis';
+import { Mail, Linkedin, Phone, ExternalLink } from 'lucide-react';
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+gsap.registerPlugin(ScrollTrigger);
 
-  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.45/bundled/lenis.min.js"></script>
+const Portfolio = () => {
+  const cursorRef = useRef(null);
 
-  <style>
-    :root{
-      --bg:#0a0f1c;
-      --fg:#e8eefc;
-      --muted:rgba(232,238,252,.78);
-      --line:rgba(232,238,252,.12);
-      --green:#00ff41;
-      --red:#f40009;
-      --shadow:0 18px 55px rgba(0,0,0,.45);
-      --radius:22px;
-      --max:1180px;
+  useEffect(() => {
+    // 1. Smooth Scroll (Lenis)
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
+    requestAnimationFrame(raf);
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--fg);
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      overflow-x:hidden;
-      cursor:none; 
-    }
-    a{ color:inherit; text-decoration:none; }
-
-    /* ========================= NAV ========================= */
-    .nav{
-      position:fixed;
-      top:18px;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(var(--max), calc(100% - 24px));
-      z-index:50;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(12,18,34,.58);
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
-      padding:12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      letter-spacing:.02em;
-      white-space:nowrap;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--green);
-      box-shadow:0 0 18px rgba(0,255,65,.65);
-      flex:0 0 auto;
-    }
-    .navLinks{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .navLinks a{
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:rgba(232,238,252,.78);
-      padding:10px 10px;
-      border-radius:999px;
-      transition: background .12s ease, color .12s ease, transform .12s ease;
-    }
-    .navLinks a:hover{
-      color:rgba(232,238,252,.95);
-      background:rgba(255,255,255,.06);
-      transform:translateY(-1px);
-    }
-    @media (max-width: 920px){
-      .navLinks{ display:none; }
-      body{ cursor:auto; }
-      .cursor{ display:none; }
-    }
-
-    /* ========================= HERO ========================= */
-    .hero{
-      min-height:100vh;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:120px 16px 70px;
-    }
-    .heroSplit{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(90deg,
-        rgba(0,255,65,.18) 0%,
-        rgba(0,255,65,.10) 48%,
-        rgba(244,0,9,.06) 52%,
-        rgba(244,0,9,.14) 100%
-      );
-      opacity:.95;
-      pointer-events:none;
-      z-index:0;
-    }
-    .factoryWire{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      z-index:1;
-      opacity:.22;
-      background:
-        linear-gradient(transparent 0 0),
-        repeating-linear-gradient(0deg, rgba(232,238,252,.10) 0 1px, transparent 1px 18px),
-        repeating-linear-gradient(90deg, rgba(232,238,252,.06) 0 1px, transparent 1px 22px);
-      mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0 52%, rgba(0,0,0,0) 78%);
-      -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0 52%, rgba(0,0,0,0) 78%);
-    }
-    .heroGrid{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(rgba(232,238,252,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,238,252,.06) 1px, transparent 1px);
-      background-size: 64px 64px;
-      opacity:.12;
-      pointer-events:none;
-      z-index:1;
-    }
-    .tickersTop, .tickersBottom{
-      position:absolute;
-      left:0; right:0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      text-transform:uppercase;
-      letter-spacing:.22em;
-      font-size:12px;
-      color:rgba(232,238,252,.55);
-      display:flex;
-      gap:16px;
-      white-space:nowrap;
-      pointer-events:none;
-      opacity:.9;
-      z-index:2;
-      mix-blend-mode:screen;
-    }
-    .tickersTop{ top:22px; }
-    .tickersBottom{ bottom:22px; }
-    .marquee{
-      display:inline-flex;
-      gap:18px;
-      animation: marquee 22s linear infinite;
-    }
-    @keyframes marquee{
-      from{ transform: translateX(0); }
-      to{ transform: translateX(-50%); }
-    }
-    .heroLines{
-      position:absolute;
-      inset:0;
-      opacity:.95;
-      pointer-events:none;
-      mix-blend-mode:screen;
-      z-index:2;
-    }
-    .container{
-      width:min(var(--max), 100%);
-      margin:0 auto;
-      position:relative;
-      z-index:5;
-    }
-    .kicker{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      text-transform:uppercase;
-      letter-spacing:.24em;
-      font-weight:900;
-      font-size:14px;
-      color:rgba(232,238,252,.84);
-      margin-bottom:14px;
-    }
-    .headline{
-      margin:0;
-      line-height:.92;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:-.03em;
-      font-size: clamp(44px, 6.2vw, 86px);
-    }
-    .nameGlow{
-      text-shadow: 0 0 18px rgba(0,255,65,.16), 0 18px 55px rgba(0,0,0,.45);
-    }
-    .btnRow{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:13px 18px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(12,18,34,.55);
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-size:12px;
-      transition: transform .08s ease;
-    }
-    .btnPrimary{ border-color: rgba(0,255,65,.32); }
-    .btnSecondary{ border-color: rgba(244,0,9,.28); }
-
-    /* ========================= ABOUT ========================= */
-    .about {
-      position: relative;
-      padding: 110px 16px 90px;
-    }
-    .aboutWrap {
-      width: min(var(--max), calc(100% - 24px));
-      margin: 0 auto;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255, 255, 255, .10);
-      background: rgba(12, 18, 34, .55);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-      padding: 60px 40px;
-    }
-    .aboutWrap::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      background: 
-        radial-gradient(900px 320px at 18% 0%, rgba(0, 255, 65, .10), transparent 60%),
-        radial-gradient(900px 320px at 82% 0%, rgba(244, 0, 9, .08), transparent 60%);
-      pointer-events: none;
-    }
-    .aboutTitle {
-      margin: 0;
-      font-size: clamp(44px, 6vw, 84px);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-      line-height: .95;
-    }
-    .aboutGrid {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-    .aboutCard {
-      border-radius: calc(var(--radius) - 2px);
-      border: 1px solid rgba(255, 255, 255, .10);
-      background: rgba(10, 15, 28, .55);
-      padding: 30px;
-      position: relative;
-      z-index: 2;
-    }
-    .tagDot { width: 10px; height: 10px; border-radius: 999px; display:inline-block; margin-right:8px;}
-    .tagDot.green { background: var(--green); box-shadow: 0 0 15px var(--green); }
-    .tagDot.red { background: var(--red); box-shadow: 0 0 15px var(--red); }
-    
-    .techEdge {
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, .10);
-      text-align: center;
-    }
-    .techLine b { color: var(--green); }
-
-    /* ========================= CURSOR ========================= */
-    .cursor{
-      position:fixed;
-      left:0; top:0;
-      width:34px; height:34px;
-      pointer-events:none;
-      z-index:9999;
-      transform: translate(-50%, -50%);
-    }
-    .candlestick{
-      position:absolute; left:50%; top:50%; transform: translate(-50%, -50%);
-      width:12px; height:20px; border-radius:6px; background: var(--green);
-    }
-    .wick{
-      position:absolute; left:50%; top:50%; transform: translate(-50%, -50%);
-      width:2px; height:30px; background: var(--green);
-    }
-    .cursor.crosshair .candlestick, .cursor.crosshair .wick{ opacity:0; }
-    .cursor.crosshair::before, .cursor.crosshair::after{
-      content:""; position:absolute; left:50%; top:50%; transform: translate(-50%, -50%);
-      background: var(--green);
-    }
-    .cursor.crosshair::before{ width:28px; height:2px; }
-    .cursor.crosshair::after{ width:2px; height:28px; }
-
-    @media (max-width: 900px){
-      .aboutGrid{ grid-template-columns: 1fr; }
-      .aboutWrap{ padding: 40px 20px; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="cursor" id="cursor" aria-hidden="true">
-    <div class="wick"></div>
-    <div class="candlestick"></div>
-  </div>
-
-  <header class="nav">
-    <div class="brand"><span class="dot"></span>HARISH REDDY GOLUGURI</div>
-    <nav class="navLinks">
-      <a href="#home" data-crosshair="true">Home</a>
-      <a href="#about" data-crosshair="true">About Me</a>
-      <a href="#experience" data-crosshair="true">Experience</a>
-      <a href="#contact" data-crosshair="true">Contact</a>
-    </nav>
-  </header>
-
-  <section class="hero" id="home">
-    <div class="heroSplit"></div>
-    <div class="factoryWire"></div>
-    <div class="heroGrid"></div>
-    <div class="tickersTop"><div class="marquee"><span>TSLA</span><span>AAPL</span><span>MSFT</span><span>NVDA</span><span>USD</span><span>SPX</span><span>VIX</span></div></div>
-    
-    <svg class="heroLines" viewBox="0 0 1200 700" preserveAspectRatio="none">
-      <path d="M0,520 C120,440 220,600 340,520 C460,440 560,560 700,480 C840,400 980,580 1200,520" fill="none" stroke="rgba(0,255,65,.68)" stroke-width="5"/>
-    </svg>
-
-    <div class="container">
-      <div class="kicker">HEY VISITOR, WELCOME.</div>
-      <h1 class="headline nameGlow">I AM HARISH REDDY<br/>GOLUGURI.</h1>
-      <p id="typeText" style="min-height:1.6em; margin: 20px 0; color:rgba(232,238,252,.8);"></p>
-      <div class="btnRow">
-        <a class="btn btnPrimary" href="./Harish_Goluguri_Resume.pdf" download data-crosshair="true">DOWNLOAD RESUME</a>
-        <a class="btn btnSecondary" href="#contact" data-crosshair="true">CONTACT ME</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="aboutWrap">
-      <div class="container">
-        <div class="aboutKicker">ABOUT ME</div>
-        <h2 class="aboutTitle">THE HYBRID ENGINE.</h2>
-        <p class="aboutLead">Why choose between the ledger and the ticker? I thrive in both.</p>
-        <div class="aboutGrid">
-          <div class="aboutCard">
-            <div class="aboutCardTag"><span class="tagDot green"></span>OPERATIONAL RIGOR</div>
-            <p class="aboutText">I bring <b>5+ years</b> of operational finance experience. I’ve managed <b>$70M+</b> budgets and unlocked <b>$6M</b> in liquidity. I achieve <b>97%</b> forecast accuracy.</p>
-          </div>
-          <div class="aboutCard">
-            <div class="aboutCardTag"><span class="tagDot red"></span>MARKET INTELLIGENCE</div>
-            <p class="aboutText">I bring a trader's instinct backed by institutional modeling (<b>Series 65</b>, <b>Bloomberg</b>) generating <b>3% alpha</b> through deep-dive equity research.</p>
-          </div>
-        </div>
-        <div class="techEdge">
-          <div class="techTitle">THE TECH EDGE</div>
-          <div class="techLine">Powered by <b>Excel</b>, <b>Bloomberg Terminal</b>, <b>Power BI</b></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div id="experience"></div>
-  <div id="contact"></div>
-
-  <script>
-    // Smooth Scroll
-    (function(){
-      if (window.Lenis) {
-        const lenis = new Lenis();
-        function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-      }
-    })();
-
-    // Cursor
-    (function(){
-      const cursor = document.getElementById("cursor");
-      let x=0, y=0, tx=0, ty=0;
-      window.addEventListener("mousemove", (e)=>{ tx=e.clientX; ty=e.clientY; });
-      function tick(){
-        x += (tx-x)*0.2; y += (ty-y)*0.2;
-        cursor.style.transform = `translate(${x}px, ${y}px)`;
-        requestAnimationFrame(tick);
-      }
-      tick();
-      document.querySelectorAll("[data-crosshair='true']").forEach(el=>{
-        el.addEventListener("mouseenter", ()=>cursor.classList.add("crosshair"));
-        el.addEventListener("mouseleave", ()=>cursor.classList.remove("crosshair"));
+    // 2. Custom Candlestick Cursor
+    const moveCursor = (e) => {
+      gsap.to(cursorRef.current, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.1
       });
-    })();
+    };
+    window.addEventListener('mousemove', moveCursor);
 
-    // Typewriter
-    (function(){
-      const el = document.getElementById("typeText");
-      const text = "I'M A FINANCE NERD WITH MARKETS IN MIND, BIRYANI IN BELLY, AND WHEELS IN FEET.";
-      let i = 0;
-      function step(){
-        el.textContent = text.slice(0, i);
-        if(i++ < text.length) setTimeout(step, 25);
-      }
-      step();
-    })();
-  </script>
-</body>
-</html>
+    return () => window.removeEventListener('mousemove', moveCursor);
+  }, []);
+
+  const handleHover = (type) => {
+    if (type === 'enter') {
+      gsap.to(cursorRef.current, { scale: 1.5, opacity: 0.5 });
+    } else {
+      gsap.to(cursorRef.current, { scale: 1, opacity: 1 });
+    }
+  };
+
+  return (
+    <div className="selection:bg-red-600 selection:text-white">
+      {/* CUSTOM CURSOR */}
+      <div id="custom-cursor" ref={cursorRef}>
+        <div className="candlestick"></div>
+      </div>
+
+      {/* PAGE 1: HERO SECTION */}
+      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden border-b border-gray-800">
+        <div className="absolute inset-0 flex">
+          {/* Left: Industrial Wireframe (Factory) Overlay */}
+          <div className="w-1/2 h-full border-r border-gray-800 flex items-center justify-center group relative overflow-hidden bg-opacity-10 bg-white">
+            <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-massive text-4xl text-white z-10">CORPORATE FINANCE</span>
+          </div>
+          {/* Right: Market Chart Overlay */}
+          <div className="w-1/2 h-full flex items-center justify-center group relative overflow-hidden">
+             <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#00ff4122] to-transparent"></div>
+             <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-massive text-4xl text-[#00ff41] z-10">MARKETS</span>
+          </div>
+        </div>
+
+        <div className="z-20 text-center px-4">
+          <p className="text-xl mb-4 tracking-widest font-mono uppercase">Hey Visitor, Welcome.</p>
+          <h1 className="font-massive text-6xl md:text-9xl mb-6">I AM HARISH REDDY GOLUGURI</h1>
+          <p className="text-lg md:text-2xl font-mono text-gray-400">
+             I'M A FINANCE NERD WITH MARKETS IN MIND, BIRYANI IN BELLY.
+          </p>
+          <div className="flex gap-6 mt-12 justify-center">
+            <button className="px-8 py-4 border-2 border-white hover:bg-[#f40009] hover:border-[#f40009] transition-all font-bold uppercase" onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>Download Resume</button>
+            <button className="px-8 py-4 bg-white text-black hover:bg-[#00ff41] transition-all font-bold uppercase" onMouseEnter={() => handleHover('enter')} onMouseLeave={() => handleHover('leave')}>Contact Me</button>
+          </div>
+        </div>
+      </section>
+
+      {/* PAGE 3: EXPERIENCE (The Data Heavy Section) */}
+      <section className="py-24 px-10 bg-black">
+        <h2 className="font-massive text-7xl mb-20 text-center">WHAT DID I DO?</h2>
+        
+        <div className="max-w-6xl mx-auto space-y-32">
+          {/* Timeline Item 1 */}
+          <div className="flex flex-col md:flex-row gap-10 items-start">
+             <div className="text-[#00ff41] font-massive text-8xl opacity-30">01</div>
+             <div>
+                <h3 className="text-4xl font-bold uppercase">Fact Finders Pro | Strategy Analyst</h3>
+                <div className="text-6xl font-massive text-white my-4">$1.5M</div>
+                <p className="text-xl text-gray-400 max-w-2xl">Capital Roadmap Structured. Engineered VC & Berkus valuation models to stress-test pricing tiers.</p>
+             </div>
+          </div>
+
+          {/* Timeline Item 4 (ANTLON) */}
+          <div className="flex flex-col md:flex-row gap-10 items-start border-t border-gray-800 pt-20">
+             <div className="text-[#f40009] font-massive text-8xl opacity-30">04</div>
+             <div>
+                <h3 className="text-4xl font-bold uppercase">ANTLON | Sr. Financial Analyst</h3>
+                <div className="text-6xl font-massive text-white my-4">$70M+</div>
+                <p className="text-xl text-gray-400 max-w-2xl">Managed budgets with 97% accuracy. Unlocked $6M in liquidity via Monte Carlo simulations.</p>
+                <div className="text-3xl font-bold text-[#00ff41] mt-4">65% REDUCTION IN CYCLE TIME</div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PAGE 4: ARSENAL (HUD Layout) */}
+      <section className="py-24 px-10 bg-[#0a0f1c] min-h-screen">
+        <h2 className="font-massive text-8xl mb-20">ARSENAL.</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 border border-gray-700 bg-gray-700">
+          <SkillCard title="MARKET WEAPONS" skills={["Bloomberg Terminal", "Derivatives & Equities", "DCF / LBO Modeling"]} color="#00ff41" />
+          <SkillCard title="OPERATIONAL ENGINES" skills={["SAP S/4HANA", "Cost Accounting", "GAAP / SOX Compliance"]} color="#f40009" />
+          <SkillCard title="TECHNICAL CORE" skills={["Python", "SQL & Power BI", "VBA/Macros"]} color="#fff" />
+        </div>
+      </section>
+
+      {/* PAGE 9: CONTACT */}
+      <footer className="py-24 px-10 bg-black flex flex-col items-center">
+        <h2 className="font-massive text-9xl mb-12 text-[#f40009]">DEPLOY ME.</h2>
+        <form className="w-full max-w-4xl space-y-6">
+          <input type="text" placeholder="NAME" className="w-full bg-transparent border-b-2 border-gray-700 p-4 text-2xl focus:border-[#00ff41] outline-none transition-colors" />
+          <input type="email" placeholder="EMAIL" className="w-full bg-transparent border-b-2 border-gray-700 p-4 text-2xl focus:border-[#00ff41] outline-none transition-colors" />
+          <textarea placeholder="MESSAGE" rows="4" className="w-full bg-transparent border-b-2 border-gray-700 p-4 text-2xl focus:border-[#00ff41] outline-none transition-colors"></textarea>
+          <button className="w-full py-6 bg-[#f40009] font-massive text-3xl hover:bg-white hover:text-black transition-all">SEND SIGNAL</button>
+        </form>
+        <div className="mt-20 text-center font-mono">
+          <p>ATLANTA, GEORGIA, USA</p>
+          <p>+1 (872) 344-7207 | harishreddyice@gmail.com</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+const SkillCard = ({ title, skills, color }) => (
+  <div className="bg-[#0a0f1c] p-10 hover:bg-opacity-50 transition-all">
+    <h4 className="font-bold text-sm tracking-widest mb-6" style={{ color }}>{title}</h4>
+    <ul className="space-y-4">
+      {skills.map(s => (
+        <li key={s} className="text-3xl font-massive leading-none">{s}</li>
+      ))}
+    </ul>
+  </div>
+);
+
+export default Portfolio;
