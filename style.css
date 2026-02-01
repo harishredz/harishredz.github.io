@@ -81,10 +81,17 @@ button,input,textarea{ font:inherit; color:inherit; }
 
 .navLinks{
   display:flex;
-  gap:18px;
+  gap:14px;
   align-items:center;
-  flex-wrap:wrap;
   justify-content:flex-end;
+
+  flex-wrap:nowrap;        /* ✅ no second line */
+  white-space:nowrap;      /* ✅ keep everything on one line */
+}
+/* If space gets tight, shrink menu text slightly before wrapping */
+@media (max-width: 1200px){
+  .navLink{ font-size:11px; padding:9px 8px; }
+  .navLinks{ gap:12px; }
 }
 .navLink{
   font-family:var(--mono);
