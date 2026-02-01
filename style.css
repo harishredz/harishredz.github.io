@@ -701,3 +701,72 @@ button,input,textarea{ font:inherit; color:inherit; }
 
 .cursor.crosshair .candle{ opacity:0; }
 .cursor.crosshair .crosshair{ opacity:1; }
+/* =========================
+   EDUCATION: AWARDS SECTION
+   (paste at bottom of style.css)
+========================= */
+
+.awards{
+  margin-top: 18px;
+  padding: 16px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(232,236,255,.10);
+  background: rgba(12,18,34,.48);
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.awards::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(520px 220px at 18% 20%, rgba(0,255,65,.10), transparent 60%),
+    radial-gradient(520px 220px at 82% 20%, rgba(244,0,9,.10), transparent 60%);
+  opacity:.65;
+  pointer-events:none;
+}
+
+.awards > *{ position:relative; z-index:1; }
+
+.awardsTag{
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 11px;
+  color: rgba(232,236,255,.70);
+  margin-bottom: 12px;
+}
+
+.awardsGrid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+}
+
+@media (max-width: 920px){
+  .awardsGrid{ grid-template-columns: 1fr; }
+}
+
+.awardCard{
+  border-radius: 18px;
+  border: 1px solid rgba(232,236,255,.10);
+  background: rgba(0,0,0,.16);
+  padding: 14px 14px;
+}
+
+.awardTitle{
+  font-weight: 900;
+  letter-spacing: -.01em;
+  font-size: 14px;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.awardDesc{
+  margin-top: 8px;
+  color: rgba(232,236,255,.74);
+  line-height: 1.65;
+  font-size: 13px;
+}
