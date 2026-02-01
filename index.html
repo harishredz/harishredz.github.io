@@ -448,6 +448,25 @@
       body{ cursor:auto; }
       .cursor{ display:none; }
     }
+    /* ABOUT: subtle question-mark background */
+#about{
+  position: relative;
+  overflow: hidden;
+}
+
+#about::after{
+  content: "?   ?   ?   ?   ?   ?   ?   ?";
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+  font-weight: 900;
+  font-size: clamp(18px, 2vw, 26px);
+  letter-spacing: 28px;
+  line-height: 70px;
+  color: rgba(255,255,255,0.08);
+  transform: rotate(-6deg);
+white-space: pre-wrap;
+}
   </style>
 </head>
 
@@ -552,7 +571,7 @@
           </a>
           <a class="btn red" href="#contact" data-crosshair="true">CONTACT ME</a>
         </div>
-      </div>
+      </div> 
     </section>
 
     <!-- ABOUT ME (clean background; no weird overlays) -->
@@ -561,7 +580,7 @@
         <div class="label">ABOUT ME</div>
         <h2 class="huge">THE HYBRID ADVANTAGE.</h2>
         <p class="sub">
-          I operate where operational finance meets capital markets — execution-first thinking, backed by modeling discipline and market awareness.
+          I operate where operational finance meets capital markets, execution-first thinking, backed by modeling discipline and market awareness.
         </p>
 
         <div class="grid2">
