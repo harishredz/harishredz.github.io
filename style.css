@@ -782,3 +782,40 @@ button,input,textarea{ font:inherit; color:inherit; }
 
 .cursor.crosshair .candle{ opacity:0; }
 .cursor.crosshair .crosshair{ opacity:1; }
+/* ================================
+   CURSOR CLICK: RED + EXTEND
+================================ */
+
+.cursor .candle .wick,
+.cursor .candle .body {
+  transition:
+    height 120ms ease,
+    transform 120ms ease,
+    background 120ms ease,
+    box-shadow 120ms ease;
+}
+
+/* Mouse down = RED */
+.cursor.down .candle .wick {
+  background: rgba(244, 0, 9, 0.95);
+  box-shadow: 0 0 14px rgba(244, 0, 9, 0.6);
+}
+
+.cursor.down .candle .body {
+  background: linear-gradient(
+    180deg,
+    rgba(244, 0, 9, 1),
+    rgba(244, 0, 9, 0.55)
+  );
+  box-shadow: 0 0 16px rgba(244, 0, 9, 0.6);
+}
+
+/* Extend candle on click */
+.cursor.down .candle .wick {
+  height: 34px; /* normal = 22px */
+}
+
+.cursor.down .candle .body {
+  height: 32px; /* normal = 20px */
+  transform: scaleY(1.05);
+}
