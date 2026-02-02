@@ -442,14 +442,20 @@
 >
   <!-- Honeypot spam protection -->
   <input type="text" name="_gotcha" style="display:none" />
-          <div class="row2">
-            <input class="field" name="name" placeholder="Name" required />
-            <input class="field" type="email" name="email" placeholder="Email" required />
-          </div>
-          <input class="field" name="subject" placeholder="Subject" required />
-          <textarea class="field area" name="message" placeholder="Message" required></textarea>
-          <button class="btn btnPrimary btnFull" type="submit">SEND</button>
-        </form>
+
+  <!-- Optional: makes the email subject nicer -->
+  <input type="hidden" name="_subject" value="New message from Harish website" />
+
+  <div class="row2">
+    <input class="field" name="name" placeholder="Name" required />
+    <input class="field" type="email" name="email" placeholder="Email" required />
+  </div>
+
+  <input class="field" name="subject" placeholder="Subject" required />
+  <textarea class="field area" name="message" placeholder="Message" required></textarea>
+
+  <button class="btn btnPrimary btnFull" type="submit">SEND</button>
+</form>
 
         <div class="contactMeta">
           <div class="metaLine">Harish Reddy Goluguri — Atlanta, Georgia, USA</div>
