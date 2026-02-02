@@ -434,7 +434,14 @@
         <div class="pageTag">CONTACT</div>
         <h2 class="huge">DEPLOY ME.</h2>
 
-        <form class="form" id="contactForm">
+        <form
+  class="form"
+  id="contactForm"
+  action="https://formspree.io/f/mlgnlalr"
+  method="POST"
+>
+  <!-- Honeypot spam protection -->
+  <input type="text" name="_gotcha" style="display:none" />
           <div class="row2">
             <input class="field" name="name" placeholder="Name" required />
             <input class="field" type="email" name="email" placeholder="Email" required />
