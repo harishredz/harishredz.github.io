@@ -739,7 +739,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   width: 34px;
   height: 34px;
   pointer-events:none;
-  z-index:999;
+  z-index:2147483647;
   transform: translate(-50%, -50%);
   will-change: transform;
 }
