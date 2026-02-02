@@ -26,32 +26,15 @@ body{
   overflow-x:hidden;
   cursor:none;
 }
-/* Force hide native cursor everywhere */
-*,
-*::before,
-*::after{
-  cursor:none !important;
-}
 
 a{ color:inherit; text-decoration:none; }
 button,input,textarea{ font:inherit; color:inherit; }
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
-
-  *{
-    animation:none !important;
-    transition:none !important;
-  }
-
-  /* Keep custom cursor, never native */
-  body{
-    cursor:none !important;
-  }
-
-  .cursor{
-    display:block !important;
-  }
+  body{ cursor:auto; }
+  .cursor{ display:none !important; }
+  *{ animation:none !important; transition:none !important; }
 }
 
 /* ---------------- NAV (ONE LINE FIX) ---------------- */
@@ -752,7 +735,7 @@ button,input,textarea{ font:inherit; color:inherit; }
   width: 34px;
   height: 34px;
   pointer-events:none;
-  z-index:2147483647;
+  z-index:999;
   transform: translate(-50%, -50%);
   will-change: transform;
 }
@@ -835,12 +818,4 @@ button,input,textarea{ font:inherit; color:inherit; }
 .cursor.down .candle .body {
   height: 32px; /* normal = 20px */
   transform: scaleY(1.05);
-}
-/* === HARD FORCE: hide native cursor everywhere (must be last) === */
-html, body,
-a, a * ,
-button, button *,
-input, textarea, select, label,
-[role="button"], [role="link"]{
-  cursor: none !important;
 }
