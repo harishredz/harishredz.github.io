@@ -26,14 +26,18 @@ body{
   overflow-x:hidden;
   cursor:none;
 }
+/* Force hide native cursor everywhere */
+*,
+*::before,
+*::after{
+  cursor:none !important;
+}
 
 a{ color:inherit; text-decoration:none; }
 button,input,textarea{ font:inherit; color:inherit; }
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
-  body{ cursor:auto; }
-  .cursor{ display:none !important; }
   *{ animation:none !important; transition:none !important; }
 }
 
