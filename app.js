@@ -119,24 +119,3 @@ window.addEventListener("load", () => {
     ease: "power2.out",
   });
 });
-
-/* ===========================
-   CONTACT FORM (no backend yet)
-=========================== */
-const form = document.getElementById("contactForm");
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const btn = form.querySelector("button[type='submit']");
-    if (btn) {
-      const old = btn.textContent;
-      btn.textContent = "SENT";
-      btn.style.borderColor = "rgba(0,255,65,.55)";
-      setTimeout(() => {
-        btn.textContent = old;
-        btn.style.borderColor = "";
-      }, 1200);
-    }
-    form.reset();
-  });
-}
