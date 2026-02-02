@@ -81,6 +81,21 @@ if (cursor) {
     el.addEventListener("mouseenter", () => setCrosshair(true));
     el.addEventListener("mouseleave", () => setCrosshair(false));
   });
+   /* ================================
+   CURSOR CLICK STATE (candlestick)
+================================ */
+
+window.addEventListener("mousedown", () => {
+  cursor.classList.add("down");
+});
+
+window.addEventListener("mouseup", () => {
+  cursor.classList.remove("down");
+});
+
+window.addEventListener("blur", () => {
+  cursor.classList.remove("down");
+});
 }
 
 /* ===========================
