@@ -38,10 +38,19 @@ button,input,textarea{ font:inherit; color:inherit; }
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
+
   *{
     animation:none !important;
     transition:none !important;
+  }
+
+  /* Keep custom cursor, never native */
+  body{
     cursor:none !important;
+  }
+
+  .cursor{
+    display:block !important;
   }
 }
 
@@ -826,4 +835,12 @@ button,input,textarea{ font:inherit; color:inherit; }
 .cursor.down .candle .body {
   height: 32px; /* normal = 20px */
   transform: scaleY(1.05);
+}
+/* === HARD FORCE: hide native cursor everywhere (must be last) === */
+html, body,
+a, a * ,
+button, button *,
+input, textarea, select, label,
+[role="button"], [role="link"]{
+  cursor: none !important;
 }
